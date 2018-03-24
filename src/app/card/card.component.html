@@ -1,0 +1,45 @@
+<div class="ui container">
+  <h3>Adicione um novo card</h3>
+  <div class="ui teal segment">
+    <h4>Disciplina: </h4>
+    <div class="ui fluid input">
+      <input type="text" placeholder="Informe a disciplina" #disciplina>
+    </div>
+
+    <h4>Pergunta: </h4>
+    <div class="ui fluid input">
+      <input type="text" placeholder="Digite sua pergunta" #pergunta>
+    </div>
+
+    <h4>Resposta: </h4>
+    <div class="ui fluid input">
+      <input type="text" placeholder="Digite sua resposta" #resposta>
+      <button class="ui teal button" (click)="addCard(disciplina.value,pergunta.value,resposta.value)">adicionar</button>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="ui container">
+  <div class="ui teal segment"></div>
+</div>
+<br>
+
+<div class="ui container">
+  <div class="ui cards">
+      <div class="ui getColor() card" *ngFor="let card of cards" >
+        <div class="content">
+          <p class="header">{{ card.disciplina }}</p>
+          <div class="description">
+            {{ card.pergunta }}
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            {{ card.resposta }}
+          </a>
+        </div>
+      </div>
+    </div>
+</div>
