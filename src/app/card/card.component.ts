@@ -1,10 +1,30 @@
 import { Card } from './../models/card';
 import { Component, OnInit } from '@angular/core';
 
+
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+ } from '@angular/animations';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  animations: [
+    trigger('rotate', [
+      state('left',   style({
+        transform: 'rotateY(180deg)',
+      })),
+      state('right',   style({
+        transform: 'rotateY(0deg)',
+      })),
+      transition('* => *', animate('300ms ease'))
+    ])
+  ]
 })
 export class CardComponent implements OnInit {
 
@@ -18,6 +38,22 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  /**
+   * Get animation type
+   * @param value Value
+   */
+  public getState(value: boolean) {
+    return value ? 'left' : 'right';
+  }
+
+  /**
+   * Get side type
+   * @param value Value
+   */
+  public getActive(value: boolean): string {
+    return value ? '' : 'active';
   }
 
   /**
