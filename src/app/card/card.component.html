@@ -1,25 +1,25 @@
 <div class="ui container">
   <h3>Adicionar um novo card</h3>
-  <div class="ui teal segment">
+  <div class="ui raised teal segment">
     <h4>Disciplina: </h4>
     <div class="ui fluid input">
-      <input type="text" placeholder="Informe a disciplina" #disciplina>
+      <input type="text" placeholder="Informe a disciplina" #discipline>
     </div>
 
     <h4>Pergunta: </h4>
     <div class="ui form">
       <div class="ui field">
-        <textarea rows="2" placeholder="Digite sua pergunta aqui" #pergunta></textarea>
+        <textarea rows="2" placeholder="Digite sua pergunta aqui" #question></textarea>
       </div>
     </div>
 
     <h4>Resposta: </h4>
     <div class="ui form">
       <div class="ui field">
-        <textarea rows="2" placeholder="Digite sua resposta aqui" #resposta></textarea>
+        <textarea rows="2" placeholder="Digite sua resposta aqui" #answer></textarea>
       </div>
       <button class="ui teal button" 
-      (click)="addCard(disciplina.value,pergunta.value,resposta.value,false)"
+      (click)="addCard(discipline.value,question.value,answer.value,false)"
       >enviar</button>
     </div>
   </div>
@@ -27,25 +27,37 @@
 
 <br>
 <div class="ui container">
-  <div class="ui teal segment"></div>
+  <div class="ui divider"></div>
 </div>
 <br>
 
 <div class="ui container">
-  <div class="ui cards">
+  <div class="ui three centered cards">
     <div class="ui {{ getColor() }} card" *ngFor="let card of cards" >
       <div class="content">
-        <div class="header">{{ card.disciplina | uppercase }}</div>
-        <div class="description"><p><strong>P:</strong> {{ card.pergunta }}</p></div>
+        <div class="right floated meta">
+          #{{ card.getId() | number:'2.0' }}
+        </div>
+        <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+        <div class="description"><p><strong>P:</strong> {{ card.getQuestion() }}</p></div>
       </div>
       <button class="ui {{ getColor() }} button"
-      (click)="card.verResposta = !card.verResposta"
+      (click)="card.setSeeAnswer(!card.getSeeAnswer())"
       >
-      Ver resposta</button>
-      <div class="extra content" *ngIf="card.verResposta" >
+      Ver resposta
+      </button>
+      <div class="extra content" *ngIf="card.seeAnswer" >
         <div>
           <i class="check icon"></i>
-          <strong>R:</strong> {{ card.resposta }}
+          {{ card.getAnswer() }}
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="right floated">
+          <i class="heart like icon"
+          (click)="card.addRating()"
+          ></i>
+           {{ card.getCardRating() }}
         </div>
       </div>
     </div>
