@@ -1,5 +1,5 @@
 <div class="ui container">
-  <h3>Adicione um novo card</h3>
+  <h3>Adicionar um novo card</h3>
   <div class="ui teal segment">
     <h4>Disciplina: </h4>
     <div class="ui fluid input">
@@ -7,14 +7,20 @@
     </div>
 
     <h4>Pergunta: </h4>
-    <div class="ui fluid input">
-      <input type="text" placeholder="Digite sua pergunta" #pergunta>
+    <div class="ui form">
+      <div class="ui field">
+        <textarea rows="2" placeholder="Digite sua pergunta aqui" #pergunta></textarea>
+      </div>
     </div>
 
     <h4>Resposta: </h4>
-    <div class="ui fluid input">
-      <input type="text" placeholder="Digite sua resposta" #resposta>
-      <button class="ui teal button" (click)="addCard(disciplina.value,pergunta.value,resposta.value)">adicionar</button>
+    <div class="ui form">
+      <div class="ui field">
+        <textarea rows="2" placeholder="Digite sua resposta aqui" #resposta></textarea>
+      </div>
+      <button class="ui teal button" 
+      (click)="addCard(disciplina.value,pergunta.value,resposta.value,false)"
+      >enviar</button>
     </div>
   </div>
 </div>
@@ -27,19 +33,21 @@
 
 <div class="ui container">
   <div class="ui cards">
-      <div class="ui getColor() card" *ngFor="let card of cards" >
-        <div class="content">
-          <p class="header">{{ card.disciplina }}</p>
-          <div class="description">
-            {{ card.pergunta }}
-          </div>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="user icon"></i>
-            {{ card.resposta }}
-          </a>
+    <div class="ui {{ getColor() }} card" *ngFor="let card of cards" >
+      <div class="content">
+        <div class="header">{{ card.disciplina | uppercase }}</div>
+        <div class="description"><p><strong>P:</strong> {{ card.pergunta }}</p></div>
+      </div>
+      <button class="ui {{ getColor() }} button"
+      (click)="card.verResposta = !card.verResposta"
+      >
+      Ver resposta</button>
+      <div class="extra content" *ngIf="card.verResposta" >
+        <div>
+          <i class="check icon"></i>
+          <strong>R:</strong> {{ card.resposta }}
         </div>
       </div>
     </div>
+  </div>
 </div>

@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  card: Card;
-  cards: Card[] = [];
-  colors: string[] = [];
+  private card: Card;
+  private cards: Card[] = [];
+  private colors: string[] = [
+      'red', 'orange', 'yellow', 'olive', 'green',
+      'teal', 'blue', 'violet', 'purple', 'pink',
+      'brown', 'grey', 'black'
+  ];
 
   constructor() { }
 
@@ -18,13 +22,13 @@ export class CardComponent implements OnInit {
   }
 
   public addCard(disciplina: string, pergunta: string, resposta: string) {
-    this.card = new Card(disciplina, pergunta, resposta);
+    this.card = new Card(disciplina, pergunta, resposta, false, this.cards.length + 1);
     this.cards.push(this.card);
   }
 
   public getColor(): string {
-    return '';
+    const index = Math.floor(Math.random() * (this.cards.length - 1));
+    return this.colors[index];
   }
-
 
 }
