@@ -1,63 +1,85 @@
 <div class="ui container">
   <h3>Adicionar um novo card</h3>
   <div class="ui raised teal segment">
+
     <h4>Disciplina: </h4>
-    <div class="ui fluid input">
-      <input type="text" placeholder="Informe a disciplina" #discipline>
-    </div>
+    <select class="ui fluid selection dropdown" #discipline>
+      <option class="ui item" value="LP1">Laboratório de Programação I</option>
+      <option class="ui item" value="LP2">Laboratório de Programação II</option>
+      <option class="ui item" value="LP3">Laboratório de Programação III</option>
+      <option class="ui item" value="OAC">Organização e Arquitetura de Computadores</option>
+      <option class="ui item" value="PSOFT">Projeto de Software</option>
+      <option class="ui item" value="TC">Teoria da Computação</option>
+    </select>
 
     <h4>Pergunta: </h4>
     <div class="ui form">
       <div class="ui field">
-        <textarea rows="2" placeholder="Digite sua pergunta aqui" #question></textarea>
+        <textarea rows="2" placeholder="Digite sua pergunta" #question></textarea>
       </div>
     </div>
 
     <h4>Resposta: </h4>
     <div class="ui form">
       <div class="ui field">
-        <textarea rows="2" placeholder="Digite sua resposta aqui" #answer></textarea>
+        <textarea rows="2" placeholder="Digite sua resposta" #answer></textarea>
       </div>
       <button class="ui teal button" 
-      (click)="addCard(discipline.value,question.value,answer.value,false)"
+      (click)="addCard(discipline.value,question.value,answer.value)"
       >enviar</button>
     </div>
   </div>
 </div>
 
-<br>
-<div class="ui container">
-  <div class="ui divider"></div>
-</div>
-<br>
+<br><div class="ui container"><div class="ui divider"></div></div><br>
 
 <div class="ui container">
-  <div class="ui three centered cards">
-    <div class="ui {{ getColor() }} card" *ngFor="let card of cards" >
-      <div class="content">
-        <div class="right floated meta">
-          #{{ card.getId() | number:'2.0' }}
+  <div class="ui two centered cards">
+    <div class="ui card shape" *ngFor="let card of cards">
+      <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
+        <div class="ui {{ getColor() }} fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
+          <div class="content">
+            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="description">
+              <p>{{ card.getQuestion() }}</p>
+            </div>
+          </div>
+          <button class="ui botton attached {{ getColor() }} button"
+          (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+            ver resposta
+          </button>
+          <div class="extra content">
+            <div class="right floated">
+              <i class="heart like icon"
+              (click)="card.addRating()">
+              </i>
+              {{ card.getRating() }}
+            </div>
+          </div>
         </div>
-        <div class="header">{{ card.getDiscipline() | uppercase }}</div>
-        <div class="description"><p><strong>P:</strong> {{ card.getQuestion() }}</p></div>
       </div>
-      <button class="ui {{ getColor() }} button"
-      (click)="card.setSeeAnswer(!card.getSeeAnswer())"
-      >
-      Ver resposta
-      </button>
-      <div class="extra content" *ngIf="card.seeAnswer" >
-        <div>
-          <i class="check icon"></i>
-          {{ card.getAnswer() }}
-        </div>
-      </div>
-      <div class="extra content">
-        <div class="right floated">
-          <i class="heart like icon"
-          (click)="card.addRating()"
-          ></i>
-           {{ card.getRating() }}
+      <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
+        <div class="ui {{ getColor() }} fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+          <div class="content">
+            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="description">
+              <p>{{ card.getAnswer() }}</p>
+            </div>
+          </div>
+          <button class="ui botton attached {{ getColor() }} button"
+          (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+            ver pergunta
+          </button>
+          <div class="extra content">
+            <div class="right floated">
+              <i class="heart like icon"
+              (click)="card.addRating()">
+              </i>
+              {{ card.getRating() }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

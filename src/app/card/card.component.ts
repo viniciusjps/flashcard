@@ -44,7 +44,7 @@ export class CardComponent implements OnInit {
    * Get animation type
    * @param value Value
    */
-  public getState(value: boolean) {
+  public getAnimation(value: boolean): string {
     return value ? 'left' : 'right';
   }
 
@@ -52,7 +52,7 @@ export class CardComponent implements OnInit {
    * Get side type
    * @param value Value
    */
-  public getActive(value: boolean): string {
+  public getSideType(value: boolean): string {
     return value ? '' : 'active';
   }
 
@@ -73,7 +73,7 @@ export class CardComponent implements OnInit {
    * @param id Id
    */
   public getCard(id: number): Card {
-    return this.cards[id];
+    return this.cards[id - 1];
   }
 
   /**
@@ -81,7 +81,7 @@ export class CardComponent implements OnInit {
    * @param id Id
    */
   public getCardRating(id: number): number {
-    const card = this.getCard(id);
+    const card = this.getCard(id - 1);
     return card.getRating();
   }
 
