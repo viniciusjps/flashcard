@@ -22,7 +22,7 @@ import {
       state('right',   style({
         transform: 'rotateY(0deg)',
       })),
-      transition('* => *', animate('300ms ease'))
+      transition('* => *', animate('500ms ease'))
     ])
   ]
 })

@@ -34,7 +34,7 @@
 <br><div class="ui container"><div class="ui divider"></div></div><br>
 
 <div class="ui container">
-  <div class="ui two centered cards">
+  <div class="ui two cards">
     <div class="ui card shape" *ngFor="let card of cards">
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
         <div class="ui {{ getColor() }} fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
