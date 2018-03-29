@@ -34,5 +34,17 @@ export class LoginComponent implements OnInit {
     return null;
   }
 
+  public logar(username: string, pswd: string) {
+    if (this.userLogado === null) {
+      this.userLogado = this.getUser(username);
+    }
+  }
+
+  public deslogar() {
+    if (this.userLogado !== null) {
+      this.userLogado = null;
+    }
+  }
+
 
 }
