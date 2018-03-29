@@ -37,7 +37,7 @@
   <div class="ui two cards">
     <div class="ui card shape" *ngFor="let card of cards">
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
-        <div class="ui {{ getColor() }} fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
+        <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
             <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
             <div class="header">{{ card.getDiscipline() | uppercase }}</div>
@@ -45,7 +45,7 @@
               <p>{{ card.getQuestion() }}</p>
             </div>
           </div>
-          <button class="ui botton attached {{ getColor() }} button"
+          <button class="ui botton attached teal button"
           (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver resposta
           </button>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
-        <div class="ui {{ getColor() }} fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+        <div class="ui teal fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
             <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
             <div class="header">{{ card.getDiscipline() | uppercase }}</div>
@@ -68,7 +68,7 @@
               <p>{{ card.getAnswer() }}</p>
             </div>
           </div>
-          <button class="ui botton attached {{ getColor() }} button"
+          <button class="ui botton attached teal button"
           (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver pergunta
           </button>

@@ -11,9 +11,9 @@ import {
  } from '@angular/animations';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
+  selector: 'app-mural',
+  templateUrl: './mural.component.html',
+  styleUrls: ['./mural.component.css'],
   animations: [
     trigger('rotate', [
       state('left',   style({
@@ -26,7 +26,7 @@ import {
     ])
   ]
 })
-export class CardComponent implements OnInit {
+export class MuralComponent implements OnInit {
 
   private cards: Card[] = [];
   private colors: string[] = [

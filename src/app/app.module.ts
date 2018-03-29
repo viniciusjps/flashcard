@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
-import { CardComponent } from './card/card.component';
+import { MuralComponent } from './mural/mural.component';
+import { routing } from './app.routing';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { CardComponent } from './card/card.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CardComponent
+    MuralComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
