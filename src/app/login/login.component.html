@@ -1,4 +1,4 @@
-<div class="ui container center">
+<div class="ui container">
   <div class="ui two column middle aligned very relaxed stackable grid">
     <div class="column">
       <div class="ui form">
@@ -12,17 +12,19 @@
         <div class="field">
           <label>Senha</label>
           <div class="ui left icon input">
-            <input type="password" #password>
+            <input type="password" placeholder="Senha" #password>
             <i class="lock icon"></i>
           </div>
         </div>
         <div class="ui blue submit button">Login</div>
       </div>
     </div>    
-    <div class="ui vertical divider">Ou</div>
+    <div style="position:relative; margin:0; padding:0;">
+      <div class="ui vertical divider">Ou</div>
+    </div>
     <div class="column">
       <div class="center aligned column">
-        <div class="ui big green labeled icon button"><i class="signup icon"></i> Inscreva-se </div>
+        <div class="ui big green labeled icon button fluid"><i class="signup icon"></i> Inscreva-se </div>
       </div>
     </div>
   </div>
