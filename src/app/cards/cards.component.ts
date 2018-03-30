@@ -9,6 +9,7 @@ import {
   animate,
   transition
  } from '@angular/animations';
+import { ControllerService } from '../shared/controller.service';
 
 @Component({
   selector: 'app-cards',
@@ -28,19 +29,24 @@ import {
 })
 export class CardsComponent implements OnInit {
 
-  private cards: Card[] = [];
   private colors: string[] = [
       'red', 'orange', 'yellow', 'olive', 'green',
       'teal', 'blue', 'violet', 'purple', 'pink',
       'brown', 'grey', 'black'
   ];
 
-  constructor() { }
+
+  constructor(
+    private controller: ControllerService
+  ) { }
 
   ngOnInit() {
-    const perg = 'Como criar um novo componente utilizando angular/cli?';
-    const resp = 'Basta ir no terminal e executar o comando: ng g c nome-componente';
-    this.cards.push(new Card('PSOFT', perg, resp, 1));
+    // const perg = 'Como criar um novo componente utilizando angular/cli?';
+    // const resp = 'Basta ir no terminal e executar o comando: ng g c nome-componente';
+    this.controller.addNewUser('vini', '123');
+    // this.cards = this.controller.getAllCards();
+    // this.controller.addNewCard('vini', 'PSOFT', perg, resp);
+    // console.log(this.cards);
   }
 
   /**
@@ -66,25 +72,23 @@ export class CardsComponent implements OnInit {
    * @param answer Answer
    */
   public addCard(discipline: string, question: string, answer: string): void {
-    const id = this.cards.length + 1;
-    const card = new Card(discipline, question, answer, id);
-    this.cards.push(card);
+    this.controller.addNewCard('vini', discipline, question, answer);
   }
 
   /**
    * Get card by id
    * @param id Id
    */
-  public getCard(id: number): Card {
-    return this.cards[id - 1];
+  public getCard(username: string, id: number): Card {
+    return this.controller.getCard(username, id);
   }
 
   /**
    * Get card rating
    * @param id Id
    */
-  public getCardRating(id: number): number {
-    const card = this.getCard(id - 1);
+  public getCardRating(username: string, id: number): number {
+    const card = this.getCard(username, id);
     return card.getRating();
   }
 
@@ -94,6 +98,13 @@ export class CardsComponent implements OnInit {
   public getColor(): string {
     const index = Math.floor(Math.random() * (this.colors.length - 1));
     return this.colors[index];
+  }
+
+  /**
+   * Get all cards
+   */
+  public getCards(): Card[] {
+    return this.controller.getAllCards();
   }
 
 }

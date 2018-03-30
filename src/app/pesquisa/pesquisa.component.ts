@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { CardsComponent } from './../cards/cards.component';
 import { ControllerService } from './../shared/controller.service';
 
 @Component({
-  selector: 'app-mural',
-  templateUrl: './mural.component.html',
-  styleUrls: ['./mural.component.css']
+  selector: 'app-pesquisa',
+  templateUrl: './pesquisa.component.html',
+  styleUrls: ['./pesquisa.component.css']
 })
-export class MuralComponent implements OnInit {
+export class PesquisaComponent implements OnInit {
 
   constructor(
     private controller: ControllerService

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { User } from './../models/user';
+import { ControllerService } from './../shared/controller.service';
 
 @Component({
   selector: 'app-login',
@@ -10,41 +11,27 @@ import { User } from './../models/user';
 })
 export class LoginComponent implements OnInit {
 
-  private users: User[];
-  private userLogado: User;
-
-  constructor() {
-    this.users = null;
-    this.userLogado = null;
-  }
+  constructor(
+    private controller: ControllerService
+  ) {}
 
   ngOnInit() {
   }
 
   public newUser(username: string, pswd: string) {
-    this.users.push(new User(username, pswd));
+    this.controller.addNewUser(username, pswd);
   }
 
   public getUser(username: string) {
-    for (let index = 0; index < this.users.length; index++) {
-      if (this.users[index].getUsername() === username) {
-        return this.users[index];
-      }
-    }
-    return null;
+    return this.controller.getUser(username);
   }
 
-  public logar(username: string, pswd: string) {
-    if (this.userLogado === null) {
-      this.userLogado = this.getUser(username);
-    }
+  public logar(username: string) {
+    this.controller.getUser(username).logar();
   }
 
-  public deslogar() {
-    if (this.userLogado !== null) {
-      this.userLogado = null;
-    }
+  public deslogar(username: string) {
+    this.controller.getUser(username).deslogar();
   }
-
 
 }

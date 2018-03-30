@@ -1,7 +1,11 @@
+import { Card } from './card';
+
+
 export class User {
 
     private username: string;
     private password: string;
+    private cards: Card[];
     private log: boolean;
 
     constructor (
@@ -11,6 +15,7 @@ export class User {
         this.username = username;
         this.password = pswd;
         this.log = false;
+        this.cards = [];
     }
 
     /**
@@ -28,10 +33,18 @@ export class User {
     }
 
     /**
-     * Get log
+     * addNewCard
      */
-    public getLog(): boolean {
-       return this.log;
+    public addNewCard(discipline: string, question: string, answer: string): void {
+        this.cards.push(new Card(discipline, question, answer, this.cards.length + 1));
+    }
+
+    public getCard(id: number) {
+        return this.cards[id - 1];
+    }
+
+    public getCards(): Card[] {
+        return this.cards;
     }
 
     public logar() {

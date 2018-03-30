@@ -11,6 +11,10 @@ import { CardsComponent } from './cards/cards.component';
 import { routing } from './app.routing';
 import { LoginComponent } from './login/login.component';
 import { MuralComponent } from './mural/mural.component';
+import { ControllerService } from './shared/controller.service';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { NovoCardComponent } from './novo-card/novo-card.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
 
 
 @NgModule({
@@ -20,7 +24,10 @@ import { MuralComponent } from './mural/mural.component';
     HomeComponent,
     CardsComponent,
     LoginComponent,
-    MuralComponent
+    MuralComponent,
+    CadastroUsuarioComponent,
+    NovoCardComponent,
+    PesquisaComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,9 @@ import { MuralComponent } from './mural/mural.component';
     BrowserAnimationsModule,
     routing
   ],
-  providers: [],
+  providers: [
+    ControllerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
