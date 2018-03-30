@@ -7,9 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
-import { MuralComponent } from './mural/mural.component';
+import { CardsComponent } from './cards/cards.component';
 import { routing } from './app.routing';
 import { LoginComponent } from './login/login.component';
+import { MuralComponent } from './mural/mural.component';
 
 
 @NgModule({
@@ -17,8 +18,9 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    MuralComponent,
-    LoginComponent
+    CardsComponent,
+    LoginComponent,
+    MuralComponent
   ],
   imports: [
     BrowserModule,
