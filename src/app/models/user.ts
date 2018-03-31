@@ -6,7 +6,6 @@ export class User {
     private username: string;
     private password: string;
     private cards: Card[];
-    private log: boolean;
 
     constructor (
         username: string,
@@ -14,7 +13,6 @@ export class User {
     ) {
         this.username = username;
         this.password = pswd;
-        this.log = false;
         this.cards = [];
     }
 
@@ -45,14 +43,6 @@ export class User {
 
     public getCards(): Card[] {
         return this.cards;
-    }
-
-    public logar() {
-        this.log = true;
-    }
-
-    public deslogar() {
-        this.log = false;
     }
 
 }

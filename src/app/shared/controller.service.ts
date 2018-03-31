@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 import { Card } from './../models/card';
@@ -8,9 +9,12 @@ import { User } from './../models/user';
 export class ControllerService {
 
   private users: User[];
+  private user_logado: User;
+  private router: Router;
 
   constructor() {
     this.users = [];
+    this.user_logado = null;
   }
 
   /**
@@ -22,7 +26,9 @@ export class ControllerService {
    */
   public addNewCard(username: string, discipline: string, question: string, answer: string): void {
     const user = this.getUser(username);
-    user.addNewCard(discipline, question, answer);
+    if (user != null || user !== undefined) {
+      user.addNewCard(discipline, question, answer);
+    }
   }
 
   /**
@@ -32,7 +38,10 @@ export class ControllerService {
    */
   public addNewUser(username: string, password: string) {
     if (username.trim().length !== 0 && password.trim().length !== 0) {
-      this.users.push(new User(username, password));
+      const user = this.getUser(username);
+      if (user == null || user === undefined) {
+        this.users.push(new User(username, password));
+      }
     }
   }
 
@@ -41,7 +50,7 @@ export class ControllerService {
    * @param username Username
    */
   public getUser(username: string): User {
-    if (username !== null || username !== undefined) {
+    if (username != null || username !== undefined) {
       for (let index = 0; index < this.users.length; index++) {
         if (this.users[index].getUsername() === username) {
           return this.users[index];
@@ -79,7 +88,7 @@ export class ControllerService {
    */
   public getCards(username: string): Card[] {
     const user = this.getUser(username);
-    if (user !== null || user !== undefined) {
+    if (user != null || user !== undefined) {
       return this.getUser(username).getCards();
     }
   }
@@ -92,6 +101,42 @@ export class ControllerService {
   public getCard(username: string, id: number) {
     const user = this.getUser(username);
     return user.getCard(id);
+  }
+
+  /**
+   * Get user logado
+   */
+  public getUserLogado() {
+    return this.user_logado;
+  }
+
+  /**
+   * Login
+   * @param username Username
+   */
+  public logIn(username: string) {
+    const user = this.getUser(username);
+    if (user != null || user !== undefined) {
+      this.user_logado = user;
+    }
+  }
+
+  /**
+   * Log out
+   */
+  public logOut() {
+    const user = this.user_logado;
+    if (user != null || user !== undefined) {
+      this.user_logado = null;
+    }
+  }
+
+  public navigate(address: string) {
+    this.router.navigate([address]);
+  }
+
+  public getRouter() {
+    return this.router;
   }
 
 }

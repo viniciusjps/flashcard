@@ -26,12 +26,15 @@ export class LoginComponent implements OnInit {
     return this.controller.getUser(username);
   }
 
-  public logar(username: string) {
-    this.controller.getUser(username).logar();
+  public logar(username: string, pswd: string) {
+    const user = this.controller.getUser(username);
+    if (user.getPassword() === pswd) {
+      this.controller.logIn(username);
+    }
   }
 
   public deslogar(username: string) {
-    this.controller.getUser(username).deslogar();
+    this.controller.logOut();
   }
 
 }

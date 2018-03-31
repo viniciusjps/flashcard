@@ -1,3 +1,28 @@
-<p>
-  cadastro-usuario works!
-</p>
+<div class="ui container">
+  <div class="ui raised teal segment">
+    <div class="ui form">
+    <h4>Digite seu nome de usuário</h4>
+    <div class="ui left icon fluid input">
+      <i class="user icon"></i>
+      <input type="text" placeholder="Nome de usuário" #username>
+    </div>
+      
+    <h4>Digite sua senha</h4>
+    <div class="ui left icon fluid input">
+      <i class="lock icon"></i>
+      <input type="password" placeholder="Digite sua senha" #pswd>
+    </div>
+
+    <h4>Digite novamente sua senha</h4>
+    <div class="ui left icon fluid input">
+      <i class="lock icon"></i>
+      <input type="password" placeholder="Digite novamente sua senha" #pswd2>
+    </div>
+    <br>
+
+    <button class="ui fluid teal button" 
+    (click)="addNewUser(username.value, pswd.value, pswd2.value)">
+      Cadastrar</button>
+    </div>
+  </div>
+</div>
