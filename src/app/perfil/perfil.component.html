@@ -1,0 +1,47 @@
+<div class="ui container">
+  <div class="ui two column grid">
+    <div class="column">
+      <h2 class="ui header">
+        <i class="user outline icon"></i>
+        <div class="content">
+          Perfil
+          <div class="sub header">
+            Painel de controle
+          </div>
+        </div>
+      </h2>
+      <br>
+      <div class="ui three column grid">
+        <div class="column">
+          <button class="ui teal fluid button" (click)="addNewCard()"
+          routerLink="perfil/novo-card">
+            Novo card</button>
+        </div>
+        <br>
+        <div class="column">
+          <button class="ui teal fluid button">Editar card</button>
+        </div>
+        <br>
+        <div class="column">
+          <button class="ui teal fluid button">Editar perfil</button>
+        </div>
+        <br>
+        <div class="column">
+          <button class="ui red fluid button" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="column">
+      <h2 class="ui header">
+        <i class="window restore outline icon"></i>
+        <div class="content">
+          Seus cartões
+        </div>
+        <br>
+      </h2>
+      <app-cards></app-cards>
+    </div>
+
+  </div>
+</div>

@@ -15,7 +15,7 @@
     <div>
       <div class="ui two column middle aligned very relaxed stackable grid">
         <div class="center aligned column">
-          <button class="ui teal fluid button">Crie um novo card</button>
+          <button class="ui teal fluid button" (click)="addNewCard()">Crie um novo card</button>
         </div>
         <div style="position:relative; margin:0; padding:0;">
             <div class="ui vertical divider">Ou</div>
@@ -23,13 +23,14 @@
         <div class="center aligned column">
           <div class="ui action input fluid">
             <input type="text" placeholder="Procure por disciplina, palavras-chave ou pelo id">
-            <button class="ui icon button"><i class="search icon"></i></button>
+            <button class="ui icon button" (click)="search()"><i class="search icon"></i></button>
           </div>
         </div>
       </div>
     </div>
   </div>
   <br>
-
 </div>
+
+<br><br>
 <app-cards></app-cards>

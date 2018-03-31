@@ -18,4 +18,17 @@ export class MuralComponent implements OnInit {
   ngOnInit() {
   }
 
+  public addNewCard() {
+    const user = this.controller.getUserLogado();
+    if (user == null) {
+      this.controller.navigate('login');
+    } else {
+      this.controller.navigate('/perfil/novo-card');
+    }
+  }
+
+  public search() {
+    this.controller.navigate('/pesquisar');
+  }
+
 }

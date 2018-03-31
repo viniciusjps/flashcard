@@ -1,20 +1,33 @@
-<div class="ui teal menu">
+<div class="ui teal stackable menu">
+  <div class="item">
+    <img class="ui mini image" src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png">
+  </div>
   <a class="item"
   routerLink="/"
   routerLinkActive="active"
   >
+    <i class="home icon"></i>
     Página inicial
   </a>
   <a class="item"
   routerLink="/mural"
   routerLinkActive="active"
   >
+  <i class="table icon"></i>
     Mural
   </a>
   <div class="right menu">
     <a class="item"
     routerLink="/login"
     routerLinkActive="active"
+    *ngIf="getInfoNavbar() === 'Login'" 
+    >
+      {{ getInfoNavbar() }}
+    </a>
+    <a class="item"
+    routerLink="/perfil"
+    routerLinkActive="active"
+    *ngIf="getInfoNavbar() !== 'Login'" 
     >
       {{ getInfoNavbar() }}
     </a>

@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
   public getInfoNavbar(): string {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      return 'Olá, @' + user.getUsername();
+      return 'Olá, ' + user.getUsername().substr(0, 1).toUpperCase()  + user.getUsername().substr(1);
     } else {
       return 'Login';
     }

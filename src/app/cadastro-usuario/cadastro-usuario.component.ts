@@ -25,7 +25,15 @@ export class CadastroUsuarioComponent implements OnInit {
    */
   public addNewUser(username: string, pswd: string, pswd2: string): void {
     if (this.validaEntrada(username) && this.validaEntrada(pswd) && this.verificaSenha(pswd, pswd2)) {
-      this.controller.addNewUser(username, pswd);
+      const user = this.controller.getUser(username);
+      if (user == null) {
+        this.controller.addNewUser(username, pswd);
+        this.controller.logIn(username);
+        this.controller.navigate('/perfil');
+        alert('Usuário criado com sucesso');
+      } else {
+        alert('Nome de usuário já cadastrado');
+      }
     } else {
       alert('Dados inválidos');
     }

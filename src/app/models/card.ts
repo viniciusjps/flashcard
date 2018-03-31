@@ -7,12 +7,14 @@ export class Card {
     private favorite: boolean;
     private rating: number;
     private id: number;
+    private author: string;
 
     constructor(
         discipline: string,
         question: string,
         answer: string,
-        id: number
+        id: number,
+        username: string
     ) {
         this.id = id;
         this.rating = 0;
@@ -21,6 +23,7 @@ export class Card {
         this.question = question;
         this.seeAnswer = false;
         this.discipline = discipline;
+        this.author = username;
     }
 
     /**
@@ -91,6 +94,13 @@ export class Card {
      */
     public getFavorite(): boolean {
         return this.favorite;
+    }
+
+    /**
+     * Get card's author
+     */
+    public getAuthor() {
+        return this.author;
     }
 
 }

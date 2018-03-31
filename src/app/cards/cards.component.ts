@@ -41,12 +41,6 @@ export class CardsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // const perg = 'Como criar um novo componente utilizando angular/cli?';
-    // const resp = 'Basta ir no terminal e executar o comando: ng g c nome-componente';
-    this.controller.addNewUser('vini', '123');
-    // this.cards = this.controller.getAllCards();
-    // this.controller.addNewCard('vini', 'PSOFT', perg, resp);
-    // console.log(this.cards);
   }
 
   /**
@@ -63,16 +57,6 @@ export class CardsComponent implements OnInit {
    */
   public getSideType(value: boolean): string {
     return value ? '' : 'active';
-  }
-
-  /**
-   * Add a new card
-   * @param discipline Discipline
-   * @param question Question
-   * @param answer Answer
-   */
-  public addCard(discipline: string, question: string, answer: string): void {
-    this.controller.addNewCard('vini', discipline, question, answer);
   }
 
   /**
@@ -104,7 +88,14 @@ export class CardsComponent implements OnInit {
    * Get all cards
    */
   public getCards(): Card[] {
-    return this.controller.getAllCards();
+    if (this.controller.getRouter().url === '/perfil') {
+      const user = this.controller.getUserLogado();
+      if (user != null) {
+        return this.controller.getCards(user.getUsername());
+      }
+    } else {
+      return this.controller.getAllCards();
+    }
   }
 
 }

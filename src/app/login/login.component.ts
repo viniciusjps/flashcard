@@ -28,8 +28,15 @@ export class LoginComponent implements OnInit {
 
   public logar(username: string, pswd: string) {
     const user = this.controller.getUser(username);
-    if (user.getPassword() === pswd) {
-      this.controller.logIn(username);
+    if (user == null) {
+      alert('Usuário não cadastrado');
+    } else {
+      if (user.getPassword() !== pswd) {
+        alert('Senha incorreta');
+      } else {
+        this.controller.logIn(username);
+        this.controller.navigate('/perfil');
+      }
     }
   }
 

@@ -15,6 +15,8 @@ import { ControllerService } from './shared/controller.service';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { NovoCardComponent } from './novo-card/novo-card.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
     MuralComponent,
     CadastroUsuarioComponent,
     NovoCardComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    PerfilComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

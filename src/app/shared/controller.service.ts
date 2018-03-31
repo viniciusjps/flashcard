@@ -10,9 +10,10 @@ export class ControllerService {
 
   private users: User[];
   private user_logado: User;
-  private router: Router;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.users = [];
     this.user_logado = null;
   }
@@ -27,7 +28,7 @@ export class ControllerService {
   public addNewCard(username: string, discipline: string, question: string, answer: string): void {
     const user = this.getUser(username);
     if (user != null || user !== undefined) {
-      user.addNewCard(discipline, question, answer);
+      user.addNewCard(discipline, question, answer, this.getAllCards().length);
     }
   }
 
