@@ -27,5 +27,8 @@ export class PerfilComponent implements OnInit {
     this.controller.navigate('/perfil/novo-card');
   }
 
+  public getUsername(): string {
+    return this.controller.getUserLogado().getUsername();
+  }
 
 }
