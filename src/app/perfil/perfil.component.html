@@ -1,5 +1,5 @@
 <div class="ui container">
-  <div class="ui two column grid">
+  <div class="ui two column very relaxed stackable grid">
     <div class="column">
       <h2 class="ui header">
         <i class="user outline icon"></i>
@@ -36,12 +36,38 @@
       <h2 class="ui header">
         <i class="window restore outline icon"></i>
         <div class="content">
-          Seus cartões
+          Seus cards
         </div>
         <br>
       </h2>
+      <div class="ui three column very relaxed stackable grid">
+        <div class="column">
+          <div class="ui animated fade fluid button" #all>
+            <div class="visible content">Todos</div>
+            <div class="hidden content">
+              <i class="right arrow icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui animated fade fluid green button" #hit>
+            <div class="visible content">Acertos</div>
+            <div class="hidden content">
+              <i class="right arrow icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui animated fade fluid red button" #missed>
+            <div class="visible content">Erros</div>
+            <div class="hidden content">
+              <i class="right arrow icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
       <app-cards></app-cards>
     </div>
-
   </div>
 </div>

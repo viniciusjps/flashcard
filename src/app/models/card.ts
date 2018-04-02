@@ -8,6 +8,7 @@ export class Card {
     private rating: number;
     private id: number;
     private author: string;
+    private result: boolean;
 
     constructor(
         discipline: string,
@@ -24,6 +25,7 @@ export class Card {
         this.seeAnswer = false;
         this.discipline = discipline;
         this.author = username;
+        this.result = null;
     }
 
     /**
@@ -101,6 +103,21 @@ export class Card {
      */
     public getAuthor() {
         return this.author;
+    }
+
+    /**
+     * Get result
+     */
+    public getResult(): boolean {
+        return this.result;
+    }
+
+    /**
+     * Set result
+     * @param value New value
+     */
+    public setResult(value: boolean) {
+        this.result = value;
     }
 
 }

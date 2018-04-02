@@ -98,4 +98,22 @@ export class CardsComponent implements OnInit {
     }
   }
 
+  /**
+   * Hit the question
+   * @param id Card id
+   */
+  public hit(id: number) {
+    const user = this.controller.getUserLogado();
+    user.getCard(id).setResult(true);
+  }
+
+  /**
+   * Missed the question
+   * @param id Card id
+   */
+  public missed(id: number) {
+    const user = this.controller.getUserLogado();
+    user.getCard(id).setResult(false);
+  }
+
 }

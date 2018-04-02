@@ -37,8 +37,18 @@ export class User {
         this.cards.push(new Card(discipline, question, answer, id + 1, this.getUsername()));
     }
 
+    /**
+     * Get card by ID
+     * @param id Id
+     */
     public getCard(id: number) {
-        return this.cards[id - 1];
+        const array = this.cards;
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].getId() === id) {
+                return array[i];
+            }
+        }
+        return null;
     }
 
     public getCards(): Card[] {

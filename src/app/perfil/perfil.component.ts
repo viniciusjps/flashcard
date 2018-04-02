@@ -13,7 +13,7 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {}
 
   ngOnInit() {
   }
