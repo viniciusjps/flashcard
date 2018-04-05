@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
@@ -20,4 +21,14 @@ const APP_ROUTES: Routes = [
     { path: 'pesquisar', component: PesquisaComponent}
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
+@NgModule({
+    imports: [
+        RouterModule.forRoot(APP_ROUTES)
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+export class AppRoutingModule {
+
+}

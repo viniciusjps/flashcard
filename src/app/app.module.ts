@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CardsComponent } from './cards/cards.component';
-import { routing } from './app.routing';
 import { LoginComponent } from './login/login.component';
 import { MuralComponent } from './mural/mural.component';
 import { ControllerService } from './shared/controller.service';
@@ -17,6 +16,7 @@ import { NovoCardComponent } from './novo-card/novo-card.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app.routing.module';
 
 
 @NgModule({
@@ -37,7 +37,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    routing
+    AppRoutingModule
   ],
   providers: [
     ControllerService
