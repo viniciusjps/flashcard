@@ -33,8 +33,8 @@ export class User {
     /**
      * addNewCard
      */
-    public addNewCard(discipline: string, question: string, answer: string, id: number): void {
-        this.cards.push(new Card(discipline, question, answer, id + 1, this.getUsername()));
+    public addNewCard(discipline: string, question: string, answer: string, id: number, privacy: boolean): void {
+        this.cards.push(new Card(discipline, question, answer, id + 1, this.getUsername(), privacy));
     }
 
     /**

@@ -9,13 +9,15 @@ export class Card {
     private id: number;
     private author: string;
     private result: boolean;
+    private privacy: boolean;
 
     constructor(
         discipline: string,
         question: string,
         answer: string,
         id: number,
-        username: string
+        username: string,
+        privacy: boolean
     ) {
         this.id = id;
         this.rating = 0;
@@ -26,6 +28,7 @@ export class Card {
         this.discipline = discipline;
         this.author = username;
         this.result = null;
+        this.privacy = privacy;
     }
 
     /**
@@ -118,6 +121,21 @@ export class Card {
      */
     public setResult(value: boolean) {
         this.result = value;
+    }
+
+    /**
+     * Get privacy
+     */
+    public getPrivacy(): boolean {
+        return this.privacy;
+    }
+
+    /**
+     * Set  privacy
+     * @param value New value
+     */
+    public setPrivacy(value: boolean) {
+        this.privacy = value;
     }
 
 }

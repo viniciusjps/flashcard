@@ -25,10 +25,10 @@ export class ControllerService {
    * @param question Question
    * @param answer Answer
    */
-  public addNewCard(username: string, discipline: string, question: string, answer: string): void {
+  public addNewCard(username: string, discipline: string, question: string, answer: string, privacy: boolean): void {
     const user = this.getUser(username);
     if (user != null || user !== undefined) {
-      user.addNewCard(discipline, question, answer, this.getAllCards().length);
+      user.addNewCard(discipline, question, answer, this.getAllCards().length, privacy);
     }
   }
 
