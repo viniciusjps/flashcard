@@ -94,7 +94,7 @@ export class CardsComponent implements OnInit {
         return this.controller.getCards(user.getUsername());
       }
     } else {
-      return this.controller.getAllCards();
+      return this.controller.getAllPublicCards();
     }
   }
 

@@ -30,13 +30,13 @@
 
       <br>
       <div class="ui toggle checkbox">
-        <input type="checkbox" #privacy>
+        <input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
         <label>Tornar público</label>
       </div>
       <br><br><br>
 
       <button class="ui teal button" 
-      (click)="addCard(discipline.value,question.value,answer.value,privacy.value)"
+      (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)"
       >adicionar</button>
     </div>
   </div>

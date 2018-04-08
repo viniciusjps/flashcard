@@ -13,9 +13,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private controller: ControllerService
-  ) {
-    console.log(this.getInfoNavbar());
-  }
+  ) {}
 
   ngOnInit() {
   }

@@ -18,7 +18,6 @@ export class NovoCardComponent implements OnInit {
   }
 
   public addCard(discipline: string, question: string, answer: string, privacy) {
-    console.log(privacy);
     const user = this.controller.getUserLogado();
     if (user != null) {
       this.controller.addNewCard(user.getUsername(), discipline, question, answer, privacy);

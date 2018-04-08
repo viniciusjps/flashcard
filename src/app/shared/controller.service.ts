@@ -69,9 +69,26 @@ export class ControllerService {
   }
 
   /**
-   * Get all cards
+   * Get all public cards
    */
-  public getAllCards(): Card[] {
+  public getAllPublicCards(): Card[] {
+    const array: Card[] = [];
+    for (let index = 0; index < this.users.length; index++) {
+      const user = this.users[index];
+      const cards = user.getCards();
+      for (let i = 0; i < cards.length; i++) {
+        if (cards[i].getPrivacy()) {
+          array.push(cards[i]);
+        }
+      }
+    }
+    return array;
+  }
+
+  /**
+   * Get all public cards
+   */
+  private getAllCards() {
     const array: Card[] = [];
     for (let index = 0; index < this.users.length; index++) {
       const user = this.users[index];
