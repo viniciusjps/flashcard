@@ -17,6 +17,7 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app.routing.module';
+import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AppRoutingModule } from './app.routing.module';
     NovoCardComponent,
     PesquisaComponent,
     PerfilComponent,
-    FooterComponent
+    FooterComponent,
+    CardsPerfilComponent
   ],
   imports: [
     BrowserModule,

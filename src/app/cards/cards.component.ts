@@ -88,32 +88,7 @@ export class CardsComponent implements OnInit {
    * Get all cards
    */
   public getCards(): Card[] {
-    if (this.controller.getRouter().url === '/perfil') {
-      const user = this.controller.getUserLogado();
-      if (user != null) {
-        return this.controller.getCards(user.getUsername());
-      }
-    } else {
-      return this.controller.getAllPublicCards();
-    }
-  }
-
-  /**
-   * Hit the question
-   * @param id Card id
-   */
-  public hit(id: number) {
-    const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(true);
-  }
-
-  /**
-   * Missed the question
-   * @param id Card id
-   */
-  public missed(id: number) {
-    const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(false);
+    return this.controller.getAllPublicCards();
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { ControllerService } from './../shared/controller.service';
-import { CardsComponent } from './../cards/cards.component';
+import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
 
 @Component({
   selector: 'app-perfil',
@@ -24,7 +24,11 @@ export class PerfilComponent implements OnInit {
   }
 
   public addNewCard() {
-    this.controller.navigate('/perfil/novo-card');
+    if (this.controller.getUserLogado() != null) {
+      this.controller.navigate('/perfil/novo-card');
+    } else {
+      this.controller.navigate('/login');
+    }
   }
 
   public getUsername(): string {

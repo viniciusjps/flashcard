@@ -18,11 +18,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  public logIn(username: string) {
+  public logIn(username: string): void {
     this.controller.logIn(username);
   }
 
-  public logOut() {
+  public logOut(): void {
     this.controller.logOut();
   }
 

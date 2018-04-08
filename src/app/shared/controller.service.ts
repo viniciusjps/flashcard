@@ -37,7 +37,7 @@ export class ControllerService {
    * @param username Username
    * @param password Password
    */
-  public addNewUser(username: string, password: string) {
+  public addNewUser(username: string, password: string): void {
     if (username.trim().length !== 0 && password.trim().length !== 0) {
       const user = this.getUser(username);
       if (user == null || user === undefined) {
@@ -88,7 +88,7 @@ export class ControllerService {
   /**
    * Get all public cards
    */
-  private getAllCards() {
+  private getAllCards(): Card[] {
     const array: Card[] = [];
     for (let index = 0; index < this.users.length; index++) {
       const user = this.users[index];
@@ -116,7 +116,7 @@ export class ControllerService {
    * @param username Username
    * @param id Id
    */
-  public getCard(username: string, id: number) {
+  public getCard(username: string, id: number): Card {
     const user = this.getUser(username);
     return user.getCard(id);
   }
@@ -124,7 +124,7 @@ export class ControllerService {
   /**
    * Get user logado
    */
-  public getUserLogado() {
+  public getUserLogado(): User {
     return this.user_logado;
   }
 
@@ -132,7 +132,7 @@ export class ControllerService {
    * Login
    * @param username Username
    */
-  public logIn(username: string) {
+  public logIn(username: string): void {
     const user = this.getUser(username);
     if (user != null || user !== undefined) {
       this.user_logado = user;
@@ -142,18 +142,18 @@ export class ControllerService {
   /**
    * Log out
    */
-  public logOut() {
+  public logOut(): void {
     const user = this.user_logado;
     if (user != null || user !== undefined) {
       this.user_logado = null;
     }
   }
 
-  public navigate(address: string) {
+  public navigate(address: string): void {
     this.router.navigate([address]);
   }
 
-  public getRouter() {
+  public getRouter(): Router {
     return this.router;
   }
 
