@@ -1,0 +1,49 @@
+<div>
+  <h2 class="ui header">
+    <i class="user icon"></i>
+    <div class="content">
+      Editar perfil
+      <div class="sub header">
+        Username: {{ getUsername() }}
+      </div>
+    </div>
+  </h2>
+  <hr class="ui divider">
+  <h3>
+    <i class="lock icon"></i>
+    Editar senha
+  </h3>
+  <div class="ui two column very relaxed stackable grid">
+    <div class="six wide column">
+      <h5>Senha atual</h5>
+      <div class="ui input fluid">
+        <input type="password" placeholder="Digite sua senha" #pswd
+        [(ngModel)]="pswd.value">
+      </div>
+      <div class="ui green message" *ngIf="pswd.value == getPassword()" >
+        <div class="header">
+          <i class="check icon"></i>
+          Senha correta
+        </div>
+      </div>
+    </div>
+    <div class="eight wide column">
+      <h5>Nova senha</h5>
+      <div class="ui action input fluid">
+        <input type="password" placeholder="Digite uma nova senha" #newpswd
+        [(ngModel)]="newpswd.value">
+        <button class="ui button" #submit
+        (click)="setPassword(pswd.value, newpswd.value)">
+          confirmar
+        </button>
+      </div>
+      <div class="ui yellow message" *ngIf="newpswd.selectionEnd == 0" >
+        <div class="header">
+          <i class="exclamation triangle icon"></i>
+          Digite uma senha válida
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>

@@ -18,6 +18,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
+import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
     PesquisaComponent,
     PerfilComponent,
     FooterComponent,
-    CardsPerfilComponent
+    CardsPerfilComponent,
+    PerfilEditarComponent
   ],
   imports: [
     BrowserModule,

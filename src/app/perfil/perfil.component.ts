@@ -11,6 +11,8 @@ import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
 })
 export class PerfilComponent implements OnInit {
 
+  private showEditProfile = false;
+
   constructor(
     private controller: ControllerService
   ) {}
@@ -33,6 +35,14 @@ export class PerfilComponent implements OnInit {
 
   public getUsername(): string {
     return this.controller.getUserLogado().getUsername();
+  }
+
+  public getShowEditProfile(): boolean {
+    return this.showEditProfile;
+  }
+
+  public setShowEditProfile(): void {
+    this.showEditProfile = !this.showEditProfile;
   }
 
 }

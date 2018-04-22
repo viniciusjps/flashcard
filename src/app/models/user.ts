@@ -30,6 +30,10 @@ export class User {
        return this.password;
     }
 
+    public setPassword(value: string): void {
+        this.password = value;
+    }
+
     /**
      * addNewCard
      */

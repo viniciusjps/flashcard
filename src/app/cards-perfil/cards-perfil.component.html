@@ -1,4 +1,14 @@
 <div class="ui container">
+  <h2 class="ui header">
+    <i class="window restore outline icon"></i>
+    <div class="content">
+      Seus cards
+      <div class="sub header">
+        Edite a privacidade dos seus cartões clicando no cadeado
+      </div>
+    </div>
+    <hr class="ui divider">
+  </h2>
   <div class="ui three column very relaxed stackable grid">
     <div class="column">
       <div class="ui animated fade fluid basic button"
@@ -34,7 +44,7 @@
       </div>
     </div>
   </div>
-  <br><br>
+  <br>
   <div class="ui two middle aligned very relaxed stackable cards">
     <div class="ui card shape" *ngFor="let card of getCards()">
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
@@ -57,7 +67,8 @@
               </i>
               {{ card.getRating() }}
             </div>
-            <span><i class="user icon"></i> {{ card.getAuthor() }} </span>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()" ><i class="unlock icon"></i></a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()" ><i class="lock icon"></i></a>
           </div>
         </div>
       </div>
@@ -75,10 +86,12 @@
             <h5 class="left floated">Autoavaliação</h5>
             <div class="ui two column very relaxed stackable buttons">
               <button class="ui green basic button"
-              (click)="hit(card.getId())">
+              (click)="hit(card.getId())"
+              (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 :)</button>
               <button class="ui red basic button"
-              (click)="missed(card.getId())">
+              (click)="missed(card.getId())"
+              (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 :(</button>
             </div>
           </div>
@@ -94,7 +107,8 @@
               </i>
               {{ card.getRating() }}
             </div>
-            <span><i class="user icon"></i> {{ card.getAuthor() }} </span>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()" ><i class="unlock icon"></i></a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()" ><i class="lock icon"></i></a>
           </div>
         </div>
       </div>
