@@ -30,7 +30,7 @@ export class PerfilEditarComponent implements OnInit {
     if (user.getPassword() === newpass) {
       alert('A senha informada é a mesma já cadastrada');
     } else {
-      if (newpass.length > 0) {
+      if (newpass.length > 0 && user.getPassword() === old) {
         user.setPassword(newpass);
         alert('Senha alterada!');
       } else {
