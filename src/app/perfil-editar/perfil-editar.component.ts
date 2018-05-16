@@ -28,7 +28,7 @@ export class PerfilEditarComponent implements OnInit {
   public setPassword(old: string, newpass: string): void {
     const user = this.controller.getUserLogado();
     if (user.getPassword() === newpass) {
-      alert('A senha informada é a mesma já cadastrada');
+      alert('Digite uma nova senha!');
     } else {
       if (newpass.length > 0 && user.getPassword() === old) {
         user.setPassword(newpass);
