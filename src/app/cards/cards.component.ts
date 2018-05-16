@@ -8,7 +8,7 @@ import {
   style,
   animate,
   transition
- } from '@angular/animations';
+} from '@angular/animations';
 import { ControllerService } from '../shared/controller.service';
 
 @Component({
@@ -17,10 +17,10 @@ import { ControllerService } from '../shared/controller.service';
   styleUrls: ['./cards.component.css'],
   animations: [
     trigger('rotate', [
-      state('left',   style({
+      state('left', style({
         transform: 'rotateY(180deg)',
       })),
-      state('right',   style({
+      state('right', style({
         transform: 'rotateY(0deg)',
       })),
       transition('* => *', animate('500ms ease'))
@@ -30,11 +30,10 @@ import { ControllerService } from '../shared/controller.service';
 export class CardsComponent implements OnInit {
 
   private colors: string[] = [
-      'red', 'orange', 'yellow', 'olive', 'green',
-      'teal', 'blue', 'violet', 'purple', 'pink',
-      'brown', 'grey', 'black'
+    'red', 'orange', 'yellow', 'olive', 'green',
+    'teal', 'blue', 'violet', 'purple', 'pink',
+    'brown', 'grey', 'black'
   ];
-
 
   constructor(
     private controller: ControllerService
@@ -60,23 +59,6 @@ export class CardsComponent implements OnInit {
   }
 
   /**
-   * Get card by id
-   * @param id Id
-   */
-  public getCard(username: string, id: number): Card {
-    return this.controller.getCard(username, id);
-  }
-
-  /**
-   * Get card rating
-   * @param id Id
-   */
-  public getCardRating(username: string, id: number): number {
-    const card = this.getCard(username, id);
-    return card.getRating();
-  }
-
-  /**
    * Get color name
    */
   public getColor(): string {
@@ -85,10 +67,23 @@ export class CardsComponent implements OnInit {
   }
 
   /**
-   * Get all cards
+   * Get all public card's
    */
   public getCards(): Card[] {
     return this.controller.getAllPublicCards();
+  }
+
+  /**
+   * Search card's by the question or subject
+   * @param value Value
+   */
+  public search(value: string): Card[] {
+    const cards = this.controller.getAllPublicCards();
+    const result = cards.filter(card =>
+      card.getQuestion().toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+      card.getDiscipline().toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+    return result;
   }
 
 }
