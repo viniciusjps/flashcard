@@ -27,7 +27,7 @@
 				<textarea rows="2" placeholder="Digite sua pergunta" #question [(ngModel)]="question.value"></textarea>
 				<div class="ui yellow message" *ngIf="question.selectionEnd == 0">
 					<div>
-						<i class="exclamation triangle icon"></i>
+						<i class="exclamation icon"></i>
 						Esse campo não pode ser vazio
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 				<textarea rows="2" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
 				<div class="ui yellow message" *ngIf="answer.selectionEnd == 0">
 					<div>
-						<i class="exclamation triangle icon"></i>
+						<i class="exclamation icon"></i>
 						Esse campo não pode ser vazio
 					</div>
 				</div>
@@ -53,7 +53,11 @@
 			<br>
 			<br>
 
-			<button class="ui teal button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)">adicionar</button>
+			<button class="ui teal fluid button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)" [disabled]="answer.value == '' || question.value == ''">
+				adicionar
+			</button>
 		</div>
 	</div>
+	<br>
+	<br>
 </div>
