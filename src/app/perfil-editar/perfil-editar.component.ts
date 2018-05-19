@@ -17,14 +17,25 @@ export class PerfilEditarComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Get username
+   */
   public getUsername(): string {
     return this.controller.getUserLogado().getUsername();
   }
 
+  /**
+   * Get user's password
+   */
   public getPassword(): string {
     return this.controller.getUserLogado().getPassword();
   }
 
+  /**
+   * Set new password
+   * @param old Old pswd
+   * @param newpass New value
+   */
   public setPassword(old: string, newpass: string): void {
     const user = this.controller.getUserLogado();
     if (user.getPassword() === newpass) {
@@ -37,6 +48,14 @@ export class PerfilEditarComponent implements OnInit {
         alert('Senha inválida');
       }
     }
+  }
+
+  /**
+   * Clear tag value
+   * @param tag Html tag
+   */
+  public clearValue(tag) {
+    tag.value = '';
   }
 
 }

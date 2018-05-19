@@ -30,7 +30,7 @@
       <h5>Nova senha</h5>
       <div class="ui action input fluid">
         <input type="password" placeholder="Digite uma nova senha" #newpswd [(ngModel)]="newpswd.value">
-        <button class="ui button" #submit [disabled]="newpswd.value == getPassword() || newpswd.value == ''" (click)="setPassword(pswd.value, newpswd.value)">
+        <button class="ui button" #submit [disabled]="newpswd.value == getPassword() || newpswd.value == ''" (click)="setPassword(pswd.value, newpswd.value); clearValue(newpswd); clearValue(pswd)">
           confirmar
         </button>
       </div>
