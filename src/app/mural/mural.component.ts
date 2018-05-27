@@ -27,8 +27,8 @@ export class MuralComponent implements OnInit {
     }
   }
 
-  public search() {
-    this.controller.navigate('/pesquisar');
+  public search(value: string) {
+    this.controller.getRouter().navigate(['/pesquisar'], { queryParams: {search: value}});
   }
 
 }

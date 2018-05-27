@@ -20,8 +20,8 @@
         </div>
         <div class="center aligned column">
           <div class="ui action input fluid">
-            <input type="text" placeholder="Procure por disciplina, palavras-chave ou pelo id">
-            <button class="ui icon button" (click)="search()">
+            <input type="text" placeholder="Procure por disciplina, palavras-chave ou pelo id" #msg>
+            <button class="ui icon button" (click)="search(msg.value)">
               <i class="search icon"></i>
             </button>
           </div>
