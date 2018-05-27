@@ -11,8 +11,7 @@
   </h2>
   <div class="ui three column very relaxed stackable grid">
     <div class="column">
-      <div class="ui animated fade fluid basic button"
-      (click)="setTypeView('all')">
+      <div class="ui animated fade fluid basic button" (click)="setTypeView('all')">
         <div class="visible content">Todos
           <a class="ui circular label"> {{ getSpecificCards(null).length }} </a>
         </div>
@@ -22,9 +21,8 @@
       </div>
     </div>
     <div class="column">
-      <div class="ui animated fade fluid green basic button"
-      (click)="setTypeView('hit')">
-        <div class="visible content">Acertos  
+      <div class="ui animated fade fluid green basic button" (click)="setTypeView('hit')">
+        <div class="visible content">Acertos
           <a class="ui green circular label"> {{ getSpecificCards(true).length }} </a>
         </div>
         <div class="hidden content">
@@ -33,8 +31,7 @@
       </div>
     </div>
     <div class="column">
-      <div class="ui animated fade fluid red basic button"
-      (click)="setTypeView('missed')">
+      <div class="ui animated fade fluid red basic button" (click)="setTypeView('missed')">
         <div class="visible content">Erros
           <a class="ui red circular label"> {{ getSpecificCards(false).length }} </a>
         </div>
@@ -56,19 +53,21 @@
               <p>{{ card.getQuestion() }}</p>
             </div>
           </div>
-          <button class="ui botton attached {{ getColor(card.getResult()) }} button"
-          (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+          <button class="ui botton attached {{ getColor(card.getResult()) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver resposta
           </button>
           <div class="extra content">
             <div class="right floated">
-              <i class="heart like icon"
-              (click)="card.addRating()">
+              <i class="heart like icon" (click)="card.addRating()">
               </i>
               {{ card.getRating() }}
             </div>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()" ><i class="unlock icon"></i></a>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()" ><i class="lock icon"></i></a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
+              <i class="unlock icon"></i>
+            </a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()">
+              <i class="lock icon"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -85,30 +84,29 @@
           <div class="extra content">
             <h5 class="left floated">Autoavaliação</h5>
             <div class="ui two column very relaxed stackable buttons">
-              <button class="ui green basic button"
-              (click)="hit(card.getId())"
-              (click)="card.setSeeAnswer(!card.getSeeAnswer())">
-                :)</button>
-              <button class="ui red basic button"
-              (click)="missed(card.getId())"
-              (click)="card.setSeeAnswer(!card.getSeeAnswer())">
-                :(</button>
+              <button class="ui green basic button" (click)="hit(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+                <i class="thumbs up icon"></i>
+              </button>
+              <button class="ui red basic button" (click)="missed(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+                <i class="thumbs down icon"></i>
+              </button>
             </div>
           </div>
 
-          <button class="ui botton attached {{ getColor(card.getResult()) }} button"
-          (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+          <button class="ui botton attached {{ getColor(card.getResult()) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver pergunta
           </button>
           <div class="extra content">
             <div class="right floated">
-              <i class="heart like icon"
-              (click)="card.addRating()">
-              </i>
+              <i class="heart like icon" (click)="card.addRating()"></i>
               {{ card.getRating() }}
             </div>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()" ><i class="unlock icon"></i></a>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()" ><i class="lock icon"></i></a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
+              <i class="unlock icon"></i>
+            </a>
+            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()">
+              <i class="lock icon"></i>
+            </a>
           </div>
         </div>
       </div>

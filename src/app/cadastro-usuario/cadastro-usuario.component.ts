@@ -35,8 +35,7 @@ export class CadastroUsuarioComponent implements OnInit {
         swal({
           title: 'Bem-vindo, ' + username,
           text: 'Aqui, você será capaz de gerênciar sua conta e os seus cartões!',
-          icon: 'success',
-          button: 'Começar'
+          icon: 'success'
         });
       } else {
         swal({

@@ -22,7 +22,7 @@ export class PerfilComponent implements OnInit {
 
   public logout() {
     this.controller.logOut();
-    this.controller.navigate('');
+    this.controller.navigate('/login');
   }
 
   public addNewCard() {
