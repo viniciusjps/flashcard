@@ -1,5 +1,70 @@
 <div class="ui container">
-  <p>
-    {{ search }}
-  </p>
+  <div class="ui field">
+    <h2 class="ui header">
+      <i class="search icon"></i>
+      <div class="content">
+        Pesquise por:
+        <div class="sub header">
+          disciplina, perguntas ou palavras-chave
+        </div>
+      </div>
+    </h2>
+    <div class="ui left icon fluid input">
+      <input type="text" placeholder="Pesquisar..." [(ngModel)]="search" value="{{ search }}">
+      <i class="search icon"></i>
+    </div>
+  </div>
+  <hr class="ui divider">
+  <div class="ui three middle aligned very relaxed stackable cards">
+    <div class="ui card shape" *ngFor="let card of getSearchList()">
+      <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
+        <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
+          <div class="content">
+            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="description">
+              <p>{{ card.getQuestion() }}</p>
+            </div>
+          </div>
+          <button class="ui botton attached teal button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+            ver resposta
+          </button>
+          <div class="extra content">
+            <div class="right floated">
+              <i class="heart like icon" (click)="card.addRating()"></i>
+              {{ card.getRating() }}
+            </div>
+            <span>
+              <i class="user icon"></i>
+              {{ card.getAuthor() }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
+        <div class="ui teal fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+          <div class="content">
+            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="description">
+              <p>{{ card.getAnswer() }}</p>
+            </div>
+          </div>
+          <button class="ui botton attached teal button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+            ver pergunta
+          </button>
+          <div class="extra content">
+            <div class="right floated">
+              <i class="heart like icon" (click)="card.addRating()"></i>
+              {{ card.getRating() }}
+            </div>
+            <span>
+              <i class="user icon"></i>
+              {{ card.getAuthor() }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,26 +13,29 @@
       <br>
       <div class="ui one column grid">
         <div class="column">
-          <button class="ui teal fluid button" (click)="addNewCard()"
-          routerLink="perfil/novo-card">
-            Novo card</button>
+          <button class="ui teal fluid button" (click)="addNewCard()" routerLink="perfil/novo-card">
+            Novo card
+          </button>
         </div>
-        <br>
         <div class="column">
-          <button class="ui teal fluid button">Editar card</button>
+          <button class="ui teal fluid button">
+            Editar card
+          </button>
         </div>
-        <br>
         <div class="column">
           <button class="ui teal fluid button" (click)="getShowEditProfile(setShowEditProfile())">
-            Editar perfil</button>
+            Editar perfil
+          </button>
         </div>
-        <br>
         <div class="column">
-          <button class="ui red fluid button" (click)="logout()">Logout</button>
+          <button class="ui red fluid button" (click)="logout()">
+            Logout
+          </button>
         </div>
       </div>
     </div>
-    <br><br>
+    <br>
+    <br>
     <div class="twelve wide column">
       <app-perfil-editar *ngIf="getShowEditProfile()"></app-perfil-editar>
       <app-cards-perfil></app-cards-perfil>
