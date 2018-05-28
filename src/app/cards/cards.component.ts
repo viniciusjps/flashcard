@@ -29,12 +29,6 @@ import { ControllerService } from '../shared/controller.service';
 })
 export class CardsComponent implements OnInit {
 
-  private colors: string[] = [
-    'red', 'orange', 'yellow', 'olive', 'green',
-    'teal', 'blue', 'violet', 'purple', 'pink',
-    'brown', 'grey', 'black'
-  ];
-
   constructor(
     private controller: ControllerService
   ) { }
@@ -59,31 +53,10 @@ export class CardsComponent implements OnInit {
   }
 
   /**
-   * Get color name
-   */
-  public getColor(): string {
-    const index = Math.floor(Math.random() * (this.colors.length - 1));
-    return this.colors[index];
-  }
-
-  /**
    * Get all public card's
    */
   public getCards(): Card[] {
     return this.controller.getAllPublicCards();
-  }
-
-  /**
-   * Search card's by the question or subject
-   * @param value Value
-   */
-  public search(value: string): Card[] {
-    const cards = this.controller.getAllPublicCards();
-    const result = cards.filter(card =>
-      card.getQuestion().toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-      card.getDiscipline().toLowerCase().indexOf(value.toLowerCase()) !== -1
-    );
-    return result;
   }
 
 }
