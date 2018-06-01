@@ -12,7 +12,6 @@
 			<select class="ui dropdown" #discipline>
 				<option value="{{ item.valueOf() }}" *ngFor="let item of getDisciplines()"> {{ item }} </option>
 			</select>
-
 			<!--select class="ui fluid selection dropdown" #discipline>
 				<option class="ui item" value="LP1">Laboratório de Programação I</option>
 				<option class="ui item" value="LP2">Laboratório de Programação II</option>
@@ -21,7 +20,6 @@
 				<option class="ui item" value="PSOFT">Projeto de Software</option>
 				<option class="ui item" value="TC">Teoria da Computação</option>
 			</select-->
-
 			<h4>Pergunta: </h4>
 			<div class="ui field">
 				<textarea rows="2" placeholder="Digite sua pergunta" #question [(ngModel)]="question.value"></textarea>
@@ -32,7 +30,6 @@
 					</div>
 				</div>
 			</div>
-
 			<h4>Resposta: </h4>
 			<div class="ui field">
 				<textarea rows="2" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
@@ -43,7 +40,6 @@
 					</div>
 				</div>
 			</div>
-
 			<br>
 			<div class="ui toggle checkbox">
 				<input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
@@ -52,7 +48,6 @@
 			<br>
 			<br>
 			<br>
-
 			<button class="ui teal fluid button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)" [disabled]="answer.value == '' || question.value == ''">
 				adicionar
 			</button>

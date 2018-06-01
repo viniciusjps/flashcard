@@ -1,15 +1,15 @@
 <div class="ui container">
   <div class="ui two column middle aligned very relaxed stackable grid">
     <div class="column">
-      <h2 class="ui image header center aligned">
+      <h2 class="ui image teal header center aligned">
         <img src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="image">
         <div class="content">Faça login em sua conta</div>
       </h2>
       <div class="ui form">
         <div class="field">
-          <label>Nome de usuário</label>
+          <label>E-mail</label>
           <div class="ui left icon input">
-            <input type="text" placeholder="Nome de usuário" #username>
+            <input type="text" placeholder="Endereço de e-mail" #email>
             <i class="user icon"></i>
           </div>
         </div>
@@ -20,14 +20,14 @@
             <i class="lock icon"></i>
           </div>
         </div>
-        <button class="ui teal submit button" (click)="logar(username.value, password.value)">Entrar</button>
+        <button class="ui teal submit button" (click)="logar(email.value, password.value)">Entrar</button>
       </div>
     </div>
     <div style="position:relative; margin:0; padding:0;">
       <div class="ui vertical divider">Ou</div>
     </div>
     <div class="column">
-      <h2 class="ui icon header center aligned">
+      <h2 class="ui icon teal header center aligned">
         <div class="content">
           <i class="user outline icon"></i>
           Novo por aqui?
