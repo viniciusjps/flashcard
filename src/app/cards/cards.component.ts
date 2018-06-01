@@ -1,5 +1,7 @@
 import { Card } from './../models/card';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 
 import {
@@ -10,6 +12,7 @@ import {
   transition
 } from '@angular/animations';
 import { ControllerService } from '../shared/controller.service';
+
 
 @Component({
   selector: 'app-cards',
@@ -30,7 +33,8 @@ import { ControllerService } from '../shared/controller.service';
 export class CardsComponent implements OnInit {
 
   constructor(
-    private controller: ControllerService
+    private controller: ControllerService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -59,4 +63,8 @@ export class CardsComponent implements OnInit {
     return this.controller.getAllPublicCards();
   }
 
+  public getImage(email: string) {
+    return this.http.get('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
+      .map(response => JSON.stringify(response));
+  }
 }
