@@ -24,13 +24,14 @@ export class CadastroUsuarioComponent implements OnInit {
    * @param username Username
    * @param pswd Password
    * @param pswd2 Password 2
+   * @param email Email
    */
-  public addNewUser(username: string, pswd: string, pswd2: string): void {
-    if (this.validaEntrada(username) && this.validaEntrada(pswd) && this.verificaSenha(pswd, pswd2)) {
-      const user = this.controller.getUser(username);
+  public addNewUser(username: string, pswd: string, pswd2: string, email: string): void {
+    if (this.validaEntrada(username) && this.validaEntrada(pswd) && this.verificaSenha(pswd, pswd2) && this.validaEntrada(email)) {
+      const user = this.controller.getUser(email);
       if (user == null) {
-        this.controller.addNewUser(username, pswd);
-        this.controller.logIn(username);
+        this.controller.addNewUser(username, pswd, email);
+        this.controller.logIn(email);
         this.controller.navigate('/perfil');
         swal({
           title: 'Bem-vindo, ' + username,
@@ -39,7 +40,7 @@ export class CadastroUsuarioComponent implements OnInit {
         });
       } else {
         swal({
-          title: 'Username inválido',
+          title: 'Email inválido',
           text: 'Já existe usuário cadastrado',
           icon: 'warning',
           buttons: [false],

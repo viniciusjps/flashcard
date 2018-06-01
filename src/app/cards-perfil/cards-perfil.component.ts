@@ -60,16 +60,16 @@ export class CardsPerfilComponent implements OnInit {
    * Get card by id
    * @param id Id
    */
-  public getCard(username: string, id: number): Card {
-    return this.controller.getCard(username, id);
+  public getCard(email: string, id: number): Card {
+    return this.controller.getCard(email, id);
   }
 
   /**
    * Get card rating
    * @param id Id
    */
-  public getCardRating(username: string, id: number): number {
-    const card = this.getCard(username, id);
+  public getCardRating(email: string, id: number): number {
+    const card = this.getCard(email, id);
     return card.getRating();
   }
 
@@ -100,9 +100,9 @@ export class CardsPerfilComponent implements OnInit {
     const result = [];
     if (user != null) {
       if (value == null) {
-        return this.controller.getCards(user.getUsername());
+        return this.controller.getCards(user.getEmail());
     } else {
-      const array = this.controller.getCards(user.getUsername());
+      const array = this.controller.getCards(user.getEmail());
       for (let i = 0; i < array.length; i++) {
         if (array[i].getResult() === value) {
           result.push(array[i]);

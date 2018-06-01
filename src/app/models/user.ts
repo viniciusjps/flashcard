@@ -5,14 +5,17 @@ export class User {
 
     private username: string;
     private password: string;
+    private email: string;
     private cards: Card[];
 
     constructor (
         username: string,
-        pswd: string
+        pswd: string,
+        email: string
     ) {
         this.username = username;
         this.password = pswd;
+        this.email = email;
         this.cards = [];
     }
 
@@ -21,6 +24,21 @@ export class User {
      */
     public getUsername(): string {
         return this.username;
+    }
+
+    public setUsername(value: string): void {
+        this.username = value;
+    }
+
+    /**
+     * getEmail
+     */
+    public getEmail(): string {
+        return this.email;
+    }
+
+    public setEmail(value: string): void {
+        this.email = value;
     }
 
     /**
@@ -38,7 +56,7 @@ export class User {
      * addNewCard
      */
     public addNewCard(discipline: string, question: string, answer: string, id: number, privacy: boolean): void {
-        this.cards.push(new Card(discipline, question, answer, id + 1, this.getUsername(), privacy));
+        this.cards.push(new Card(discipline, question, answer, id + 1, this, privacy));
     }
 
     /**

@@ -36,24 +36,25 @@ export class ControllerService {
    * Add a new user
    * @param username Username
    * @param password Password
+   * @param email Email
    */
-  public addNewUser(username: string, password: string): void {
+  public addNewUser(username: string, password: string, email: string): void {
     if (username.trim().length !== 0 && password.trim().length !== 0) {
       const user = this.getUser(username);
       if (user == null || user === undefined) {
-        this.users.push(new User(username, password));
+        this.users.push(new User(username, password, email));
       }
     }
   }
 
   /**
-   * Get user by username
-   * @param username Username
+   * Get user by Email
+   * @param email Email
    */
-  public getUser(username: string): User {
-    if (username != null || username !== undefined) {
+  public getUser(email: string): User {
+    if (email != null || email !== undefined) {
       for (let index = 0; index < this.users.length; index++) {
-        if (this.users[index].getUsername() === username) {
+        if (this.users[index].getEmail() === email) {
           return this.users[index];
         }
       }
@@ -104,20 +105,20 @@ export class ControllerService {
    * Get the cards by username
    * @param username Username
    */
-  public getCards(username: string): Card[] {
-    const user = this.getUser(username);
+  public getCards(email: string): Card[] {
+    const user = this.getUser(email);
     if (user != null || user !== undefined) {
-      return this.getUser(username).getCards();
+      return this.getUser(email).getCards();
     }
   }
 
   /**
    * Get the cards by id
-   * @param username Username
+   * @param email Email
    * @param id Id
    */
-  public getCard(username: string, id: number): Card {
-    const user = this.getUser(username);
+  public getCard(email: string, id: number): Card {
+    const user = this.getUser(email);
     return user.getCard(id);
   }
 
@@ -132,8 +133,8 @@ export class ControllerService {
    * Login
    * @param username Username
    */
-  public logIn(username: string): void {
-    const user = this.getUser(username);
+  public logIn(email: string): void {
+    const user = this.getUser(email);
     if (user != null || user !== undefined) {
       this.user_logado = user;
     }

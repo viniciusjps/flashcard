@@ -31,7 +31,7 @@ export class NovoCardComponent implements OnInit {
         const user = this.controller.getUserLogado();
         if (user != null) {
             if (this.validaEntrada(question) && this.validaEntrada(answer)) {
-                this.controller.addNewCard(user.getUsername(), discipline, question, answer, privacy);
+                this.controller.addNewCard(user.getEmail(), discipline, question, answer, privacy);
                 this.controller.navigate('/perfil');
             } else {
                 alert('Os campos não podem ser vazios!');

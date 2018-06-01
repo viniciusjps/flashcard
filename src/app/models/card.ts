@@ -1,3 +1,6 @@
+import { User } from './user';
+
+
 export class Card {
 
     private discipline: string;
@@ -7,7 +10,7 @@ export class Card {
     private favorite: boolean;
     private rating: number;
     private id: number;
-    private author: string;
+    private author: User;
     private result: boolean;
     private privacy: boolean;
 
@@ -16,7 +19,7 @@ export class Card {
         question: string,
         answer: string,
         id: number,
-        username: string,
+        author: User,
         privacy: boolean
     ) {
         this.id = id;
@@ -26,7 +29,7 @@ export class Card {
         this.question = question;
         this.seeAnswer = false;
         this.discipline = discipline;
-        this.author = username;
+        this.author = author;
         this.result = null;
         this.privacy = privacy;
     }

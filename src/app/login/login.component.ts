@@ -14,34 +14,34 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private controller: ControllerService
-  ) {}
+  ) { }
 
   ngOnInit() {
   }
 
-  public newUser(username: string, pswd: string) {
-    this.controller.addNewUser(username, pswd);
+  public newUser(username: string, pswd: string, email: string) {
+    this.controller.addNewUser(username, pswd, email);
   }
 
-  public getUser(username: string) {
-    return this.controller.getUser(username);
+  public getUser(email: string) {
+    return this.controller.getUser(email);
   }
 
-  public logar(username: string, pswd: string) {
-    const user = this.controller.getUser(username);
+  public logar(email: string, pswd: string) {
+    const user = this.controller.getUser(email);
     if (user == null) {
       alert('Usuário não cadastrado');
     } else {
       if (user.getPassword() !== pswd) {
         alert('Senha incorreta');
       } else {
-        this.controller.logIn(username);
+        this.controller.logIn(email);
         this.controller.navigate('/perfil');
       }
     }
   }
 
-  public deslogar(username: string) {
+  public deslogar(email: string) {
     this.controller.logOut();
   }
 
