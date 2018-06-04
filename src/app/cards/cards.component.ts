@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
-
 import {
   trigger,
   state,
@@ -64,7 +63,16 @@ export class CardsComponent implements OnInit {
   }
 
   public getImage(email: string) {
-    return this.http.get('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
-      .map(response => JSON.stringify(response));
+    this.getUrl(email)
+      .then(data => {
+        const url = data;
+        return url;
+      });
+  }
+
+  public getUrl(email: string) {
+    return fetch('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
+      .then(response => response.json())
+      .then(json => json['entry']['gphoto$thumbnail']['$t']);
   }
 }
