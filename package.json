@@ -4,18 +4,21 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "postinstall": "ng build --aot -prod",
   "private": true,
   "dependencies": {
     "@angular-devkit/core": "0.0.29",
     "@angular/animations": "^5.2.10",
+    "@angular/cli": "1.6.0",
     "@angular/common": "^5.2.10",
     "@angular/compiler": "^5.2.10",
+    "@angular/compiler-cli": "^5.2.10",
     "@angular/core": "^5.2.10",
     "@angular/forms": "^5.2.10",
     "@angular/http": "^5.2.10",
@@ -24,11 +27,14 @@
     "@angular/router": "^5.2.10",
     "@schematics/angular": "^0.1.17",
     "core-js": "^2.5.5",
+    "express": "^4.16.3",
     "jquery": "^3.3.1",
+    "path": "^0.12.7",
     "rxjs": "^5.5.10",
     "semantic-ui-css": "^2.3.1",
     "ssri": "^5.3.0",
     "sweetalert": "^2.1.0",
+    "typescript": "~2.4.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -39,6 +45,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^6.0.108",
     "codelyzer": "^4.3.0",
+    "enhanced-resolve": "^4.0.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
@@ -51,5 +58,9 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"
+  },
+  "engines": {
+    "node": "9.2.0",
+    "npm": "6.0.1"
   }
 }
