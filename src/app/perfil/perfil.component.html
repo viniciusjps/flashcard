@@ -6,29 +6,34 @@
         <div class="content">
           Perfil
           <div class="sub header">
-            Painel de controle
+            Dashboard
           </div>
         </div>
       </h2>
       <br>
       <div class="ui one column grid">
         <div class="column">
-          <button class="ui teal fluid button" (click)="addNewCard()" routerLink="perfil/novo-card">
+          <button class="ui teal fluid button" (click)="setCommand('cards')" title="Exibir seus cards">
+            Seus cards
+          </button>
+        </div>
+        <div class="column">
+          <button class="ui teal fluid button" (click)="addNewCard()" routerLink="perfil/novo-card" title="Adicionar um novo card">
             Novo card
           </button>
         </div>
         <div class="column">
-          <button class="ui teal fluid button">
+          <button class="ui teal fluid button" title="Editar card">
             Editar card
           </button>
         </div>
         <div class="column">
-          <button class="ui teal fluid button" (click)="getShowEditProfile(setShowEditProfile())">
+          <button class="ui teal fluid button" (click)="setCommand('editar-perfil')" title="Editar perfil">
             Editar perfil
           </button>
         </div>
         <div class="column">
-          <button class="ui red fluid button" (click)="logout()">
+          <button class="ui red fluid button" (click)="logout()" title="Sair">
             Logout
           </button>
         </div>
@@ -37,8 +42,8 @@
     <br>
     <br>
     <div class="twelve wide column">
-      <app-perfil-editar *ngIf="getShowEditProfile()"></app-perfil-editar>
-      <app-cards-perfil></app-cards-perfil>
+      <app-perfil-editar *ngIf="mode === 'editar-perfil'"></app-perfil-editar>
+      <app-cards-perfil *ngIf="mode === 'cards'"></app-cards-perfil>
     </div>
   </div>
 </div>

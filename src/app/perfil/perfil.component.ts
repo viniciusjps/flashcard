@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 import { ControllerService } from './../shared/controller.service';
 import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-perfil',
@@ -11,13 +13,20 @@ import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
 })
 export class PerfilComponent implements OnInit {
 
-  private showEditProfile = false;
+  private subscription: Subscription;
+  private mode: String;
 
   constructor(
-    private controller: ControllerService
+    private controller: ControllerService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.subscription = this.route.queryParams.subscribe(
+      queryParams => this.mode = queryParams['command']
+      
+    );
+    this.mode = 'cards'
   }
 
   public logout() {
@@ -37,12 +46,12 @@ export class PerfilComponent implements OnInit {
     return this.controller.getUserLogado().getUsername();
   }
 
-  public getShowEditProfile(): boolean {
-    return this.showEditProfile;
-  }
-
-  public setShowEditProfile(): void {
-    this.showEditProfile = !this.showEditProfile;
+  /**
+   * Set command mode
+   * @param mode New mode value
+   */
+  public setCommand(mode: String) {
+    this.controller.getRouter().navigate(['/perfil'], { queryParams: {command: mode}});
   }
 
 }
