@@ -27,7 +27,7 @@ export class CadastroUsuarioComponent implements OnInit {
    * @param email Email
    */
   public addNewUser(username: string, pswd: string, pswd2: string, email: string): void {
-    if (this.validaEntrada(username) && this.validaEntrada(pswd) && this.verificaSenha(pswd, pswd2) && this.validaEntrada(email)) {
+    if (this.validEntry(username) && this.validEntry(pswd) && this.verifyPassword(pswd, pswd2) && this.validEntry(email)) {
       const user = this.controller.getUser(email);
       if (user == null) {
         this.controller.addNewUser(username, pswd, email);
@@ -48,7 +48,7 @@ export class CadastroUsuarioComponent implements OnInit {
         });
       }
     } else {
-      if (!this.verificaSenha(pswd, pswd2)) {
+      if (!this.verifyPassword(pswd, pswd2)) {
         swal({
           title: 'Dados inválidos',
           text: 'Senhas diferentes',
@@ -68,11 +68,11 @@ export class CadastroUsuarioComponent implements OnInit {
     }
   }
 
-  public validaEntrada(value: string): boolean {
+  public validEntry(value: string): boolean {
     return value.trim().length !== 0;
   }
 
-  public verificaSenha(pswd: string, pswd2: string): boolean {
+  public verifyPassword(pswd: string, pswd2: string): boolean {
     return pswd.trim() === pswd2.trim();
   }
 
