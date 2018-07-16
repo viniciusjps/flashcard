@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,14 +16,17 @@ public class User {
 	@Id
 	@Column(name = "username")
 	@NotNull(message = "Username can't be null")
+	@NotEmpty(message = "Username can't be empty")
 	private String username;
 
 	@Column(name = "password")
 	@NotNull(message = "Password can't be null")
+	@NotEmpty(message = "Password can't be empty")
 	private String password;
 
 	@Column(name = "email")
 	@NotNull(message = "Email can't be null")
+	@NotEmpty (message = "Email can't be empty")
 	private String email;
 
 	@Column(name = "cards")

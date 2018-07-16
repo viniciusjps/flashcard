@@ -1,12 +1,47 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import enums.Discipline;
+
+@Entity
+@Table(name = "cards")
 public class Card {
 
-	private String discipline;
-	private String question;
-	private String answer;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
+	@Column(name = "discipline")
+	@NotNull(message = "Discipline can't be null")
+	@NotEmpty(message = "Discipline can't be empty")
+	private Discipline discipline;
+
+	@Column(name = "question")
+	@NotNull(message = "Question can't be null")
+	@NotEmpty(message = "Question can't be empty")
+	private String question;
+
+	@Column(name = "answer")
+	@NotNull(message = "Answer can't be null")
+	@NotEmpty(message = "Answer can't be empty")
+	private String answer;
+
+	@Column(name = "author")
+	@NotNull(message = "User can't be null")
+	@NotEmpty(message = "User can't be empty")
 	private User author;
+
+	@Column(name = "privacy")
+	@NotEmpty(message = "Privacy can't be empty")
 	private boolean privacy;
 
 	/*
@@ -18,11 +53,11 @@ public class Card {
 	public Card() {
 	}
 
-	public String getDiscipline() {
+	public Discipline getDiscipline() {
 		return discipline;
 	}
 
-	public void setDiscipline(String discipline) {
+	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
 
