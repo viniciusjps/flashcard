@@ -18,7 +18,7 @@ public class Card {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
 	@Column(name = "discipline")
 	@NotNull(message = "Discipline can't be null")
@@ -77,7 +77,7 @@ public class Card {
 		this.answer = answer;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
