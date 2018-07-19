@@ -1,4 +1,4 @@
-package com.flashcard.flashcard;
+package com.br.flashcard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

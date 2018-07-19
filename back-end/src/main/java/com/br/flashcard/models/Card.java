@@ -1,4 +1,4 @@
-package models;
+package com.br.flashcard.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import enums.Discipline;
+import com.br.flashcard.enums.Discipline;
 
 @Entity
 @Table(name = "cards")
@@ -18,7 +18,7 @@ public class Card {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(name = "discipline")
 	@NotNull(message = "Discipline can't be null")
@@ -35,20 +35,14 @@ public class Card {
 	@NotEmpty(message = "Answer can't be empty")
 	private String answer;
 
-	@Column(name = "author")
-	@NotNull(message = "User can't be null")
-	@NotEmpty(message = "User can't be empty")
-	private User author;
+	//@Column(name = "author")
+	//@NotNull(message = "User can't be null")
+	//@NotEmpty(message = "User can't be empty")
+	//private User author;
 
 	@Column(name = "privacy")
 	@NotEmpty(message = "Privacy can't be empty")
-	private boolean privacy;
-
-	/*
-	 * private boolean seeAnswer; private boolean favorite; private boolean result;
-	 * private int rating;
-	 * 
-	 */
+	private Boolean privacy;
 
 	public Card() {
 	}
@@ -77,27 +71,27 @@ public class Card {
 		this.answer = answer;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public User getAuthor() {
+	/*public User getAuthor() {
 		return author;
 	}
 
 	public void setAuthor(User author) {
 		this.author = author;
-	}
+	}*/
 
-	public boolean isPrivacy() {
+	public Boolean isPrivacy() {
 		return privacy;
 	}
 
-	public void setPrivacy(boolean privacy) {
+	public void setPrivacy(Boolean privacy) {
 		this.privacy = privacy;
 	}
 

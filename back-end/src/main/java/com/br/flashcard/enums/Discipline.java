@@ -1,4 +1,4 @@
-package enums;
+package com.br.flashcard.enums;
 
 public enum Discipline {
 	

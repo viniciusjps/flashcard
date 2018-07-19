@@ -1,4 +1,4 @@
-package models;
+package com.br.flashcard.models;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ public class User {
 	@NotEmpty (message = "Email can't be empty")
 	private String email;
 
-	@Column(name = "cards")
-	private List<Card> cards;
+	//@Column(name = "cards")
+	//private List<Card> cards;
 
 	public User() {
 	}
@@ -59,12 +59,12 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Card> getCards() {
+	/*public List<Card> getCards() {
 		return cards;
 	}
 
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
-	}
+	}*/
 
 }
