@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users")
 public class User {
 
-	@Id
 	@Column(name = "username")
 	@NotNull(message = "Username can't be null")
 	@NotEmpty(message = "Username can't be empty")
@@ -24,6 +23,7 @@ public class User {
 	@NotEmpty(message = "Password can't be empty")
 	private String password;
 
+	@Id
 	@Column(name = "email")
 	@NotNull(message = "Email can't be null")
 	@NotEmpty (message = "Email can't be empty")

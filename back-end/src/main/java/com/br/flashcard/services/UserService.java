@@ -20,8 +20,8 @@ public class UserService {
 		return this.repository.findAll();
 	}
 
-	public User getByUsername(String username) {
-		Optional<User> user = this.repository.findById(username);
+	public User getByEmail(String email) {
+		Optional<User> user = this.repository.findById(email);
 		checkExists(user);
 		
 		return user.get();
@@ -32,8 +32,8 @@ public class UserService {
 		return user;
 	}
 
-	public User update(User user, String username) {
-		Optional<User> optUser = this.repository.findById(username);
+	public User update(User user, String email) {
+		Optional<User> optUser = this.repository.findById(email);
 		checkExists(optUser);
 		
 		User newUser = optUser.get();
@@ -44,8 +44,8 @@ public class UserService {
 		return newUser;
 	}
 	
-	public User delete(String username) {
-		Optional<User> optUser = this.repository.findById(username);
+	public User delete(String email) {
+		Optional<User> optUser = this.repository.findById(email);
 		checkExists(optUser);
 		
 		User user = optUser.get();

@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<User> getAll() {
 		return this.userService.getAll();
 	}
@@ -33,20 +33,20 @@ public class UserController {
 		return this.userService.save(user);
 	}
 
-	@RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-	public User getByUsername(@PathVariable("username") String username) {
-		return this.userService.getByUsername(username);
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
+	public User getByUsername(@PathVariable("email") String email) {
+		return this.userService.getByEmail(email);
 	}
 
-	@RequestMapping(value = "/user/{username}", method = RequestMethod.PUT)
-	public ResponseEntity<User> update(@PathVariable("username") String username, @RequestBody User user) {
-		User updateUser = this.userService.update(user, username);
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.PUT)
+	public ResponseEntity<User> update(@PathVariable("email") String email, @RequestBody User user) {
+		User updateUser = this.userService.update(user, email);
 		return new ResponseEntity<User>(updateUser, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/user/{username}", method = RequestMethod.DELETE)
-	public ResponseEntity<User> delete(@PathVariable("username") String username) {
-		User user = this.userService.delete(username);
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.DELETE)
+	public ResponseEntity<User> delete(@PathVariable("email") String email) {
+		User user = this.userService.delete(email);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
