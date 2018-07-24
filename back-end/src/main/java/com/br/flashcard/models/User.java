@@ -1,7 +1,5 @@
 package com.br.flashcard.models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,9 +27,6 @@ public class User {
 	@NotEmpty (message = "Email can't be empty")
 	private String email;
 
-	//@Column(name = "cards")
-	//private List<Card> cards;
-
 	public User() {
 	}
 
@@ -58,13 +53,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	/*public List<Card> getCards() {
-		return cards;
-	}
-
-	public void setCards(List<Card> cards) {
-		this.cards = cards;
-	}*/
 
 }

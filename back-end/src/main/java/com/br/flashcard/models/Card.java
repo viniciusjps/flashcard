@@ -23,7 +23,7 @@ public class Card {
 	@Column(name = "discipline")
 	@NotNull(message = "Discipline can't be null")
 	@NotEmpty(message = "Discipline can't be empty")
-	private Discipline discipline;
+	private String discipline;
 
 	@Column(name = "question")
 	@NotNull(message = "Question can't be null")
@@ -35,11 +35,6 @@ public class Card {
 	@NotEmpty(message = "Answer can't be empty")
 	private String answer;
 
-	//@Column(name = "author")
-	//@NotNull(message = "User can't be null")
-	//@NotEmpty(message = "User can't be empty")
-	//private User author;
-
 	@Column(name = "privacy")
 	@NotEmpty(message = "Privacy can't be empty")
 	private Boolean privacy;
@@ -47,11 +42,11 @@ public class Card {
 	public Card() {
 	}
 
-	public Discipline getDiscipline() {
+	public String getDiscipline() {
 		return discipline;
 	}
 
-	public void setDiscipline(Discipline discipline) {
+	public void setDiscipline(String discipline) {
 		this.discipline = discipline;
 	}
 
@@ -78,14 +73,6 @@ public class Card {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	/*public User getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(User author) {
-		this.author = author;
-	}*/
 
 	public Boolean isPrivacy() {
 		return privacy;
