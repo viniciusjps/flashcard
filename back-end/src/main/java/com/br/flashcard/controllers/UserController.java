@@ -16,7 +16,7 @@ import com.br.flashcard.models.User;
 import com.br.flashcard.services.UserService;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/user")
 @CrossOrigin(origins = "*")
 public class UserController {
 
@@ -28,23 +28,23 @@ public class UserController {
 		return this.userService.getAll();
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public User save(@RequestBody User user) {
 		return this.userService.save(user);
 	}
 
-	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
-	public User getByUsername(@PathVariable("email") String email) {
+	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	public User getByEmail(@PathVariable("email") String email) {
 		return this.userService.getByEmail(email);
 	}
 
-	@RequestMapping(value = "/user/{email}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{email}", method = RequestMethod.PUT)
 	public ResponseEntity<User> update(@PathVariable("email") String email, @RequestBody User user) {
 		User updateUser = this.userService.update(user, email);
 		return new ResponseEntity<User>(updateUser, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/user/{email}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{email}", method = RequestMethod.DELETE)
 	public ResponseEntity<User> delete(@PathVariable("email") String email) {
 		User user = this.userService.delete(email);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
