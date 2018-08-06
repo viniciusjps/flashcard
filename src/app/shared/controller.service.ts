@@ -3,18 +3,17 @@ import { Router } from '@angular/router';
 
 
 import { Card } from './../models/card';
-import { User } from './../models/user';
 
 @Injectable()
 export class ControllerService {
 
-  private users: User[];
-  private user_logado: User;
+  private users;
+  private user_logado;
 
   constructor(
     private router: Router
   ) {
-    this.users = [];
+    this.users = [{}];
     this.user_logado = null;
   }
 
@@ -33,40 +32,64 @@ export class ControllerService {
   }
 
   /**
-   * Add a new user
+   * Add new user and log-in
    * @param username Username
-   * @param password Password
    * @param email Email
+   * @param image Url image
    */
-  public addNewUser(username: string, password: string, email: string): void {
-    if (username.trim().length !== 0 && password.trim().length !== 0) {
-      const user = this.getUser(username);
-      if (user == null || user === undefined) {
-        this.users.push(new User(username, password, email));
+  public log(username: string, email: string, image: string): void {
+    let response = {};
+    this.getUser(email)
+    .then(data => {
+      response = data;
+    })
+    .then(a => {
+      if (!response.status) {
+        this.addUser(username, email, image);
       }
-    }
+    })
+    .then(a => {
+      this.logIn(email)
+      .then(a => {
+        this.navigate('/perfil');
+      });
+    });
+  }
+
+  /**
+   * Add new user
+   * @param username Username
+   * @param email Email
+   * @param image Url Image
+   */
+  public addUser(username, email, image) {
+    return fetch('', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        image: image
+      })
+    });
   }
 
   /**
    * Get user by Email
    * @param email Email
    */
-  public getUser(email: string): User {
-    if (email != null || email !== undefined) {
-      for (let index = 0; index < this.users.length; index++) {
-        if (this.users[index].getEmail() === email) {
-          return this.users[index];
-        }
-      }
-    }
-    return null;
+  public getUser(email: string) {
+    return fetch('http://api-flashcard.herokuapp.com/api/user/' + email).then(res => res.json());
   }
 
   /**
    * Get all users
    */
-  public getUsers(): User[] {
-    return this.users;
+  public getUsers() {
+    return fetch('http://api-flashcard.herokuapp.com/api/user/').then(res => res.json());
   }
 
   /**
@@ -102,8 +125,8 @@ export class ControllerService {
   }
 
   /**
-   * Get the cards by username
-   * @param username Username
+   * Get the cards by email
+   * @param email Email
    */
   public getCards(email: string): Card[] {
     const user = this.getUser(email);
@@ -125,29 +148,36 @@ export class ControllerService {
   /**
    * Get user logado
    */
-  public getUserLogado(): User {
+  public getUserLogado() {
     return this.user_logado;
   }
 
   /**
    * Login
-   * @param username Username
+   * @param email Email
    */
-  public logIn(email: string): void {
-    const user = this.getUser(email);
-    if (user != null || user !== undefined) {
+  public logIn(email: string) {
+    let user = '';
+    return this.getUser(email).then(data => {
+      user = data;
+    }).then(a => {
       this.user_logado = user;
-    }
+      localStorage.setItem('isLogged', 'true');
+      localStorage.setItem('username', this.user_logado.username);
+      localStorage.setItem('email', this.user_logado.email);
+      localStorage.setItem('image', this.user_logado.image);
+    });
   }
 
   /**
    * Log out
    */
   public logOut(): void {
-    const user = this.user_logado;
-    if (user != null || user !== undefined) {
-      this.user_logado = null;
-    }
+    this.user_logado = null;
+    localStorage.setItem('isLogged', 'false');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('image');
   }
 
   public navigate(address: string): void {
@@ -157,6 +187,5 @@ export class ControllerService {
   public getRouter(): Router {
     return this.router;
   }
-
 
 }

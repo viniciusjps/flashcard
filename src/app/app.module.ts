@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,19 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
 import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular-6-social-login';
 
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+      [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('77402829032-th76kjj3p109feaj2f41mtvqo8bca534.apps.googleusercontent.com')
+        }
+      ]
+    );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -44,10 +55,15 @@ import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocialLoginModule
   ],
   providers: [
-    ControllerService
+    ControllerService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   bootstrap: [AppComponent]
 })

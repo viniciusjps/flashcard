@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
     "@schematics/angular": "^0.1.17",
+    "angular-6-social-login": "^1.1.1",
     "core-js": "^2.5.5",
     "express": "^4.16.3",
     "jquery": "^3.3.1",

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 
-import { User } from './../models/user';
 import { ControllerService } from './../shared/controller.service';
+import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 
 @Component({
   selector: 'app-login',
@@ -13,36 +13,29 @@ import { ControllerService } from './../shared/controller.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private controller: ControllerService
+    private controller: ControllerService,
+    private socialAuthService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
-  public newUser(username: string, pswd: string, email: string) {
-    this.controller.addNewUser(username, pswd, email);
-  }
+  public socialSignIn() {
+    let name = '';
+    let email = '';
+    let image = '';
+    let socialPlatformProvider;
 
-  public getUser(email: string) {
-    return this.controller.getUser(email);
-  }
-
-  public logar(email: string, pswd: string) {
-    const user = this.controller.getUser(email);
-    if (user == null) {
-      alert('Usuário não cadastrado');
-    } else {
-      if (user.getPassword() !== pswd) {
-        alert('Senha incorreta');
-      } else {
-        this.controller.logIn(email);
-        this.controller.navigate('/perfil');
+    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        name = userData.name;
+        email = userData.email;
+        image = userData.image;
       }
-    }
-  }
-
-  public deslogar(email: string) {
-    this.controller.logOut();
+    ).then(data => {
+      this.controller.log(name, email, image);
+    });
   }
 
 }
