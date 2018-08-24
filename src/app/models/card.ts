@@ -1,144 +1,109 @@
-import { User } from './user';
-
-
 export class Card {
 
-    private discipline: string;
-    private question: string;
-    private answer: string;
-    private seeAnswer: boolean;
-    private favorite: boolean;
-    private rating: number;
-    private id: number;
-    private author: User;
-    private result: boolean;
-    private privacy: boolean;
+	private discipline: string;
+	private question: string;
+	private answer: string;
+	private privacy: boolean;
 
-    constructor(
-        discipline: string,
-        question: string,
-        answer: string,
-        id: number,
-        author: User,
-        privacy: boolean
-    ) {
-        this.id = id;
-        this.rating = 0;
-        this.answer = answer;
-        this.favorite = false;
-        this.question = question;
-        this.seeAnswer = false;
-        this.discipline = discipline;
-        this.author = author;
-        this.result = null;
-        this.privacy = privacy;
-    }
+	private seeAnswer: boolean;
+	private favorite: boolean;
+	private id: number;
+	private result: boolean;
 
-    /**
-     * getDiscipline
-     */
-    public getDiscipline(): string {
-        return this.discipline;
-    }
+	constructor(
+		discipline: string,
+		question: string,
+		answer: string,
+		privacy: boolean
+	) {
+		this.discipline = discipline;
+		this.question = question;
+		this.answer = answer;
+		this.privacy = privacy;
 
-    /**
-     * getQuestion
-     */
-    public getQuestion(): string {
-        return this.question;
-    }
+		this.favorite = false;
+		this.seeAnswer = false;
+		this.result = null;
+	}
 
-    /**
-     * getAnswer
-     */
-    public getAnswer(): string {
-        return this.answer;
-    }
+	/**
+	 * getDiscipline
+	 */
+	public getDiscipline(): string {
+		return this.discipline;
+	}
 
-    /**
-     * getId
-     */
-    public getId(): number {
-        return this.id;
-    }
+	/**
+	 * getQuestion
+	 */
+	public getQuestion(): string {
+		return this.question;
+	}
 
-    /**
-     * getRating
-     */
-    public getRating(): number {
-        return this.rating;
-    }
+	/**
+	 * getAnswer
+	 */
+	public getAnswer(): string {
+		return this.answer;
+	}
 
-    /**
-     * addRating
-     */
-    public addRating(): void {
-        if (this.favorite === false) {
-            this.rating += 1;
-            this.favorite = true;
-        } else {
-            this.rating -= 1;
-            this.favorite = false;
-        }
-    }
+	/**
+	 * getId
+	 */
+	public getId(): number {
+		return this.id;
+	}
 
-    /**
-     * getSeeAnswer
-     */
-    public getSeeAnswer(): boolean {
-        return this.seeAnswer;
-    }
+	/**
+	 * getSeeAnswer
+	 */
+	public getSeeAnswer(): boolean {
+		return this.seeAnswer;
+	}
 
-    /**
-     * Set See Answer
-     * @param value New value
-     */
-    public setSeeAnswer(value: boolean): boolean {
-        return this.seeAnswer = value;
-    }
+	/**
+	 * Set See Answer
+	 * @param value New value
+	 */
+	public setSeeAnswer(value: boolean): boolean {
+		return this.seeAnswer = value;
+	}
 
-    /**
-     * getFavorite
-     */
-    public getFavorite(): boolean {
-        return this.favorite;
-    }
+	/**
+	 * getFavorite
+	 */
+	public getFavorite(): boolean {
+		return this.favorite;
+	}
 
-    /**
-     * Get card's author
-     */
-    public getAuthor() {
-        return this.author;
-    }
+	/**
+	 * Get result
+	 */
+	public getResult(): boolean {
+		return this.result;
+	}
 
-    /**
-     * Get result
-     */
-    public getResult(): boolean {
-        return this.result;
-    }
+	/**
+	 * Set result
+	 * @param value New value
+	 */
+	public setResult(value: boolean) {
+		this.result = value;
+	}
 
-    /**
-     * Set result
-     * @param value New value
-     */
-    public setResult(value: boolean) {
-        this.result = value;
-    }
+	/**
+	 * Get privacy
+	 */
+	public getPrivacy(): boolean {
+		return this.privacy;
+	}
 
-    /**
-     * Get privacy
-     */
-    public getPrivacy(): boolean {
-        return this.privacy;
-    }
-
-    /**
-     * Set  privacy
-     * @param value New value
-     */
-    public setPrivacy(value: boolean) {
-        this.privacy = value;
-    }
+	/**
+	 * Set  privacy
+	 * @param value New value
+	 */
+	public setPrivacy(value: boolean) {
+		this.privacy = value;
+	}
 
 }

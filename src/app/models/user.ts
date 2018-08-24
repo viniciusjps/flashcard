@@ -3,78 +3,91 @@ import { Card } from './card';
 
 export class User {
 
-    private username: string;
-    private password: string;
-    private email: string;
-    private cards: Card[];
+	private username: string;
+	private email: string;
+	private image: string;
+	private cards: Card[];
 
-    constructor (
-        username: string,
-        pswd: string,
-        email: string
-    ) {
-        this.username = username;
-        this.password = pswd;
-        this.email = email;
-        this.cards = [];
-    }
+	constructor(
+		username: string,
+		email: string,
+		image: string
+	) {
+		this.username = username;
+		this.email = email;
+		this.image = image;
+		this.cards = [];
+	}
 
-    /**
-     * Get username
-     */
-    public getUsername(): string {
-        return this.username;
-    }
+	/**
+	 * Get username
+	 */
+	public getUsername(): string {
+		return this.username;
+	}
 
-    public setUsername(value: string): void {
-        this.username = value;
-    }
+	public setUsername(value: string): void {
+		this.username = value;
+	}
 
-    /**
-     * getEmail
-     */
-    public getEmail(): string {
-        return this.email;
-    }
+	/**
+	 * getEmail
+	 */
+	public getEmail(): string {
+		return this.email;
+	}
 
-    public setEmail(value: string): void {
-        this.email = value;
-    }
+	public setEmail(value: string): void {
+		this.email = value;
+	}
 
-    /**
-     * Get Password
-     */
-    public getPassword(): string {
-       return this.password;
-    }
+	/**
+	 * Get Image
+	 */
+	public getImage(): string {
+		return this.image;
+	}
 
-    public setPassword(value: string): void {
-        this.password = value;
-    }
+	public setImage(value: string): void {
+		this.image = value;
+	}
 
-    /**
-     * addNewCard
-     */
-    public addNewCard(discipline: string, question: string, answer: string, id: number, privacy: boolean): void {
-        this.cards.push(new Card(discipline, question, answer, id + 1, this, privacy));
-    }
+	/**
+	 * addNewCard
+	 */
+	public addNewCard(discipline: string, question: string, answer: string, privacy: boolean): void {
+		this.addCard(discipline, question, answer, privacy)
+			.then(resp => {
+				this.cards.push(new Card(discipline, question, answer, privacy));
+			});
+	}
 
-    /**
-     * Get card by ID
-     * @param id Id
-     */
-    public getCard(id: number) {
-        const array = this.cards;
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].getId() === id) {
-                return array[i];
-            }
-        }
-        return null;
-    }
+	public addCard(discipline: string, question: string, answer: string, privacy: boolean) {
+		return fetch('', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				discipline: discipline,
+				question: question,
+				answer: answer,
+				privacy: privacy
+			})
+		});
+	}
 
-    public getCards(): Card[] {
-        return this.cards;
-    }
+	/**
+	 * Get card by ID
+	 * @param id Id
+	 */
+	public getCard(id: number) {
+		return null;
+	}
+
+	public getCards(): Card[] {
+		return this.cards;
+	}
 
 }

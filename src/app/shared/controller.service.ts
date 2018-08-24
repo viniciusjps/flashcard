@@ -3,32 +3,37 @@ import { Router } from '@angular/router';
 
 
 import { Card } from './../models/card';
+import { User } from '../models/user';
 
 @Injectable()
 export class ControllerService {
 
-  private users;
-  private user_logado;
+  private users: User[]
+  private user_logado: User;
 
   constructor(
     private router: Router
   ) {
-    this.users = [{}];
+    this.users = [];
     this.user_logado = null;
   }
 
   /**
    * Add a new card
-   * @param username Username
+   * @param email Email
    * @param discipline Discipline
    * @param question Question
    * @param answer Answer
    */
-  public addNewCard(username: string, discipline: string, question: string, answer: string, privacy: boolean): void {
-    const user = this.getUser(username);
-    if (user != null || user !== undefined) {
-      user.addNewCard(discipline, question, answer, this.getAllCards().length, privacy);
-    }
+  public addNewCard(email: string, discipline: string, question: string, answer: string, privacy: boolean): void {
+    let user: User = null;
+    this.getUser(email).then(data => {
+      user = data;
+    }).then(a => {
+      if (user != null || user !== undefined) {
+        user.addNewCard(discipline, question, answer, privacy);
+      }
+    });
   }
 
   /**
@@ -40,20 +45,20 @@ export class ControllerService {
   public log(username: string, email: string, image: string): void {
     let response = {};
     this.getUser(email)
-    .then(data => {
-      response = data;
-    })
-    .then(a => {
-      if (!response.status) {
-        this.addUser(username, email, image);
-      }
-    })
-    .then(a => {
-      this.logIn(email)
+      .then(data => {
+        response = data;
+      })
       .then(a => {
-        this.navigate('/perfil');
+        if (!response.status) {
+          this.addUser(username, email, image);
+        }
+      })
+      .then(a => {
+        this.logIn(email)
+          .then(a => {
+            this.navigate('/perfil');
+          });
       });
-    });
   }
 
   /**
@@ -96,32 +101,14 @@ export class ControllerService {
    * Get all public cards
    */
   public getAllPublicCards(): Card[] {
-    const array: Card[] = [];
-    for (let index = 0; index < this.users.length; index++) {
-      const user = this.users[index];
-      const cards = user.getCards();
-      for (let i = 0; i < cards.length; i++) {
-        if (cards[i].getPrivacy()) {
-          array.push(cards[i]);
-        }
-      }
-    }
-    return array;
+    return null;
   }
 
   /**
    * Get all public cards
    */
   private getAllCards(): Card[] {
-    const array: Card[] = [];
-    for (let index = 0; index < this.users.length; index++) {
-      const user = this.users[index];
-      const cards = user.getCards();
-      for (let i = 0; i < cards.length; i++) {
-        array.push(cards[i]);
-      }
-    }
-    return array;
+    return null;
   }
 
   /**
@@ -129,10 +116,7 @@ export class ControllerService {
    * @param email Email
    */
   public getCards(email: string): Card[] {
-    const user = this.getUser(email);
-    if (user != null || user !== undefined) {
-      return this.getUser(email).getCards();
-    }
+    return null;
   }
 
   /**
@@ -141,8 +125,15 @@ export class ControllerService {
    * @param id Id
    */
   public getCard(email: string, id: number): Card {
-    const user = this.getUser(email);
-    return user.getCard(id);
+    let user: User = null;
+    let card: Card = null;
+    this.getUser(email)
+      .then(data => {
+        user = data;
+      }).then(c => {
+        card = user.getCard(id);
+      });
+    return card;
   }
 
   /**
@@ -157,15 +148,15 @@ export class ControllerService {
    * @param email Email
    */
   public logIn(email: string) {
-    let user = '';
+    let user: User = null;
     return this.getUser(email).then(data => {
       user = data;
     }).then(a => {
       this.user_logado = user;
       localStorage.setItem('isLogged', 'true');
-      localStorage.setItem('username', this.user_logado.username);
-      localStorage.setItem('email', this.user_logado.email);
-      localStorage.setItem('image', this.user_logado.image);
+      localStorage.setItem('username', this.user_logado.getUsername());
+      localStorage.setItem('email', this.user_logado.getEmail());
+      localStorage.setItem('image', this.user_logado.getImage());
     });
   }
 
@@ -174,10 +165,11 @@ export class ControllerService {
    */
   public logOut(): void {
     this.user_logado = null;
-    localStorage.setItem('isLogged', 'false');
     localStorage.removeItem('username');
     localStorage.removeItem('email');
     localStorage.removeItem('image');
+    localStorage.clear();
+    localStorage.setItem('isLogged', 'false');
   }
 
   public navigate(address: string): void {
