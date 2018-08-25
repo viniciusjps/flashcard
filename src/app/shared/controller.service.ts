@@ -8,7 +8,7 @@ import { User } from '../models/user';
 @Injectable()
 export class ControllerService {
 
-  private users: User[]
+  private users: User[];
   private user_logado: User;
 
   constructor(

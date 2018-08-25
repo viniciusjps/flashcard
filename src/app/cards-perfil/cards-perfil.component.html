@@ -57,11 +57,6 @@
             ver resposta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()">
-              </i>
-              {{ card.getRating() }}
-            </div>
             <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
               <i class="unlock icon"></i>
             </a>
@@ -97,10 +92,6 @@
             ver pergunta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
-            </div>
             <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
               <i class="unlock icon"></i>
             </a>

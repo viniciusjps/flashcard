@@ -12,7 +12,6 @@ import { CardsComponent } from './cards/cards.component';
 import { LoginComponent } from './login/login.component';
 import { MuralComponent } from './mural/mural.component';
 import { ControllerService } from './shared/controller.service';
-import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { NovoCardComponent } from './novo-card/novo-card.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -42,7 +41,6 @@ export function getAuthServiceConfigs() {
     CardsComponent,
     LoginComponent,
     MuralComponent,
-    CadastroUsuarioComponent,
     NovoCardComponent,
     PesquisaComponent,
     PerfilComponent,

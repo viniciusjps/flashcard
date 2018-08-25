@@ -65,15 +65,6 @@ export class CardsPerfilComponent implements OnInit {
   }
 
   /**
-   * Get card rating
-   * @param id Id
-   */
-  public getCardRating(email: string, id: number): number {
-    const card = this.getCard(email, id);
-    return card.getRating();
-  }
-
-  /**
    * Get all cards
    */
   public getCards(): Card[] {

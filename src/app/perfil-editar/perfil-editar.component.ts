@@ -25,32 +25,6 @@ export class PerfilEditarComponent implements OnInit {
   }
 
   /**
-   * Get user's password
-   */
-  public getPassword(): string {
-    return this.controller.getUserLogado().getPassword();
-  }
-
-  /**
-   * Set new password
-   * @param old Old pswd
-   * @param newpass New value
-   */
-  public setPassword(old: string, newpass: string): void {
-    const user = this.controller.getUserLogado();
-    if (user.getPassword() === newpass) {
-      alert('Digite uma nova senha!');
-    } else {
-      if (newpass.length > 0 && user.getPassword() === old) {
-        user.setPassword(newpass);
-        alert('Senha alterada!');
-      } else {
-        alert('Senha inválida');
-      }
-    }
-  }
-
-  /**
    * Clear tag value
    * @param tag Html tag
    */
