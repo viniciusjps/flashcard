@@ -43,21 +43,24 @@ export class ControllerService {
    * @param image Url image
    */
   public log(username: string, email: string, image: string): void {
-    let response = {};
+    let response = { status: '' };
     this.getUser(email)
       .then(data => {
         response = data;
       })
       .then(a => {
         if (!response.status) {
-          this.addUser(username, email, image);
-        }
-      })
-      .then(a => {
-        this.logIn(email)
-          .then(a => {
+          this.addUser(username, email, image)
+          .then(s => {
             this.navigate('/perfil');
+            alert('Cadastro realizado');
           });
+        } else {
+          this.logIn(email)
+            .then(b => {
+              this.navigate('/perfil');
+          });
+        }
       });
   }
 
@@ -68,7 +71,7 @@ export class ControllerService {
    * @param image Url Image
    */
   public addUser(username, email, image) {
-    return fetch('', {
+    return fetch('http://api-flashcard.herokuapp.com/api/user', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
