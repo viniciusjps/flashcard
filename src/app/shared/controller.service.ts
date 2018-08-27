@@ -8,13 +8,11 @@ import { User } from '../models/user';
 @Injectable()
 export class ControllerService {
 
-  private users: User[];
   private user_logado: User;
 
   constructor(
     private router: Router
   ) {
-    this.users = [];
     this.user_logado = null;
   }
 
@@ -26,9 +24,9 @@ export class ControllerService {
    * @param answer Answer
    */
   public addNewCard(email: string, discipline: string, question: string, answer: string, privacy: boolean): void {
-    let user: User = null;
+    let user: User;
     this.getUser(email).then(data => {
-      user = data;
+      user = new User(data.username, data.email, data.image);
     }).then(a => {
       if (user != null || user !== undefined) {
         user.addNewCard(discipline, question, answer, privacy);
@@ -43,24 +41,12 @@ export class ControllerService {
    * @param image Url image
    */
   public log(username: string, email: string, image: string): void {
-    let response = { status: '' };
     this.getUser(email)
-      .then(data => {
-        response = data;
-      })
       .then(a => {
-        if (!response.status) {
-          this.addUser(username, email, image)
+        this.addUser(username, email, image)
           .then(s => {
-            this.navigate('/perfil');
-            alert('Cadastro realizado');
+            this.logIn(email);
           });
-        } else {
-          this.logIn(email)
-            .then(b => {
-              this.navigate('/perfil');
-          });
-        }
       });
   }
 
@@ -128,11 +114,11 @@ export class ControllerService {
    * @param id Id
    */
   public getCard(email: string, id: number): Card {
-    let user: User = null;
-    let card: Card = null;
+    let user: User;
+    let card: Card;
     this.getUser(email)
       .then(data => {
-        user = data;
+        user = new User(data.username, data.email, data.image);
       }).then(c => {
         card = user.getCard(id);
       });
@@ -151,15 +137,16 @@ export class ControllerService {
    * @param email Email
    */
   public logIn(email: string) {
-    let user: User = null;
+    let user: User;
     return this.getUser(email).then(data => {
-      user = data;
+      user = new User(data.username, data.email, data.image);
     }).then(a => {
       this.user_logado = user;
       localStorage.setItem('isLogged', 'true');
       localStorage.setItem('username', this.user_logado.getUsername());
       localStorage.setItem('email', this.user_logado.getEmail());
       localStorage.setItem('image', this.user_logado.getImage());
+      this.navigate('/perfil');
     });
   }
 
@@ -168,9 +155,6 @@ export class ControllerService {
    */
   public logOut(): void {
     this.user_logado = null;
-    localStorage.removeItem('username');
-    localStorage.removeItem('email');
-    localStorage.removeItem('image');
     localStorage.clear();
     localStorage.setItem('isLogged', 'false');
   }

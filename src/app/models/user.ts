@@ -55,9 +55,10 @@ export class User {
     answer: string,
     privacy: boolean
   ): void {
-    this.addCard(discipline, question, answer, privacy).then(resp => {
-      this.cards.push(new Card(discipline, question, answer, privacy));
-    });
+    this.addCard(discipline, question, answer, privacy)
+      .then(resp => {
+        this.cards.push(new Card(discipline, question, answer, privacy));
+      });
   }
 
   public addCard(
