@@ -4,7 +4,7 @@ export class Card {
   private question: string;
   private answer: string;
   private privacy: boolean;
-  private result: boolean;
+  private result: string;
 
   private seeAnswer: boolean;
   private favorite: boolean;
@@ -79,7 +79,7 @@ export class Card {
   /**
    * Get result
    */
-  public getResult(): boolean {
+  public getResult(): string {
     return this.result;
   }
 
@@ -87,7 +87,7 @@ export class Card {
    * Set result
    * @param value New value
    */
-  public setResult(value: boolean) {
+  public setResult(value: string) {
     this.result = value;
   }
 
