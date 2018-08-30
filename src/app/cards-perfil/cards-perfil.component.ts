@@ -34,7 +34,7 @@ export class CardsPerfilComponent implements OnInit {
   constructor(
     private controller: ControllerService
   ) {
-    this.view = 'all';
+    this.view = 'default';
   }
 
   ngOnInit() {
@@ -70,15 +70,7 @@ export class CardsPerfilComponent implements OnInit {
   public getCards(): Card[] {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      if (this.view === 'all') {
-        return this.getSpecificCards(null);
-      }
-      if (this.view === 'hit') {
-        return this.getSpecificCards(true);
-      }
-      if (this.view === 'missed') {
-        return this.getSpecificCards(false);
-      }
+      return this.getSpecificCards(this.view);
     }
   }
 
@@ -86,7 +78,7 @@ export class CardsPerfilComponent implements OnInit {
    * Get specific cards
    * @param value Value type
    */
-  private getSpecificCards(value: boolean): Card[] {
+  private getSpecificCards(value: string): Card[] {
     const user = this.controller.getUserLogado();
     const result = [];
     if (user != null) {
