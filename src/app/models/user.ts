@@ -67,7 +67,7 @@ export class User {
     answer: string,
     privacy: boolean
   ) {
-    return fetch('', {
+    return fetch('http://api-flashcard.herokuapp.com/api/card', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
