@@ -77,7 +77,8 @@ export class User {
         discipline: discipline,
         question: question,
         answer: answer,
-        privacy: privacy
+        privacy: privacy,
+        result: 'default'
       })
     });
   }
