@@ -23,13 +23,13 @@ export class ControllerService {
    * @param question Question
    * @param answer Answer
    */
-  public addNewCard(email: string, discipline: string, question: string, answer: string, privacy: boolean): void {
+  public addNewCard(email: string, discipline: string, question: string, answer: string, privacy: boolean): Promise<any> {
     let user: User;
-    this.getUser(email).then(data => {
+    return this.getUser(email).then(data => {
       user = new User(data.username, data.email, data.image);
     }).then(a => {
       if (user != null || user !== undefined) {
-        user.addNewCard(discipline, question, answer, privacy);
+        this.user_logado.addNewCard(discipline, question, answer, privacy);
       }
     });
   }

@@ -54,8 +54,8 @@ export class User {
     question: string,
     answer: string,
     privacy: boolean
-  ): void {
-    this.addCard(discipline, question, answer, privacy)
+  ): Promise<any> {
+    return this.addCard(discipline, question, answer, privacy)
       .then(resp => {
         this.cards.push(new Card(discipline, question, answer, privacy));
       });
