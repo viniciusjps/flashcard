@@ -33,6 +33,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
 
   private search: string;
   private subscription: Subscription;
+  private cards: Card[];
 
   constructor(
     private controller: ControllerService,
@@ -43,6 +44,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe(
       queryParams => this.search = queryParams['search']
     );
+    this.cards = this.controller.getAllPublicCards();
   }
 
   ngOnDestroy(): void {
@@ -53,8 +55,7 @@ export class PesquisaComponent implements OnInit, OnDestroy {
    * Get search list by queryParams
    */
   public getSearchList(): Card[] {
-    const cards = this.controller.getAllPublicCards();
-    const search = cards.filter(card =>
+    const search = this.cards.filter(card =>
       card.getQuestion().toLowerCase().indexOf(this.search.toLowerCase()) !== -1 ||
       card.getAnswer().toLowerCase().indexOf(this.search.toLowerCase()) !== -1 ||
       card.getDiscipline().toLowerCase().indexOf(this.search.toLowerCase()) !== -1

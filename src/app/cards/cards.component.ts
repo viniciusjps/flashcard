@@ -36,7 +36,9 @@ export class CardsComponent implements OnInit {
   constructor(
     private controller: ControllerService,
     private http: HttpClient
-  ) {}
+  ) {
+    this.cards = this.controller.getAllPublicCards();
+  }
 
   ngOnInit() {
     this.cards = this.controller.getAllPublicCards();
