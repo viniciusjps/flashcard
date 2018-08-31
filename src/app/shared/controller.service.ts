@@ -90,14 +90,25 @@ export class ControllerService {
    * Get all public cards
    */
   public getAllPublicCards(): Card[] {
-    return null;
+    const cards: Card[] = [];
+    let request = [];
+    this.getAllCards()
+      .then(data => {
+        request = data;
+      }).then(a => {
+        request.forEach(e => {
+          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
+          if (card.getPrivacy()) {
+            cards.push(card);
+          }
+        });
+        return cards.reverse();
+      });
+    return cards;
   }
 
-  /**
-   * Get all public cards
-   */
-  private getAllCards(): Card[] {
-    return null;
+  private getAllCards(): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/card/').then(res => res.json());
   }
 
   /**
@@ -105,7 +116,21 @@ export class ControllerService {
    * @param email Email
    */
   public getCards(email: string): Card[] {
-    return null;
+    const cards: Card[] = [];
+    let request = [];
+    this.getAllCards()
+      .then(data => {
+        request = data;
+      }).then(a => {
+        request.forEach(e => {
+          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
+          if (card.getAuthor() === email) {
+            cards.push(card);
+          }
+        });
+        return cards.reverse();
+      });
+    return cards;
   }
 
   /**
@@ -148,6 +173,13 @@ export class ControllerService {
       localStorage.setItem('image', this.user_logado.getImage());
       this.navigate('/perfil');
     });
+  }
+
+  public reloadPage() {
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    const image = localStorage.getItem('image');
+    this.user_logado = new User(username, email, image);
   }
 
   /**

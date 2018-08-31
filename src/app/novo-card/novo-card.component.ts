@@ -16,6 +16,7 @@ export class NovoCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.controller.reloadPage();
     if (!localStorage.getItem('isLogged')) {
       this.controller.navigate('/login');
     }
@@ -38,8 +39,6 @@ export class NovoCardComponent implements OnInit {
         .then(res => {
           this.controller.navigate('/perfil');
         });
-      } else {
-        alert('Os campos não podem ser vazios!');
       }
     } else {
       alert('Não existe usuário logado');

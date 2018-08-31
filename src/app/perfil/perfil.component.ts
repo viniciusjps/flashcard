@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 import { ControllerService } from './../shared/controller.service';
-import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-perfil',
@@ -24,9 +23,9 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.route.queryParams.subscribe(
       queryParams => this.mode = queryParams['command']
-      
     );
-    this.mode = 'cards'
+    this.mode = 'cards';
+    this.controller.reloadPage();
   }
 
   public logout() {

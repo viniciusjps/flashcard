@@ -49,24 +49,20 @@ export class User {
   /**
    * addNewCard
    */
-  public addNewCard(
-    discipline: string,
-    question: string,
-    answer: string,
-    privacy: boolean
-  ): Promise<any> {
-    return this.addCard(discipline, question, answer, privacy)
+  public addNewCard(discipline: string, question: string, answer: string, privacy: boolean): Promise<any> {
+    return this.addCard(discipline, question, answer, privacy, this.getEmail(), this.getImage())
+      .then(resp => resp.json())
       .then(resp => {
-        this.cards.push(new Card(discipline, question, answer, privacy));
+        const card = new Card(resp.id, discipline, question, answer, privacy, this.getEmail(), this.getImage());
+        this.addRelation(this.getEmail(), card.getId())
+        .then(data => data.json())
+        .then(a => {
+          this.cards.push(card);
+        });
       });
   }
 
-  public addCard(
-    discipline: string,
-    question: string,
-    answer: string,
-    privacy: boolean
-  ) {
+  private addCard(discipline: string, question: string, answer: string, privacy: boolean, email: string, image: string) {
     return fetch('http://api-flashcard.herokuapp.com/api/card', {
       headers: {
         Accept: 'application/json',
@@ -78,7 +74,23 @@ export class User {
         question: question,
         answer: answer,
         privacy: privacy,
-        result: 'default'
+        result: 'default',
+        author: email,
+        image: image
+      })
+    });
+  }
+
+  private addRelation(email: string, cardId: number) {
+    return fetch('http://api-flashcard.herokuapp.com/api/having', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        userEmail: email,
+        cardId: cardId
       })
     });
   }

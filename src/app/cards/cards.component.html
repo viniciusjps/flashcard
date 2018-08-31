@@ -1,6 +1,6 @@
 <div class="ui container">
   <div class="ui three middle aligned very relaxed stackable cards">
-    <div class="ui card shape" *ngFor="let card of getCards()">
+    <div class="ui card shape" *ngFor="let card of cards">
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
         <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
@@ -14,17 +14,14 @@
             ver resposta
           </button>
           <div class="extra content">
-            <div class="right floated">
+            <!--div class="right floated">
               <i class="heart like icon" (click)="card.addRating()">
               </i>
               {{ card.getRating() }}
-            </div>
-            <span>
-              <i class="user icon"></i> {{ card.getAuthor().getUsername() }}
-            </span>
-            <!--div class="left floated author">
-              <img class="ui avatar image" src="{{ getImage(card.getAuthor().getEmail()) }}"> {{ card.getAuthor().getUsername() }} 
             </div-->
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
+            </div>
           </div>
         </div>
       </div>
@@ -41,14 +38,14 @@
             ver pergunta
           </button>
           <div class="extra content">
-            <div class="right floated">
+            <!--div class="right floated">
               <i class="heart like icon" (click)="card.addRating()">
               </i>
               {{ card.getRating() }}
+            </div-->
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
             </div>
-            <span>
-              <i class="user icon"></i> {{ card.getAuthor().getUsername() }}
-            </span>
           </div>
         </div>
       </div>

@@ -1,27 +1,36 @@
 export class Card {
 
+  // Backend
   private discipline: string;
   private question: string;
   private answer: string;
   private privacy: boolean;
   private result: string;
+  private author: string;
 
   private seeAnswer: boolean;
   private favorite: boolean;
   private id: number;
+  private image: string;
 
   constructor(
+    id: number,
     discipline: string,
     question: string,
     answer: string,
-    privacy: boolean
+    privacy: boolean,
+    author: string,
+    image: string
   ) {
+    this.id = id;
     this.discipline = discipline;
     this.question = question;
     this.answer = answer;
     this.privacy = privacy;
     this.result = 'default';
+    this.author = author;
 
+    this.image = image;
     this.favorite = false;
     this.seeAnswer = false;
   }
@@ -105,4 +114,35 @@ export class Card {
   public setPrivacy(value: boolean) {
     this.privacy = value;
   }
+
+    /**
+   * Get author's email
+   */
+  public getAuthor(): string {
+    return this.author;
+  }
+
+  /**
+   * Set  author's email
+   * @param value New value
+   */
+  public setAuthor(value: string) {
+    this.author = value;
+  }
+
+  /**
+   * Get image url
+   */
+  public getImage(): string {
+    return this.image;
+  }
+
+  /**
+   * Set image url
+   * @param value New value
+   */
+  public setImage(value: string) {
+    this.image = value;
+  }
+
 }

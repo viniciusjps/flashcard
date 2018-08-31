@@ -31,12 +31,15 @@ import { ControllerService } from '../shared/controller.service';
 })
 export class CardsComponent implements OnInit {
 
+  private cards: Card[];
+
   constructor(
     private controller: ControllerService,
     private http: HttpClient
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.cards = this.controller.getAllPublicCards();
   }
 
   /**
@@ -55,24 +58,4 @@ export class CardsComponent implements OnInit {
     return value ? '' : 'active';
   }
 
-  /**
-   * Get all public card's
-   */
-  public getCards(): Card[] {
-    return this.controller.getAllPublicCards();
-  }
-
-  public getImage(email: string) {
-    this.getUrl(email)
-      .then(data => {
-        const url = data;
-        return url;
-      });
-  }
-
-  public getUrl(email: string) {
-    return fetch('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
-      .then(response => response.json())
-      .then(json => json['entry']['gphoto$thumbnail']['$t']);
-  }
 }

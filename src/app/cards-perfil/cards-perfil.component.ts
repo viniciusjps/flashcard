@@ -30,6 +30,7 @@ import { ControllerService } from '../shared/controller.service';
 export class CardsPerfilComponent implements OnInit {
 
   private view: string;
+  private cards: Card[];
 
   constructor(
     private controller: ControllerService
@@ -38,6 +39,7 @@ export class CardsPerfilComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCards();
   }
 
   /**
@@ -57,20 +59,12 @@ export class CardsPerfilComponent implements OnInit {
   }
 
   /**
-   * Get card by id
-   * @param id Id
-   */
-  public getCard(email: string, id: number): Card {
-    return this.controller.getCard(email, id);
-  }
-
-  /**
    * Get all cards
    */
-  public getCards(): Card[] {
+  public getCards(): void {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      return this.getSpecificCards(this.view);
+      this.cards = this.getSpecificCards(this.view);
     }
   }
 
@@ -82,16 +76,12 @@ export class CardsPerfilComponent implements OnInit {
     const user = this.controller.getUserLogado();
     const result = [];
     if (user != null) {
-      if (value == null) {
-        return this.controller.getCards(user.getEmail());
-    } else {
       const array = this.controller.getCards(user.getEmail());
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].getResult() === value) {
-          result.push(array[i]);
-          }
+      array.forEach(element => {
+        if (element.getResult() === value) {
+          result.push(element);
         }
-      }
+      });
     }
     return result;
   }
@@ -113,7 +103,7 @@ export class CardsPerfilComponent implements OnInit {
    */
   public hit(id: number) {
     const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(true);
+    user.getCard(id).setResult('hit');
   }
 
   /**
@@ -122,7 +112,7 @@ export class CardsPerfilComponent implements OnInit {
    */
   public missed(id: number) {
     const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(false);
+    user.getCard(id).setResult('missed');
   }
 
   /**

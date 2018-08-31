@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { CardsComponent } from './../cards/cards.component';
 import { ControllerService } from './../shared/controller.service';
 
 @Component({
