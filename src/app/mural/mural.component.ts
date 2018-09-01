@@ -15,6 +15,7 @@ export class MuralComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.controller.reloadPage();
   }
 
   public addNewCard() {
