@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { ControllerService } from './../shared/controller.service';
-import { User } from './../models/user';
 
 @Component({
   selector: 'app-navbar',

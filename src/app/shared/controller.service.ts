@@ -176,11 +176,11 @@ export class ControllerService {
   }
 
   public reloadPage() {
-    const username = localStorage.getItem('username');
-    const email = localStorage.getItem('email');
-    const image = localStorage.getItem('image');
     const isLogged = localStorage.getItem('isLogged');
     if (isLogged) {
+      const username = localStorage.getItem('username');
+      const email = localStorage.getItem('email');
+      const image = localStorage.getItem('image');
       this.user_logado = new User(username, email, image);
     }
   }

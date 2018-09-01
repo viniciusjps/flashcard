@@ -45,6 +45,9 @@ export class PesquisaComponent implements OnInit, OnDestroy {
       queryParams => this.search = queryParams['search']
     );
     this.cards = this.controller.getAllPublicCards();
+    if (localStorage.getItem('isLogged')) {
+      this.controller.reloadPage();
+    }
   }
 
   ngOnDestroy(): void {

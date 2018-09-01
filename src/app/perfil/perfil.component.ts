@@ -25,7 +25,9 @@ export class PerfilComponent implements OnInit {
       queryParams => this.mode = queryParams['command']
     );
     this.mode = 'cards';
-    this.controller.reloadPage();
+    if (localStorage.getItem('isLogged')) {
+      this.controller.reloadPage();
+    }
   }
 
   public logout() {

@@ -30,14 +30,9 @@
             ver resposta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
             </div>
-            <span>
-              <i class="user icon"></i>
-              {{ card.getAuthor().getUsername() }}
-            </span>
           </div>
         </div>
       </div>
@@ -54,14 +49,9 @@
             ver pergunta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
             </div>
-            <span>
-              <i class="user icon"></i>
-              {{ card.getAuthor().getUsername() }}
-            </span>
           </div>
         </div>
       </div>
