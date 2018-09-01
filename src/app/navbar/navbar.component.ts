@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.controller.reloadPage();
   }
 
   public getInfoNavbar(): string {

@@ -11,35 +11,11 @@
   <hr class="ui divider">
   <h3>
     <i class="lock icon"></i>
-    Editar senha
+    Deletar conta
   </h3>
   <div class="ui two column very relaxed stackable grid">
     <div class="six wide column">
-      <h5>Senha atual</h5>
-      <div class="ui input fluid">
-        <input type="password" placeholder="Digite sua senha" #pswd [(ngModel)]="pswd.value">
-      </div>
-      <!--div class="ui green message" *ngIf="pswd.value == getPassword()">
-        <div class="header">
-          <i class="check icon"></i>
-          Senha correta
-        </div>
-      </div-->
-    </div>
-    <div class="eight wide column">
-      <h5>Nova senha</h5>
-      <div class="ui action input fluid">
-        <input type="password" placeholder="Digite uma nova senha" #newpswd [(ngModel)]="newpswd.value">
-        <button class="ui button" #submit [disabled]="newpswd.value == getPassword() || newpswd.value == ''" (click)="setPassword(pswd.value, newpswd.value); clearValue(newpswd); clearValue(pswd)">
-          confirmar
-        </button>
-      </div>
-      <!--div class="ui yellow message" *ngIf="newpswd.value == getPassword()">
-        <div class="header">
-          <i class="exclamation icon"></i>
-          A senha informada é a mesma já cadastrada
-        </div>
-      </div-->
+      <button class="ui red button">Apagar</button>
     </div>
   </div>
 </div>

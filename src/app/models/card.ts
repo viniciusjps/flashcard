@@ -1,17 +1,17 @@
 export class Card {
 
   // Backend
+  private id: number;
   private discipline: string;
   private question: string;
   private answer: string;
   private privacy: boolean;
   private result: string;
   private author: string;
+  private image: string;
 
   private seeAnswer: boolean;
   private favorite: boolean;
-  private id: number;
-  private image: string;
 
   constructor(
     id: number,
@@ -29,8 +29,8 @@ export class Card {
     this.privacy = privacy;
     this.result = 'default';
     this.author = author;
-
     this.image = image;
+
     this.favorite = false;
     this.seeAnswer = false;
   }

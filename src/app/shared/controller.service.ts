@@ -177,7 +177,7 @@ export class ControllerService {
 
   public reloadPage() {
     const isLogged = localStorage.getItem('isLogged');
-    if (isLogged) {
+    if (isLogged != null && isLogged === 'true') {
       const username = localStorage.getItem('username');
       const email = localStorage.getItem('email');
       const image = localStorage.getItem('image');

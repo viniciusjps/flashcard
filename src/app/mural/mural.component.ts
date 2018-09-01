@@ -15,9 +15,6 @@ export class MuralComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('isLogged')) {
-      this.controller.reloadPage();
-    }
   }
 
   public addNewCard() {

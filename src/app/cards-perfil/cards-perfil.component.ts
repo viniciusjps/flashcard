@@ -36,6 +36,7 @@ export class CardsPerfilComponent implements OnInit {
     private controller: ControllerService
   ) {
     this.view = 'default';
+    this.cards = [];
   }
 
   ngOnInit() {
@@ -64,7 +65,7 @@ export class CardsPerfilComponent implements OnInit {
   public getCards(): void {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      this.cards = this.getSpecificCards(this.view);
+      this.cards = this.controller.getCards(user.getEmail());
     }
   }
 
@@ -74,27 +75,30 @@ export class CardsPerfilComponent implements OnInit {
    */
   private getSpecificCards(value: string): Card[] {
     const user = this.controller.getUserLogado();
-    const result = [];
+    const result: Card [] = [];
     if (user != null) {
-      const array = this.controller.getCards(user.getEmail());
-      array.forEach(element => {
-        if (element.getResult() === value) {
-          result.push(element);
+      this.cards.forEach(card => {
+        if (card.getResult() === value) {
+          result.push(card);
         }
       });
+      return result;
     }
-    return result;
+    return [];
   }
 
   /**
    * Get color's card
    * @param value Result card
    */
-  public getColor(value: boolean): string {
-    if (value == null) {
+  public getColor(value: string): string {
+    if (value === 'default') {
       return '';
+    } else if (value === 'hit') {
+      return 'green';
+    } else {
+      return 'red';
     }
-    return value ? 'green' : 'red';
   }
 
   /**
