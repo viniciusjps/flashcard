@@ -123,7 +123,7 @@ export class CardsPerfilComponent implements OnInit {
         result,
         card.getAuthor(),
         card.getImage())
-      .then(a => {
+      .then(data => {
         this.getCards();
       })
       .then(a => {
@@ -144,7 +144,7 @@ export class CardsPerfilComponent implements OnInit {
         card.getResult(),
         card.getAuthor(),
         card.getImage())
-      .then(a => {
+      .then(data => {
         this.getCards();
       })
       .then(a => {
@@ -163,12 +163,12 @@ export class CardsPerfilComponent implements OnInit {
     email: string,
     image: string
   ) {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/' + idCard, {
+    return fetch('http://api-flashcard.herokuapp.com/api/card', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      method: 'PUT',
+      method: 'POST',
       body: JSON.stringify({
         id: idCard,
         discipline: discipline,

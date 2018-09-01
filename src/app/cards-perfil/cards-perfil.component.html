@@ -13,7 +13,7 @@
     <div class="column">
       <div class="ui animated fade fluid basic button" (click)="setTypeView('default')">
         <div class="visible content">Todos
-          <a class="ui circular label"> {{ getSpecificCards('default').length }} </a>
+          <a class="ui circular label"> {{ cards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="sync alternate icon"></i>
@@ -23,7 +23,7 @@
     <div class="column">
       <div class="ui animated fade fluid green basic button" (click)="setTypeView('hit')">
         <div class="visible content">Acertos
-          <a class="ui green circular label"> {{ getSpecificCards('hit').length }} </a>
+          <a class="ui green circular label"> {{ hitCards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="check icon"></i>
@@ -33,7 +33,7 @@
     <div class="column">
       <div class="ui animated fade fluid red basic button" (click)="setTypeView('missed')">
         <div class="visible content">Erros
-          <a class="ui red circular label"> {{ getSpecificCards('missed').length }} </a>
+          <a class="ui red circular label"> {{ missedCards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="times icon"></i>
