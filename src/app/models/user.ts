@@ -54,11 +54,7 @@ export class User {
       .then(resp => resp.json())
       .then(resp => {
         const card = new Card(resp.id, discipline, question, answer, privacy, this.getEmail(), this.getImage());
-        this.addRelation(this.getEmail(), card.getId())
-        .then(data => data.json())
-        .then(a => {
-          this.cards.push(card);
-        });
+        this.cards.push(card);
       });
   }
 
@@ -77,20 +73,6 @@ export class User {
         result: 'default',
         author: email,
         image: image
-      })
-    });
-  }
-
-  private addRelation(email: string, cardId: number) {
-    return fetch('http://api-flashcard.herokuapp.com/api/having', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        userEmail: email,
-        cardId: cardId
       })
     });
   }

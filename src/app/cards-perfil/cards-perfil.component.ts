@@ -1,4 +1,3 @@
-import { User } from './../models/user';
 import { Card } from './../models/card';
 import { Component, OnInit } from '@angular/core';
 
@@ -32,16 +31,26 @@ export class CardsPerfilComponent implements OnInit {
 
   private view: string;
   private cards: Card[];
+  private hitCards: Card[];
+  private missedCards: Card[];
 
   constructor(
     private controller: ControllerService
   ) {
     this.view = 'default';
     this.cards = [];
+    this.hitCards = [];
+    this.missedCards = [];
   }
 
   ngOnInit() {
-    this.getCards();
+    fetch('http://api-flashcard.herokuapp.com/api/card')
+    .then(data => {
+      this.getCards();
+    })
+    .then(data => {
+      this.splitCards();
+    });
   }
 
   /**
@@ -74,63 +83,78 @@ export class CardsPerfilComponent implements OnInit {
    * Get specific cards
    * @param value Value type
    */
-  private getSpecificCards(value: string): Card[] {
+  public getSpecificCards(value: string): Card[] {
     const user = this.controller.getUserLogado();
-    const cards: Card [] = this.cards;
-    const result: Card [] = [];
     if (user != null) {
-      cards.forEach(card => {
-        if (card.getResult() === value) {
-          result.push(card);
-        }
-      });
-      return result;
+      if (value === 'default') {
+        return this.cards;
+      } else if (value === 'hit') {
+        return this.hitCards;
+      } else {
+        return this.missedCards;
+      }
     }
     return [];
   }
 
-  /**
-   * Get color's card
-   * @param value Result card
-   */
-  public getColor(value: string): string {
-    if (value === 'default') {
-      return '';
-    } else if (value === 'hit') {
-      return 'green';
-    } else {
-      return 'red';
-    }
+  public splitCards(): void {
+    const hit: Card[] = [];
+    const missed: Card[] = [];
+    this.cards.forEach(card => {
+      if (card.getResult() === 'hit') {
+        hit.push(card);
+      } else {
+        missed.push(card);
+      }
+    });
+    this.hitCards = hit;
+    this.missedCards = missed;
   }
 
-  public setCardResult(value: string, card: Card) {
+  public setCardResult(result: string, card: Card) {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      this.setResult(
+      this.setCard(
         card.getId(),
         card.getDiscipline(),
         card.getQuestion(),
         card.getAnswer(),
         card.getPrivacy(),
-        value,
+        result,
         card.getAuthor(),
         card.getImage())
       .then(a => {
-        const updateCard = new Card(
-          card.getId(),
-          card.getDiscipline(),
-          card.getQuestion(),
-          card.getAnswer(),
-          card.getPrivacy(),
-          card.getAnswer(),
-          card.getImage());
-        card = updateCard;
+        this.getCards();
+      })
+      .then(a => {
+        this.splitCards();
       });
     }
   }
 
-  private setResult(
-    id: number,
+  public setCardPrivacy(privacy: boolean, card: Card) {
+    const user = this.controller.getUserLogado();
+    if (user != null) {
+      this.setCard(
+        card.getId(),
+        card.getDiscipline(),
+        card.getQuestion(),
+        card.getAnswer(),
+        privacy,
+        card.getResult(),
+        card.getAuthor(),
+        card.getImage())
+      .then(a => {
+        this.getCards();
+      })
+      .then(a => {
+        this.splitCards();
+      });
+    }
+  }
+
+  private setCard(
+    idCard: number,
     discipline: string,
     question: string,
     answer: string,
@@ -139,14 +163,14 @@ export class CardsPerfilComponent implements OnInit {
     email: string,
     image: string
   ) {
-    return fetch('http://api-flashcard.herokuapp.com/api/cards/', {
+    return fetch('http://api-flashcard.herokuapp.com/api/card/' + idCard, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify({
-        id: id,
+        id: idCard,
         discipline: discipline,
         question: question,
         answer: answer,
@@ -164,5 +188,15 @@ export class CardsPerfilComponent implements OnInit {
    */
   public setTypeView(value: string): void {
     this.view = value;
+  }
+
+  public getColor(card: Card): string {
+    if (card.getResult() === 'hit') {
+      return 'green';
+    } else if (card.getResult() === 'missed') {
+      return 'red';
+    } else {
+      return '';
+    }
   }
 }

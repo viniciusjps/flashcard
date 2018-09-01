@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    fetch('http://api-flashcard.herokuapp.com/api/user').then(a => a.json());
   }
 
 }

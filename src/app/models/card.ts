@@ -27,10 +27,10 @@ export class Card {
     this.question = question;
     this.answer = answer;
     this.privacy = privacy;
-    this.result = 'default';
     this.author = author;
     this.image = image;
 
+    this.result = 'default';
     this.favorite = false;
     this.seeAnswer = false;
   }
