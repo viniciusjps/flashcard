@@ -74,7 +74,7 @@
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
         <div class="ui {{ getColor(card.getResult()) }} fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
-            <div class="left floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
+            <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
             <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="right aligned description">
               <p>{{ card.getAnswer() }}</p>
@@ -83,10 +83,10 @@
           <div class="extra content">
             <h5 class="left floated">Autoavaliação</h5>
             <div class="ui two column very relaxed stackable buttons">
-              <button class="ui green basic button" (click)="hit(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+              <button class="ui green basic button" (click)="setCardResult('hit', card)" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 <i class="thumbs up icon"></i>
               </button>
-              <button class="ui red basic button" (click)="missed(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+              <button class="ui red basic button" (click)="setCardResult('missed', card)" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 <i class="thumbs down icon"></i>
               </button>
             </div>

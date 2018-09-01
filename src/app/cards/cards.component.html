@@ -23,7 +23,7 @@
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
         <div class="ui yellow fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
-            <div class="left floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
+            <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
             <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="right aligned description">
               <p>{{ card.getAnswer() }}</p>

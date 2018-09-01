@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { Card } from './../models/card';
 import { Component, OnInit } from '@angular/core';
 
@@ -75,9 +76,10 @@ export class CardsPerfilComponent implements OnInit {
    */
   private getSpecificCards(value: string): Card[] {
     const user = this.controller.getUserLogado();
+    const cards: Card [] = this.cards;
     const result: Card [] = [];
     if (user != null) {
-      this.cards.forEach(card => {
+      cards.forEach(card => {
         if (card.getResult() === value) {
           result.push(card);
         }
@@ -101,22 +103,59 @@ export class CardsPerfilComponent implements OnInit {
     }
   }
 
-  /**
-   * Hit the question
-   * @param id Card id
-   */
-  public hit(id: number) {
+  public setCardResult(value: string, card: Card) {
     const user = this.controller.getUserLogado();
-    user.getCard(id).setResult('hit');
+    if (user != null) {
+      this.setResult(
+        card.getId(),
+        card.getDiscipline(),
+        card.getQuestion(),
+        card.getAnswer(),
+        card.getPrivacy(),
+        value,
+        card.getAuthor(),
+        card.getImage())
+      .then(a => {
+        const updateCard = new Card(
+          card.getId(),
+          card.getDiscipline(),
+          card.getQuestion(),
+          card.getAnswer(),
+          card.getPrivacy(),
+          card.getAnswer(),
+          card.getImage());
+        card = updateCard;
+      });
+    }
   }
 
-  /**
-   * Missed the question
-   * @param id Card id
-   */
-  public missed(id: number) {
-    const user = this.controller.getUserLogado();
-    user.getCard(id).setResult('missed');
+  private setResult(
+    id: number,
+    discipline: string,
+    question: string,
+    answer: string,
+    privacy: boolean,
+    result: string,
+    email: string,
+    image: string
+  ) {
+    return fetch('http://api-flashcard.herokuapp.com/api/cards/', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id: id,
+        discipline: discipline,
+        question: question,
+        answer: answer,
+        privacy: privacy,
+        result: result,
+        author: email,
+        image: image
+      })
+    });
   }
 
   /**
