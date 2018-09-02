@@ -47,7 +47,7 @@ export class PerfilEditarComponent implements OnInit {
         },
         method: 'DELETE'
       }).then(a => {
-        this.deleteCards();
+        this.deleteCards(user);
       })
       .then(b => {
         this.controller.logOut();
@@ -55,8 +55,7 @@ export class PerfilEditarComponent implements OnInit {
     }
   }
 
-  private deleteCards() {
-    const user = this.controller.getUserLogado();
+  private deleteCards(user: User) {
     let request = [];
     this.controller.getAllCards()
     .then(data => {
