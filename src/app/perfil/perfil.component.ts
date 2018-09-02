@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 import { ControllerService } from './../shared/controller.service';
-import { CardsPerfilComponent } from './../cards-perfil/cards-perfil.component';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-perfil',
@@ -24,9 +23,12 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.route.queryParams.subscribe(
       queryParams => this.mode = queryParams['command']
-      
     );
-    this.mode = 'cards'
+    this.mode = 'cards';
+    this.controller.reloadPage();
+    if (this.controller.getUserLogado() == null) {
+      this.controller.navigate('/login');
+    }
   }
 
   public logout() {
@@ -44,6 +46,14 @@ export class PerfilComponent implements OnInit {
 
   public getUsername(): string {
     return this.controller.getUserLogado().getUsername();
+  }
+
+  public getImage(): string {
+    const user = this.controller.getUserLogado();
+    if (user != null) {
+      return user.getImage();
+    }
+    return '';
   }
 
   /**

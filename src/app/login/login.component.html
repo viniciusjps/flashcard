@@ -1,26 +1,22 @@
 <div class="ui container">
   <div class="ui two column middle aligned very relaxed stackable grid">
     <div class="column">
-      <h2 class="ui image teal header center aligned">
-        <img src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="image">
-        <div class="content">Faça login em sua conta</div>
+      <h2 class="ui icon teal header center aligned">
+        <div class="content">
+          <img src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="ui image">
+          Sign In
+        </div>
       </h2>
-      <div class="ui form">
-        <div class="field">
-          <label>E-mail</label>
-          <div class="ui left icon input">
-            <input type="text" placeholder="Endereço de e-mail" #email>
-            <i class="user icon"></i>
-          </div>
+      <br>
+      <div class="center aligned column">
+        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
+          <i class="coffe icon"></i>
+          Aguarde...
         </div>
-        <div class="field">
-          <label>Senha</label>
-          <div class="ui left icon input">
-            <input type="password" placeholder="Senha" #password>
-            <i class="lock icon"></i>
-          </div>
+        <div class="ui teal labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
+          <i class="google icon"></i>
+          Login com o Google
         </div>
-        <button class="ui teal submit button" (click)="logar(email.value, password.value)">Entrar</button>
       </div>
     </div>
     <div style="position:relative; margin:0; padding:0;">
@@ -35,8 +31,14 @@
       </h2>
       <br>
       <div class="center aligned column">
-        <div class="ui big green labeled icon button fluid" routerLink="/login/cadastro">
-          <i class="signup icon"></i> Inscreva-se </div>
+        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
+          <i class="coffe icon"></i>
+          Aguarde...
+        </div>
+        <div class="ui green labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
+          <i class="signup icon"></i>
+          Inscreva-se 
+        </div>
       </div>
     </div>
   </div>

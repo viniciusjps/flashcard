@@ -20,7 +20,7 @@
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
         <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
-            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="right floated meta">&nbsp; #{{ card.getId() | number:'2.0' }}</div>
             <div class="header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="description">
               <p>{{ card.getQuestion() }}</p>
@@ -30,38 +30,28 @@
             ver resposta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
             </div>
-            <span>
-              <i class="user icon"></i>
-              {{ card.getAuthor().getUsername() }}
-            </span>
           </div>
         </div>
       </div>
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
-        <div class="ui teal fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+        <div class="ui yellow fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
-            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
-            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
-            <div class="description">
+            <div class="left floated meta">#{{ card.getId() | number:'2.0' }} &nbsp;</div>
+            <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="right aligned description">
               <p>{{ card.getAnswer() }}</p>
             </div>
           </div>
-          <button class="ui botton attached teal button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+          <button class="ui botton attached yellow button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver pergunta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
+            <div class="right floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
             </div>
-            <span>
-              <i class="user icon"></i>
-              {{ card.getAuthor().getUsername() }}
-            </span>
           </div>
         </div>
       </div>

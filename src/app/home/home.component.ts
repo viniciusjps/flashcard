@@ -8,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  private serverStatus: boolean;
+
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {
+    this.serverStatus = false;
+  }
 
   ngOnInit() {
+    if (!this.serverStatus) {
+      this.controller.turnOnServer()
+      .then(a => {
+        this.serverStatus = true;
+      });
+    }
   }
 
 }

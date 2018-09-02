@@ -11,9 +11,9 @@
   </h2>
   <div class="ui three column very relaxed stackable grid">
     <div class="column">
-      <div class="ui animated fade fluid basic button" (click)="setTypeView('all')">
+      <div class="ui animated fade fluid basic button" (click)="setTypeView('default')">
         <div class="visible content">Todos
-          <a class="ui circular label"> {{ getSpecificCards(null).length }} </a>
+          <a class="ui circular label"> {{ cards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="sync alternate icon"></i>
@@ -23,7 +23,7 @@
     <div class="column">
       <div class="ui animated fade fluid green basic button" (click)="setTypeView('hit')">
         <div class="visible content">Acertos
-          <a class="ui green circular label"> {{ getSpecificCards(true).length }} </a>
+          <a class="ui green circular label"> {{ hitCards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="check icon"></i>
@@ -33,7 +33,7 @@
     <div class="column">
       <div class="ui animated fade fluid red basic button" (click)="setTypeView('missed')">
         <div class="visible content">Erros
-          <a class="ui red circular label"> {{ getSpecificCards(false).length }} </a>
+          <a class="ui red circular label"> {{ missedCards.length }} </a>
         </div>
         <div class="hidden content">
           <i class="times icon"></i>
@@ -43,70 +43,71 @@
   </div>
   <br>
   <div class="ui two middle aligned very relaxed stackable cards">
-    <div class="ui card shape" *ngFor="let card of getCards()">
+    <div class="ui card shape" *ngFor="let card of getSpecificCards(view)">
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
-        <div class="ui {{ getColor(card.getResult()) }} fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
+        <div class="ui {{ getColor(card) }} fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
-            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
+            <div class="right floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
             <div class="header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="description">
               <p>{{ card.getQuestion() }}</p>
             </div>
           </div>
-          <button class="ui botton attached {{ getColor(card.getResult()) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+          <button class="ui bottom attached {{ getColor(card) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver resposta
           </button>
           <div class="extra content">
-            <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()">
-              </i>
-              {{ card.getRating() }}
+            <div class="left floated">
+              <a (click)="setCardPrivacy(false, card)" *ngIf="card.getPrivacy()">
+                <i class="unlock icon" title="Tornar privado"></i>
+              </a>
+              <a (click)="setCardPrivacy(true, card)" *ngIf="!card.getPrivacy()">
+                <i class="lock icon" title="Tornar público"></i>
+              </a>
             </div>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
-              <i class="unlock icon"></i>
-            </a>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()">
-              <i class="lock icon"></i>
-            </a>
+            <div class="right floated author">
+              <a (click)="delete(card.getId())">
+                <i class="trash alternate icon" title="Apagar"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
-        <div class="ui {{ getColor(card.getResult()) }} fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+        <div class="ui {{ getColor(card) }} fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
-            <div class="right floated meta">#{{ card.getId() | number:'2.0' }}</div>
-            <div class="header">{{ card.getDiscipline() | uppercase }}</div>
-            <div class="description">
+            <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
+            <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
+            <div class="right aligned description">
               <p>{{ card.getAnswer() }}</p>
             </div>
           </div>
-
           <div class="extra content">
             <h5 class="left floated">Autoavaliação</h5>
             <div class="ui two column very relaxed stackable buttons">
-              <button class="ui green basic button" (click)="hit(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+              <button class="ui green basic button" (click)="setCardResult('hit', card)" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 <i class="thumbs up icon"></i>
               </button>
-              <button class="ui red basic button" (click)="missed(card.getId())" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+              <button class="ui red basic button" (click)="setCardResult('missed', card)" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
                 <i class="thumbs down icon"></i>
               </button>
             </div>
           </div>
-
-          <button class="ui botton attached {{ getColor(card.getResult()) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+          <button class="ui bottom attached {{ getColor(card) }} button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
             ver pergunta
           </button>
           <div class="extra content">
             <div class="right floated">
-              <i class="heart like icon" (click)="card.addRating()"></i>
-              {{ card.getRating() }}
+              <a (click)="setCardPrivacy(false, card)" *ngIf="card.getPrivacy()">
+                <i class="unlock icon" title="Tornar privado"></i>
+              </a>
+              <a (click)="setCardPrivacy(true, card)" *ngIf="!card.getPrivacy()">
+                <i class="lock icon" title="Tornar público"></i>
+              </a>
             </div>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="card.getPrivacy()">
-              <i class="unlock icon"></i>
-            </a>
-            <a (click)="card.setPrivacy(!card.getPrivacy())" *ngIf="!card.getPrivacy()">
-              <i class="lock icon"></i>
-            </a>
+            <div class="left floated author">
+              <img class="ui avatar image" src="{{ card.getImage() }}"> 
+            </div>
           </div>
         </div>
       </div>

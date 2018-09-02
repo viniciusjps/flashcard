@@ -1,80 +1,91 @@
 import { Card } from './card';
 
-
 export class User {
+  private username: string;
+  private email: string;
+  private image: string;
+  private cards: Card[];
 
-    private username: string;
-    private password: string;
-    private email: string;
-    private cards: Card[];
+  constructor(username: string, email: string, image: string) {
+    this.username = username;
+    this.email = email;
+    this.image = image;
+    this.cards = [];
+  }
 
-    constructor (
-        username: string,
-        pswd: string,
-        email: string
-    ) {
-        this.username = username;
-        this.password = pswd;
-        this.email = email;
-        this.cards = [];
-    }
+  /**
+   * Get username
+   */
+  public getUsername(): string {
+    return this.username;
+  }
 
-    /**
-     * Get username
-     */
-    public getUsername(): string {
-        return this.username;
-    }
+  public setUsername(value: string): void {
+    this.username = value;
+  }
 
-    public setUsername(value: string): void {
-        this.username = value;
-    }
+  /**
+   * getEmail
+   */
+  public getEmail(): string {
+    return this.email;
+  }
 
-    /**
-     * getEmail
-     */
-    public getEmail(): string {
-        return this.email;
-    }
+  public setEmail(value: string): void {
+    this.email = value;
+  }
 
-    public setEmail(value: string): void {
-        this.email = value;
-    }
+  /**
+   * Get Image
+   */
+  public getImage(): string {
+    return this.image;
+  }
 
-    /**
-     * Get Password
-     */
-    public getPassword(): string {
-       return this.password;
-    }
+  public setImage(value: string): void {
+    this.image = value;
+  }
 
-    public setPassword(value: string): void {
-        this.password = value;
-    }
+  /**
+   * addNewCard
+   */
+  public addNewCard(discipline: string, question: string, answer: string, privacy: boolean): Promise<any> {
+    return this.addCard(discipline, question, answer, privacy, this.getEmail(), this.getImage())
+      .then(resp => resp.json())
+      .then(resp => {
+        const card = new Card(resp.id, discipline, question, answer, privacy, this.getEmail(), this.getImage());
+        this.cards.push(card);
+      });
+  }
 
-    /**
-     * addNewCard
-     */
-    public addNewCard(discipline: string, question: string, answer: string, id: number, privacy: boolean): void {
-        this.cards.push(new Card(discipline, question, answer, id + 1, this, privacy));
-    }
+  private addCard(discipline: string, question: string, answer: string, privacy: boolean, email: string, image: string) {
+    return fetch('http://api-flashcard.herokuapp.com/api/card', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        discipline: discipline,
+        question: question,
+        answer: answer,
+        privacy: privacy,
+        result: 'default',
+        author: email,
+        image: image
+      })
+    });
+  }
 
-    /**
-     * Get card by ID
-     * @param id Id
-     */
-    public getCard(id: number) {
-        const array = this.cards;
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].getId() === id) {
-                return array[i];
-            }
-        }
-        return null;
-    }
+  /**
+   * Get card by ID
+   * @param id Id
+   */
+  public getCard(id: number) {
+    return null;
+  }
 
-    public getCards(): Card[] {
-        return this.cards;
-    }
-
+  public getCards(): Card[] {
+    return this.cards;
+  }
 }

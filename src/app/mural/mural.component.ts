@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { CardsComponent } from './../cards/cards.component';
 import { ControllerService } from './../shared/controller.service';
 
 @Component({
@@ -11,11 +10,21 @@ import { ControllerService } from './../shared/controller.service';
 })
 export class MuralComponent implements OnInit {
 
+  private serverStatus: boolean;
+
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {
+    this.serverStatus = false;
+  }
 
   ngOnInit() {
+    if (!this.serverStatus) {
+      this.controller.turnOnServer()
+      .then(a => {
+        this.serverStatus = true;
+      });
+    }
   }
 
   public addNewCard() {
@@ -27,8 +36,8 @@ export class MuralComponent implements OnInit {
     }
   }
 
-  public search(value: string) {
-    this.controller.getRouter().navigate(['/pesquisar'], { queryParams: {search: value}});
+  public search(newValue: string) {
+    this.controller.getRouter().navigate(['/pesquisar'], { queryParams: {value: newValue}});
   }
 
 }

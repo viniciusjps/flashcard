@@ -1,6 +1,6 @@
 import { Card } from './../models/card';
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import {
@@ -29,14 +29,20 @@ import { ControllerService } from '../shared/controller.service';
     ])
   ]
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit, OnDestroy {
+
+  private cards: Card[];
 
   constructor(
     private controller: ControllerService,
-    private http: HttpClient
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.cards = this.controller.getAllPublicCards();
+  }
+
+  ngOnDestroy() {
+    this.cards = [];
   }
 
   /**
@@ -55,24 +61,4 @@ export class CardsComponent implements OnInit {
     return value ? '' : 'active';
   }
 
-  /**
-   * Get all public card's
-   */
-  public getCards(): Card[] {
-    return this.controller.getAllPublicCards();
-  }
-
-  public getImage(email: string) {
-    this.getUrl(email)
-      .then(data => {
-        const url = data;
-        return url;
-      });
-  }
-
-  public getUrl(email: string) {
-    return fetch('http://picasaweb.google.com/data/entry/api/user/' + email + '?alt=json')
-      .then(response => response.json())
-      .then(json => json['entry']['gphoto$thumbnail']['$t']);
-  }
 }

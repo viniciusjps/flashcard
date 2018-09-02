@@ -30,14 +30,24 @@ import { ControllerService } from '../shared/controller.service';
 export class CardsPerfilComponent implements OnInit {
 
   private view: string;
+  private cards: Card[];
+  private hitCards: Card[];
+  private missedCards: Card[];
 
   constructor(
     private controller: ControllerService
   ) {
-    this.view = 'all';
+    this.view = 'default';
+    this.cards = [];
+    this.hitCards = [];
+    this.missedCards = [];
   }
 
   ngOnInit() {
+    this.controller.turnOnServer()
+    .then(data => {
+      this.getCards();
+    });
   }
 
   /**
@@ -57,37 +67,38 @@ export class CardsPerfilComponent implements OnInit {
   }
 
   /**
-   * Get card by id
-   * @param id Id
-   */
-  public getCard(email: string, id: number): Card {
-    return this.controller.getCard(email, id);
-  }
-
-  /**
-   * Get card rating
-   * @param id Id
-   */
-  public getCardRating(email: string, id: number): number {
-    const card = this.getCard(email, id);
-    return card.getRating();
-  }
-
-  /**
    * Get all cards
    */
-  public getCards(): Card[] {
+  public getCards(): void {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      if (this.view === 'all') {
-        return this.getSpecificCards(null);
-      }
-      if (this.view === 'hit') {
-        return this.getSpecificCards(true);
-      }
-      if (this.view === 'missed') {
-        return this.getSpecificCards(false);
-      }
+      const cards: Card[] = [];
+      let request = [];
+      this.controller.getAllCards()
+      .then(data => {
+        request = data;
+      })
+      .then(a => {
+        request.forEach(e => {
+          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
+          card.setResult(e.result);
+          if (card.getAuthor() === user.getEmail()) {
+            cards.push(card);
+          }
+        });
+        this.cards = cards.sort((c, b) => b.getId() - c.getId());
+        this.hitCards = [];
+        this.missedCards = [];
+      })
+      .then(a => {
+        this.cards.forEach(card => {
+          if (card.getResult() === 'hit') {
+            this.hitCards.push(card);
+          } else if (card.getResult() === 'missed') {
+            this.missedCards.push(card);
+          }
+        });
+      });
     }
   }
 
@@ -95,51 +106,94 @@ export class CardsPerfilComponent implements OnInit {
    * Get specific cards
    * @param value Value type
    */
-  private getSpecificCards(value: boolean): Card[] {
+  public getSpecificCards(value: string): Card[] {
     const user = this.controller.getUserLogado();
-    const result = [];
     if (user != null) {
-      if (value == null) {
-        return this.controller.getCards(user.getEmail());
-    } else {
-      const array = this.controller.getCards(user.getEmail());
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].getResult() === value) {
-          result.push(array[i]);
-          }
-        }
+      if (value === 'default') {
+        return this.cards;
+      } else if (value === 'hit') {
+        return this.hitCards;
+      } else {
+        return this.missedCards;
       }
     }
-    return result;
+    return [];
   }
 
-  /**
-   * Get color's card
-   * @param value Result card
-   */
-  public getColor(value: boolean): string {
-    if (value == null) {
-      return '';
+  public setCardResult(result: string, card: Card) {
+    const user = this.controller.getUserLogado();
+    if (user != null) {
+      this.setCard(
+        card.getId(),
+        card.getDiscipline(),
+        card.getQuestion(),
+        card.getAnswer(),
+        card.getPrivacy(),
+        result,
+        card.getAuthor(),
+        card.getImage())
+      .then(data => {
+        this.getCards();
+      });
     }
-    return value ? 'green' : 'red';
+  }
+
+  public setCardPrivacy(privacy: boolean, card: Card) {
+    const user = this.controller.getUserLogado();
+    if (user != null) {
+      this.setCard(
+        card.getId(),
+        card.getDiscipline(),
+        card.getQuestion(),
+        card.getAnswer(),
+        privacy,
+        card.getResult(),
+        card.getAuthor(),
+        card.getImage())
+      .then(data => {
+        this.getCards();
+      });
+    }
+  }
+
+  private setCard(
+    idCard: number,
+    discipline: string,
+    question: string,
+    answer: string,
+    privacy: boolean,
+    result: string,
+    email: string,
+    image: string
+  ) {
+    return fetch('http://api-flashcard.herokuapp.com/api/card', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id: idCard,
+        discipline: discipline,
+        question: question,
+        answer: answer,
+        privacy: privacy,
+        result: result,
+        author: email,
+        image: image
+      })
+    });
   }
 
   /**
-   * Hit the question
+   * Delete card
    * @param id Card id
    */
-  public hit(id: number) {
-    const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(true);
-  }
-
-  /**
-   * Missed the question
-   * @param id Card id
-   */
-  public missed(id: number) {
-    const user = this.controller.getUserLogado();
-    user.getCard(id).setResult(false);
+  public delete(id: number) {
+    this.controller.deleteCard(id)
+    .then(a => {
+      this.getCards();
+    });
   }
 
   /**
@@ -148,5 +202,15 @@ export class CardsPerfilComponent implements OnInit {
    */
   public setTypeView(value: string): void {
     this.view = value;
+  }
+
+  public getColor(card: Card): string {
+    if (card.getResult() === 'hit') {
+      return 'green';
+    } else if (card.getResult() === 'missed') {
+      return 'red';
+    } else {
+      return '';
+    }
   }
 }
