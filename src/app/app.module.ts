@@ -27,7 +27,7 @@ export function getAuthServiceConfigs() {
       [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider('77402829032-th76kjj3p109feaj2f41mtvqo8bca534.apps.googleusercontent.com')
+          provider: new GoogleLoginProvider('77402829032-r2b4ou83dvovirk9pl9t5os1n7o2kti1.apps.googleusercontent.com')
         }
       ]
     );
