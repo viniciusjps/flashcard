@@ -10,11 +10,21 @@ import { ControllerService } from './../shared/controller.service';
 })
 export class MuralComponent implements OnInit {
 
+  private serverStatus: boolean;
+
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {
+    this.serverStatus = false;
+  }
 
   ngOnInit() {
+    if (!this.serverStatus) {
+      this.controller.turnOnServer()
+      .then(a => {
+        this.serverStatus = true;
+      });
+    }
   }
 
   public addNewCard() {

@@ -2,7 +2,7 @@
   <div class="ui two column very relaxed stackable grid">
     <div class="four wide column">
       <h2 class="ui header">
-        <i class="user outline icon"></i>
+        <img class="ui circular image" src="{{ getImage() }}">
         <div class="content">
           Perfil
           <div class="sub header">
@@ -13,7 +13,7 @@
       <br>
       <div class="ui one column grid">
         <div class="column">
-          <button class="ui teal fluid button" (click)="setCommand('cards')" title="Exibir seus cards">
+          <button class="ui teal fluid button" (click)="setCommand('cards')" title="Exibir seus cards" [disabled]="mode === 'cards'">
             Seus cards
           </button>
         </div>
@@ -23,12 +23,7 @@
           </button>
         </div>
         <div class="column">
-          <button class="ui teal fluid button" title="Editar card">
-            Editar card
-          </button>
-        </div>
-        <div class="column">
-          <button class="ui teal fluid button" (click)="setCommand('editar-perfil')" title="Editar perfil">
+          <button class="ui teal fluid button" (click)="setCommand('editar-perfil')" title="Editar perfil" [disabled]="mode === 'editar-perfil'">
             Editar perfil
           </button>
         </div>

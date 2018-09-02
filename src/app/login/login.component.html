@@ -3,13 +3,17 @@
     <div class="column">
       <h2 class="ui icon teal header center aligned">
         <div class="content">
-          <i src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="image"></i>
+          <img src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="ui image">
           Sign In
         </div>
       </h2>
       <br>
       <div class="center aligned column">
-        <div class="ui big labeled icon button fluid" (click)="socialSignIn('google')">
+        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
+          <i class="search icon"></i>
+          Aguarde...
+        </div>
+        <div class="ui teal labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
           <i class="google icon"></i>
           Login com o Google
         </div>
@@ -27,7 +31,11 @@
       </h2>
       <br>
       <div class="center aligned column">
-        <div class="ui big green labeled icon button fluid" (click)="socialSignIn('google')">
+        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
+          <i class="search icon"></i>
+          Aguarde...
+        </div>
+        <div class="ui green labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
           <i class="signup icon"></i>
           Inscreva-se 
         </div>

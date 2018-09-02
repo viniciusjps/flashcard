@@ -48,6 +48,14 @@ export class PerfilComponent implements OnInit {
     return this.controller.getUserLogado().getUsername();
   }
 
+  public getImage(): string {
+    const user = this.controller.getUserLogado();
+    if (user != null) {
+      return user.getImage();
+    }
+    return '';
+  }
+
   /**
    * Set command mode
    * @param mode New mode value

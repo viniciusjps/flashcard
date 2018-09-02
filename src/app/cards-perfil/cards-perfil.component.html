@@ -59,10 +59,10 @@
           <div class="extra content">
             <div class="left floated">
               <a (click)="setCardPrivacy(false, card)" *ngIf="card.getPrivacy()">
-                <i class="unlock icon"></i>
+                <i class="unlock icon" title="Tornar privado"></i>
               </a>
               <a (click)="setCardPrivacy(true, card)" *ngIf="!card.getPrivacy()">
-                <i class="lock icon"></i>
+                <i class="lock icon" title="Tornar público"></i>
               </a>
             </div>
             <div class="right floated author">
@@ -97,10 +97,10 @@
           <div class="extra content">
             <div class="right floated">
               <a (click)="setCardPrivacy(false, card)" *ngIf="card.getPrivacy()">
-                <i class="unlock icon"></i>
+                <i class="unlock icon" title="Tornar privado"></i>
               </a>
               <a (click)="setCardPrivacy(true, card)" *ngIf="!card.getPrivacy()">
-                <i class="lock icon"></i>
+                <i class="lock icon" title="Tornar público"></i>
               </a>
             </div>
             <div class="left floated author">

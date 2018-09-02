@@ -44,12 +44,9 @@ export class CardsPerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-    fetch('http://api-flashcard.herokuapp.com/api/card')
+    this.controller.turnOnServer()
     .then(data => {
       this.getCards();
-    })
-    .then(data => {
-      this.splitCards();
     });
   }
 
@@ -75,7 +72,35 @@ export class CardsPerfilComponent implements OnInit {
   public getCards(): void {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      this.cards = this.controller.getCards(user.getEmail());
+      const cards: Card[] = [];
+      let request = [];
+      this.controller.getAllCards()
+      .then(data => {
+        request = data;
+      })
+      .then(a => {
+        request.forEach(e => {
+          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
+          card.setResult(e.result);
+          if (card.getAuthor() === user.getEmail()) {
+            cards.push(card);
+          }
+        });
+        this.cards = cards.sort((c, b) => b.getId() - c.getId());
+        this.hitCards = [];
+        this.missedCards = [];
+      })
+      .then(a => {
+        this.cards.forEach(card => {
+          console.log(card.getResult());
+          if (card.getResult() === 'hit') {
+            this.hitCards.push(card);
+            console.log('passou');
+          } else if (card.getResult() === 'missed') {
+            this.missedCards.push(card);
+          }
+        });
+      });
     }
   }
 
@@ -97,20 +122,6 @@ export class CardsPerfilComponent implements OnInit {
     return [];
   }
 
-  public splitCards(): void {
-    const hit: Card[] = [];
-    const missed: Card[] = [];
-    this.cards.forEach(card => {
-      if (card.getResult() === 'hit') {
-        hit.push(card);
-      } else {
-        missed.push(card);
-      }
-    });
-    this.hitCards = hit;
-    this.missedCards = missed;
-  }
-
   public setCardResult(result: string, card: Card) {
     const user = this.controller.getUserLogado();
     if (user != null) {
@@ -125,9 +136,6 @@ export class CardsPerfilComponent implements OnInit {
         card.getImage())
       .then(data => {
         this.getCards();
-      })
-      .then(a => {
-        this.splitCards();
       });
     }
   }
@@ -146,9 +154,6 @@ export class CardsPerfilComponent implements OnInit {
         card.getImage())
       .then(data => {
         this.getCards();
-      })
-      .then(a => {
-        this.splitCards();
       });
     }
   }

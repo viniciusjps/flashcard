@@ -8,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  private serverStatus: boolean;
+
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {
+    this.serverStatus = false;
+  }
 
   ngOnInit() {
-    fetch('http://api-flashcard.herokuapp.com/api/user').then(a => a.json());
+    if (!this.serverStatus) {
+      this.controller.turnOnServer()
+      .then(a => {
+        this.serverStatus = true;
+      });
+    }
   }
 
 }

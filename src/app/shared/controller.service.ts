@@ -107,30 +107,8 @@ export class ControllerService {
     return cards;
   }
 
-  private getAllCards(): Promise<any> {
+  public getAllCards(): Promise<any> {
     return fetch('http://api-flashcard.herokuapp.com/api/card/').then(res => res.json());
-  }
-
-  /**
-   * Get the cards by email
-   * @param email Email
-   */
-  public getCards(email: string): Card[] {
-    const cards: Card[] = [];
-    let request = [];
-    this.getAllCards()
-      .then(data => {
-        request = data;
-      }).then(a => {
-        request.forEach(e => {
-          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
-          if (card.getAuthor() === email) {
-            cards.push(card);
-          }
-        });
-        return cards.reverse();
-      });
-    return cards;
   }
 
   /**
@@ -200,6 +178,10 @@ export class ControllerService {
 
   public getRouter(): Router {
     return this.router;
+  }
+
+  public turnOnServer(): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/user');
   }
 
 }

@@ -12,12 +12,22 @@ import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 })
 export class LoginComponent implements OnInit {
 
+  private serverStatus: boolean;
+
   constructor(
     private controller: ControllerService,
     private socialAuthService: AuthService
-  ) { }
+  ) {
+    this.serverStatus = false;
+  }
 
   ngOnInit() {
+    if (!this.serverStatus) {
+      this.controller.turnOnServer()
+      .then(a => {
+        this.serverStatus = true;
+      });
+    }
   }
 
   public socialSignIn() {
