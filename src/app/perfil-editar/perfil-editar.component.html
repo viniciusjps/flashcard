@@ -14,8 +14,16 @@
     Deletar conta
   </h3>
   <div class="ui two column very relaxed stackable grid">
-    <div class="six wide column">
-      <button class="ui red button">Apagar</button>
+    <div class="column">
+      <div class="six wide column">
+        <button class="ui red fluid button" (click)="delete()">Apagar</button>
+      </div>
+    </div>
+    <div class="column">
+      <h2 class="ui center aligned icon header">
+        <i class="circular trash alternate outline icon"></i>
+        :(
+      </h2>
     </div>
   </div>
 </div>

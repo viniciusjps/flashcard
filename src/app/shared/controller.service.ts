@@ -184,4 +184,17 @@ export class ControllerService {
     return fetch('http://api-flashcard.herokuapp.com/api/user');
   }
 
+   /**
+   * Delete card
+   * @param id Card id
+   */
+  public deleteCard(id: number): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/card/' + id, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    });
+  }
 }

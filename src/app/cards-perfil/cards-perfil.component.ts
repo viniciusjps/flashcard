@@ -92,10 +92,8 @@ export class CardsPerfilComponent implements OnInit {
       })
       .then(a => {
         this.cards.forEach(card => {
-          console.log(card.getResult());
           if (card.getResult() === 'hit') {
             this.hitCards.push(card);
-            console.log('passou');
           } else if (card.getResult() === 'missed') {
             this.missedCards.push(card);
           }
@@ -184,6 +182,17 @@ export class CardsPerfilComponent implements OnInit {
         author: email,
         image: image
       })
+    });
+  }
+
+  /**
+   * Delete card
+   * @param id Card id
+   */
+  public delete(id: number) {
+    this.controller.deleteCard(id)
+    .then(a => {
+      this.getCards();
     });
   }
 
