@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ControllerService } from './../shared/controller.service';
 import { Card } from '../models/card';
+import { User } from './../models/user';
 
 @Component({
   selector: 'app-perfil-editar',
