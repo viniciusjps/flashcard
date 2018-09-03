@@ -56,7 +56,7 @@ export class ControllerService {
   public addUser(username, email, image) {
     return fetch('http://api-flashcard.herokuapp.com/api/user', {
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       method: 'POST',
