@@ -41,13 +41,10 @@ export class ControllerService {
    * @param image Url image
    */
   public log(username: string, email: string, image: string): void {
-    this.getUser(email)
-      .then(a => {
-        this.addUser(username, email, image)
-          .then(s => {
-            this.logIn(email);
-          });
-      });
+    this.addUser(username, email, image)
+    .then(s => {
+      this.logIn(email);
+    });
   }
 
   /**
