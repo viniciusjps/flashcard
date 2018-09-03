@@ -48,25 +48,4 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public newUser() {
-    let name = '';
-    let email = '';
-    let image = '';
-    let socialPlatformProvider;
-
-    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (userData) => {
-        name = userData.name;
-        email = userData.email;
-        image = userData.image;
-      }
-    ).then(a => {
-      this.controller.addUser(name,email,image);
-    })
-    .then(b => {
-      this.controller.logIn(email);
-    });
-  }
-
 }
