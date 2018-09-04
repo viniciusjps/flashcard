@@ -1,6 +1,6 @@
 <div class="ui teal stackable menu">
   <div class="item">
-    <img class="ui mini image" src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png">
+    <img class="ui mini image" src="https://i.imgur.com/mWvFaA1.png">
   </div>
   <a class="item" routerLink="/">
     <i class="home icon"></i>
@@ -12,6 +12,7 @@
   </a>
   <div class="right menu">
     <a class="item" routerLink="/login" routerLinkActive="active" *ngIf="getInfoNavbar() === 'Login'">
+      <i class="sign in icon"></i>
       {{ getInfoNavbar() }}
     </a>
     <a class="item" routerLink="/perfil" routerLinkActive="active" *ngIf="getInfoNavbar() !== 'Login'">

@@ -1,47 +1,24 @@
+<br><br><br><br>
 <div class="ui container">
-  <div class="ui two column middle aligned very relaxed stackable grid">
-    <div class="column">
-      <h2 class="ui icon teal header center aligned">
-        <div class="content">
-          <img src="http://www.dsc.ufcg.edu.br/~sacc/img/portfolio/guardians.png" class="ui image">
-          Sign In
-        </div>
-      </h2>
-      <br>
-      <div class="center aligned column">
-        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
-          <i class="coffe icon"></i>
-          Aguarde...
-        </div>
-        <div class="ui teal labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
-          <i class="google icon"></i>
-          Login com o Google
+  <div class="ui middle aligned center aligned very relaxed stackable grid">
+    <div>
+      <div class="column">
+        <img src="https://i.imgur.com/Z0y1dLQ.png" class="ui medium middle aligned image">
+        <br><br><br>
+        <div class="center aligned column">
+          <div class="ui large labeled icon button fluid" *ngIf="!serverStatus">
+            <i class="coffee icon"></i>
+            Aguarde...
+          </div>
+          <div class="ui large teal labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
+            <i class="google icon"></i>
+            Login com o Google
+          </div>
         </div>
       </div>
-    </div>
-    <div style="position:relative; margin:0; padding:0;">
-      <div class="ui vertical divider">Ou</div>
-    </div>
-    <div class="column">
-      <h2 class="ui icon teal header center aligned">
-        <div class="content">
-          <i class="user outline icon"></i>
-          Novo por aqui?
-        </div>
-      </h2>
-      <br>
-      <div class="center aligned column">
-        <div class="ui labeled icon button fluid" *ngIf="!serverStatus">
-          <i class="coffe icon"></i>
-          Aguarde...
-        </div>
-        <div class="ui green labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
-          <i class="signup icon"></i>
-          Inscreva-se 
-        </div>
+      <div class="" *ngIf="loading">
+        <div class="ui normal active centered inline text loader" *ngIf="!serverStatus">Aguarde...</div>
       </div>
     </div>
   </div>
 </div>
-<br>
-<br>

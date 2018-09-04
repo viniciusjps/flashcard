@@ -12,9 +12,13 @@ import { User } from './../models/user';
 })
 export class PerfilEditarComponent implements OnInit {
 
+  private status: boolean;
+
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {
+    this.status = false;
+  }
 
   ngOnInit() {
   }
@@ -36,29 +40,25 @@ export class PerfilEditarComponent implements OnInit {
 
   /**
    * Delete user
-   * @param email User email
    */
-  public delete(email: string) {
+  public delete() {
     const user = this.controller.getUserLogado();
     if (user != null) {
-      fetch('http://api-flashcard.herokuapp.com/api/user/' + email, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'DELETE'
-      }).then(a => {
-        this.deleteCards(user);
+      this.status = true;
+      this.deleteCards(user.getEmail())
+      .then(a => {
+        this.deleteUser(user.getEmail());
       })
       .then(b => {
+        this.controller.navigate('/');
         this.controller.logOut();
       });
     }
   }
 
-  private deleteCards(user: User) {
+  private deleteCards(email: string): Promise<any> {
     let request = [];
-    this.controller.getAllCards()
+    return this.controller.getAllCards()
     .then(data => {
       request = data;
     })
@@ -66,10 +66,20 @@ export class PerfilEditarComponent implements OnInit {
       request.forEach(e => {
         const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
         card.setResult(e.result);
-        if (card.getAuthor() === user.getEmail()) {
+        if (card.getAuthor() === email) {
           this.controller.deleteCard(card.getId());
         }
       });
+    });
+  }
+
+  public deleteUser(email: string): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/user/' + email, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
     });
   }
 }

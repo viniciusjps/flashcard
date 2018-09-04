@@ -13,12 +13,14 @@ import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 export class LoginComponent implements OnInit {
 
   private serverStatus: boolean;
+  private loading: boolean;
 
   constructor(
     private controller: ControllerService,
     private socialAuthService: AuthService
   ) {
     this.serverStatus = false;
+    this.loading = false;
   }
 
   ngOnInit() {
@@ -42,8 +44,9 @@ export class LoginComponent implements OnInit {
         name = userData.name;
         email = userData.email;
         image = userData.image;
-      }
-    ).then(data => {
+    }).then(data => {
+      this.loading = true;
+    }).then(a => {
       this.controller.log(name, email, image);
     });
   }
