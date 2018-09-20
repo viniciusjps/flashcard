@@ -20,7 +20,6 @@ import { AppRoutingModule } from './app.routing.module';
 import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
 import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular-6-social-login';
-import {SuiModule} from 'ng2-semantic-ui';
 
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -55,8 +54,7 @@ export function getAuthServiceConfigs() {
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SocialLoginModule,
-    SuiModule
+    SocialLoginModule
   ],
   providers: [
     ControllerService,
