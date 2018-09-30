@@ -41,6 +41,12 @@
       </div>
     </div>
   </div>
+  <div class="ui message" *ngIf="cards.length == 0">
+    <div>
+      <i class="exclamation icon"></i>
+      Bem-vindo! Comece cadastrando novos cards
+    </div>
+  </div>
   <br>
   <div class="ui two middle aligned very relaxed stackable cards">
     <div class="ui card shape" *ngFor="let card of getSpecificCards(view)">
@@ -106,7 +112,7 @@
               </a>
             </div>
             <div class="left floated author">
-              <img class="ui avatar image" src="{{ card.getImage() }}"> 
+              <img class="ui avatar image" src="{{ card.getImage() }}">
             </div>
           </div>
         </div>
