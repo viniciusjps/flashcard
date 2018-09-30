@@ -2,22 +2,22 @@
 <div class="ui container">
   <div class="ui middle aligned center aligned very relaxed stackable grid">
     <div>
-      <div class="column">
+      <div class="column" *ngIf="!loading">
         <img src="https://i.imgur.com/CiOocsT.png" class="ui medium middle aligned image">
         <br><br><br>
         <div class="center aligned column">
-          <div class="ui large labeled icon button fluid" *ngIf="!serverStatus">
+          <button class="ui large labeled icon button fluid" *ngIf="!serverStatus" disabled>
             <i class="coffee icon"></i>
             Aguarde...
-          </div>
+          </button>
           <div class="ui large teal labeled icon button fluid" (click)="socialSignIn('google')" *ngIf="serverStatus">
             <i class="google icon"></i>
             Login com o Google
           </div>
         </div>
       </div>
-      <div class="" *ngIf="loading">
-        <div class="ui normal active centered inline text loader" *ngIf="!serverStatus">Aguarde...</div>
+      <div *ngIf="loading">
+        <div class="ui large active centered inline text loader">Entrando...</div>
       </div>
     </div>
   </div>
