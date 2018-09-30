@@ -99,7 +99,7 @@ export class ControllerService {
             cards.push(card);
           }
         });
-        return cards.reverse();
+        return cards.sort((c, b) => b.getId() - c.getId());
       });
     return cards;
   }
