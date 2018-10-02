@@ -42,9 +42,9 @@ export class ControllerService {
    */
   public log(username: string, email: string, image: string): void {
     this.addUser(username, email, image)
-    .then(s => {
-      this.logIn(email);
-    });
+      .then(s => {
+        this.logIn(email);
+      });
   }
 
   /**
@@ -89,23 +89,25 @@ export class ControllerService {
   public getAllPublicCards(): Card[] {
     const cards: Card[] = [];
     let request = [];
-    this.getAllCards()
+    this.getPublicCards()
       .then(data => {
         request = data;
       }).then(a => {
         request.forEach(e => {
           const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
-          if (card.getPrivacy()) {
-            cards.push(card);
-          }
+          cards.push(card);
         });
         return cards.sort((c, b) => b.getId() - c.getId());
       });
     return cards;
   }
 
-  public getAllCards(): Promise<any> {
+  public getPublicCards(): Promise<any> {
     return fetch('http://api-flashcard.herokuapp.com/api/card/').then(res => res.json());
+  }
+
+  public getUserCards(email: String): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/card/user/' + email).then(res => res.json());
   }
 
   /**
@@ -181,10 +183,10 @@ export class ControllerService {
     return fetch('http://api-flashcard.herokuapp.com/api/user');
   }
 
-   /**
-   * Delete card
-   * @param id Card id
-   */
+  /**
+  * Delete card
+  * @param id Card id
+  */
   public deleteCard(id: number): Promise<any> {
     return fetch('http://api-flashcard.herokuapp.com/api/card/' + id, {
       headers: {

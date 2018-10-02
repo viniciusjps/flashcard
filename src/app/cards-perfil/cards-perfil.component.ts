@@ -74,7 +74,7 @@ export class CardsPerfilComponent implements OnInit {
     if (user != null) {
       const cards: Card[] = [];
       let request = [];
-      this.controller.getAllCards()
+      this.controller.getUserCards(user.getEmail())
       .then(data => {
         request = data;
       })
@@ -82,9 +82,7 @@ export class CardsPerfilComponent implements OnInit {
         request.forEach(e => {
           const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
           card.setResult(e.result);
-          if (card.getAuthor() === user.getEmail()) {
-            cards.push(card);
-          }
+          cards.push(card);
         });
         this.cards = cards.sort((c, b) => b.getId() - c.getId());
         this.hitCards = [];

@@ -58,7 +58,7 @@ export class PerfilEditarComponent implements OnInit {
 
   private deleteCards(email: string): Promise<any> {
     let request = [];
-    return this.controller.getAllCards()
+    return this.controller.getPublicCards()
     .then(data => {
       request = data;
     })
