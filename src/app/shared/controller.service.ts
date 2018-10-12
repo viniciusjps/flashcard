@@ -111,23 +111,6 @@ export class ControllerService {
   }
 
   /**
-   * Get the cards by id
-   * @param email Email
-   * @param id Id
-   */
-  public getCard(email: string, id: number): Card {
-    let user: User;
-    let card: Card;
-    this.getUser(email)
-      .then(data => {
-        user = new User(data.username, data.email, data.image);
-      }).then(c => {
-        card = user.getCard(id);
-      });
-    return card;
-  }
-
-  /**
    * Get user logado
    */
   public getUserLogado() {
