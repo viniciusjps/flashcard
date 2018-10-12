@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
 import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
+import { EditarCardComponent } from './editar-card/editar-card.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular-6-social-login';
 
 export function getAuthServiceConfigs() {
@@ -46,7 +47,8 @@ export function getAuthServiceConfigs() {
     PerfilComponent,
     FooterComponent,
     CardsPerfilComponent,
-    PerfilEditarComponent
+    PerfilEditarComponent,
+    EditarCardComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { NovoCardComponent } from './novo-card/novo-card.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { EditarCardComponent } from './editar-card/editar-card.component';
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent},
@@ -16,6 +17,7 @@ const APP_ROUTES: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'perfil', component: PerfilComponent},
     { path: 'perfil/novo-card', component: NovoCardComponent},
+    { path: 'perfil/editar-card', component: EditarCardComponent},
     { path: 'pesquisar', component: PesquisaComponent}
 ];
 
