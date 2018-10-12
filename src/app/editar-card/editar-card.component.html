@@ -1,0 +1,51 @@
+<div class="ui container">
+  <h2 class="ui icon header center aligned">
+    <i class="edit outline icon"></i>
+    <div class="content">
+      Editar card
+    </div>
+  </h2>
+  <br>
+  <div class="ui teal segment">
+    <div class="ui form">
+      <h4>Disciplina: </h4>
+      <select class="ui dropdown" #discipline>
+        <option value="{{ item.valueOf() }}" *ngFor="let item of getDisciplines()"> {{ item }} </option>
+      </select>
+      <h4>Pergunta: </h4>
+      <div class="ui field">
+        <textarea rows="2" #question value="{{ questionCard }}" [(ngModel)]="question.value"></textarea>
+        <div class="ui info message" *ngIf="question.selectionEnd == 0">
+          <div>
+            <i class="exclamation icon"></i>
+            Esse campo não pode ser vazio
+          </div>
+        </div>
+      </div>
+      <h4>Resposta: </h4>
+      <div class="ui field">
+        <textarea rows="2" #answer value="{{ answerCard }}" [(ngModel)]="answer.value"></textarea>
+        <div class="ui info message" *ngIf="answer.selectionEnd == 0">
+          <div>
+            <i class="exclamation icon"></i>
+            Esse campo não pode ser vazio
+          </div> 
+        </div>
+      </div>
+      <br>
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
+        <label>Tornar público</label>
+      </div>
+      <br>
+      <br>
+      <br>
+      <button class="ui teal fluid button" (click)="update(discipline.value,question.value,answer.value,privacy.checked)"
+        [disabled]="answer.value == '' || question.value == ''">
+        atualizar card
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
