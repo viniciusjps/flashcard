@@ -211,4 +211,9 @@ export class CardsPerfilComponent implements OnInit {
       return '';
     }
   }
+
+  public editCard(id: string) {
+    localStorage.setItem('id', id);
+    this.controller.navigate('/perfil/editar-card');
+  }
 }

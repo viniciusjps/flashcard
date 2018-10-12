@@ -70,6 +70,9 @@
               <a (click)="setCardPrivacy(true, card)" *ngIf="!card.getPrivacy()">
                 <i class="lock icon" title="Tornar público"></i>
               </a>
+              <a (click)="editCard(card.getId())">
+                <i class="pencil alternate icon" title="Editar card"></i>
+              </a>
             </div>
             <div class="right floated author">
               <a (click)="delete(card.getId())">

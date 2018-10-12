@@ -13,7 +13,7 @@ export class NovoCardComponent implements OnInit {
 
   constructor(
     private controller: ControllerService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.controller.reloadPage();
@@ -49,5 +49,4 @@ export class NovoCardComponent implements OnInit {
   public validaEntrada(value: string): boolean {
     return value.trim().length !== 0;
   }
-
 }
