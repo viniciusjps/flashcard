@@ -10,15 +10,17 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { NovoCardComponent } from './novo-card/novo-card.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { EditarCardComponent } from './editar-card/editar-card.component';
+import { ComentariosComponent } from './comentarios/comentarios.component';
 
 const APP_ROUTES: Routes = [
-    { path: '', component: HomeComponent},
-    { path: 'mural', component: MuralComponent},
-    { path: 'login', component: LoginComponent},
-    { path: 'perfil', component: PerfilComponent},
-    { path: 'perfil/novo-card', component: NovoCardComponent},
-    { path: 'perfil/editar-card', component: EditarCardComponent},
-    { path: 'pesquisar', component: PesquisaComponent}
+    { path: '', component: HomeComponent },
+    { path: 'mural', component: MuralComponent },
+    { path: 'mural/comentarios', component: ComentariosComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'perfil', component: PerfilComponent },
+    { path: 'perfil/novo-card', component: NovoCardComponent },
+    { path: 'perfil/editar-card', component: EditarCardComponent },
+    { path: 'pesquisar', component: PesquisaComponent }
 ];
 
 @NgModule({

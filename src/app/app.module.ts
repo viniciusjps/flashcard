@@ -21,6 +21,7 @@ import { CardsPerfilComponent } from './cards-perfil/cards-perfil.component';
 import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
 import { EditarCardComponent } from './editar-card/editar-card.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular-6-social-login';
+import { ComentariosComponent } from './comentarios/comentarios.component';
 
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -48,7 +49,8 @@ export function getAuthServiceConfigs() {
     FooterComponent,
     CardsPerfilComponent,
     PerfilEditarComponent,
-    EditarCardComponent
+    EditarCardComponent,
+    ComentariosComponent
   ],
   imports: [
     BrowserModule,

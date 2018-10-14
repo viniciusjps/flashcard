@@ -110,6 +110,14 @@ export class ControllerService {
     return fetch('http://api-flashcard.herokuapp.com/api/card/user/' + email).then(res => res.json());
   }
 
+  public getCardById(id: String): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/card/' + id).then(res => res.json());
+  }
+
+  public getComments(id: String): Promise<any> {
+    return fetch('http://api-flashcard.herokuapp.com/api/msg/' + id).then(res => res.json());
+  }
+
   /**
    * Get user logado
    */
