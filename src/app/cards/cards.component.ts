@@ -35,7 +35,7 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   constructor(
     private controller: ControllerService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.cards = this.controller.getAllPublicCards();
@@ -59,6 +59,11 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   public getSideType(value: boolean): string {
     return value ? '' : 'active';
+  }
+
+  public comment(id: string) {
+    localStorage.setItem('card', id);
+    this.controller.navigate('/mural/comentarios');
   }
 
 }
