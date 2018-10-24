@@ -32,16 +32,19 @@ export class ComentariosComponent implements OnInit {
 
   private card: Card;
   private comments: Comment[];
+  private showData: boolean;
 
   constructor(
     private controller: ControllerService
   ) {
+    this.card = new Card(0, '', '', '', true, '', '');
     this.comments = [];
+    this.showData = false;
   }
 
   ngOnInit() {
     this.checkCard();
-    this.getComments();
+    this.comments = this.getComments();
   }
 
   /**
@@ -60,6 +63,10 @@ export class ComentariosComponent implements OnInit {
     return value ? '' : 'active';
   }
 
+  private setShowData(): void {
+    this.showData = !this.showData;
+  }
+
   private getCard(id: String): Promise<any> {
     return this.controller.getCardById(id);
   }
@@ -76,7 +83,8 @@ export class ComentariosComponent implements OnInit {
     }
   }
 
-  public getComments() {
+  public getComments(): Comment[] {
+    const comments: Comment[] = [];
     let request = [];
     this.controller.getComments(localStorage.getItem('card'))
       .then(data => {
@@ -84,12 +92,23 @@ export class ComentariosComponent implements OnInit {
       })
       .then(a => {
         request.forEach(c => {
-          // const com = new Comment();
+          const com = new Comment(
+            c.id,
+            c.cardId,
+            c.message,
+            c.createdAt,
+            c.edit,
+            c.author,
+            c.image
+          );
+          comments.push(com);
         });
+        return comments.sort((b, c) => b.getId() - c.getId());
       })
       .then(b => {
-        localStorage.removeItem('card');
+        this.setShowData();
       });
+    return comments;
   }
 
 }

@@ -1,7 +1,11 @@
 <div class="ui container">
-  <div class="ui two column very relaxed stackable grid">
+  <div class="ui one column grid" *ngIf="!showData">
+    <br>
+    <div class="ui large active centered inline text loader">Aguarde...</div>
+  </div>
+  <div class="ui two column very relaxed stackable grid" *ngIf="showData">
     <div class="six wide column">
-      <div class="ui card fluid shape">
+      <div class="ui card shape">
         <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
           <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
             <div class="content">
@@ -48,17 +52,17 @@
           <i class="comments outline icon"></i>
           Comentários
         </h3>
-        <div class="comment">
+        <div class="comment" *ngFor="let com of comments">
           <a class="avatar">
-            <img src="/images/avatar/small/matt.jpg">
+            <img src="{{ com.getImage() }}">
           </a>
           <div class="content">
-            <i class="author">User aqui</i>
+            <i class="author">{{ com.getAuthor() }}</i>
             <div class="metadata">
-              <span class="date">Data aqui</span>
+              <span class="date">{{ com.getDate() }}</span>
             </div>
             <div class="text">
-              Texto aqui
+              {{ com.getMessage() }}
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ export class CardsComponent implements OnInit, OnDestroy {
     return value ? '' : 'active';
   }
 
-  public comment(id: string) {
+  public comments(id: string) {
     localStorage.setItem('card', id);
     this.controller.navigate('/mural/comentarios');
   }

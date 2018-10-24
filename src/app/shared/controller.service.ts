@@ -115,7 +115,7 @@ export class ControllerService {
   }
 
   public getComments(id: String): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/msg/' + id).then(res => res.json());
+    return fetch('http://api-flashcard.herokuapp.com/api/msg/').then(res => res.json());
   }
 
   /**
