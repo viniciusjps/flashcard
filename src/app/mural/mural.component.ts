@@ -1,12 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 import { ControllerService } from './../shared/controller.service';
 
 @Component({
   selector: 'app-mural',
   templateUrl: './mural.component.html',
-  styleUrls: ['./mural.component.css']
+  styleUrls: ['./mural.component.css'],
+  animations: [
+    trigger('enterLeave', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('150ms', style({ opacity: 1, height: '*' })),
+      ]),
+      transition(':leave', [
+        animate('150ms', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class MuralComponent implements OnInit {
 

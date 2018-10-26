@@ -1,6 +1,6 @@
 <div class="ui container">
   <div class="ui three middle aligned very relaxed stackable cards">
-    <div class="ui card shape" *ngFor="let card of cards">
+    <div class="ui card shape" *ngFor="let card of cards" @enterLeave>
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
         <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">

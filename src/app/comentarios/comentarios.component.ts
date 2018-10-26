@@ -25,7 +25,16 @@ import { ControllerService } from '../shared/controller.service';
         transform: 'rotateY(0deg)',
       })),
       transition('* => *', animate('500ms ease'))
-    ])
+    ]),
+    trigger('enterLeave', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('150ms', style({ opacity: 1, height: '*' })),
+      ]),
+      transition(':leave', [
+        animate('150ms', style({ opacity: 0 }))
+      ])
+    ]),
   ]
 })
 export class ComentariosComponent implements OnInit {
@@ -34,6 +43,7 @@ export class ComentariosComponent implements OnInit {
   private comments: Comment[];
   private showData: boolean;
   private hasComments: boolean;
+  private isLogged: boolean;
 
   constructor(
     private controller: ControllerService
@@ -45,6 +55,11 @@ export class ComentariosComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('isLogged') === 'true') {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
     this.checkCard();
     this.comments = this.getComments();
   }
@@ -135,7 +150,11 @@ export class ComentariosComponent implements OnInit {
   }
 
   public edit(value: string): boolean {
-    return value === this.controller.getUserLogado().getEmail();
+    if (this.isLogged) {
+      return value === this.controller.getUserLogado().getEmail();
+    } else {
+      return false;
+    }
   }
 
   public publishComment(value: string): void {

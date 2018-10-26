@@ -18,6 +18,15 @@ import { ControllerService } from '../shared/controller.service';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css'],
   animations: [
+    trigger('enterLeave', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('250ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('250ms', style({ opacity: 0, width: '0', height: '0' }))
+      ])
+    ]),
     trigger('rotate', [
       state('left', style({
         transform: 'rotateY(180deg)',
