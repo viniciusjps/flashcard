@@ -7,6 +7,9 @@ export class Comment {
   private edit: boolean;
   private author: string;
   private image: string;
+  private email: string;
+
+  private toEdit: boolean;
 
   constructor(
     id: number,
@@ -15,7 +18,8 @@ export class Comment {
     createdAt: Date,
     edit: boolean,
     author: string,
-    image: string
+    image: string,
+    email: string
   ) {
     this.id = id;
     this.cardId = cardId;
@@ -24,10 +28,16 @@ export class Comment {
     this.edit = edit;
     this.author = author;
     this.image = image;
+    this.email = email;
+    this.toEdit = false;
   }
 
   public getId(): number {
     return this.id;
+  }
+
+  public getCardId(): number {
+    return this.cardId;
   }
 
   public getAuthor(): string {
@@ -43,7 +53,23 @@ export class Comment {
   }
 
   public getDate(): Date {
-    return this.creatAt;
+    return this.createdAt;
+  }
+
+  public getEdit(): boolean {
+    return this.edit;
+  }
+
+  public getToEdit(): boolean {
+    return this.toEdit;
+  }
+
+  public setToEdit(): void {
+    this.toEdit = !this.toEdit;
+  }
+
+  public getEmail(): string {
+    return this.email;
   }
 
 }

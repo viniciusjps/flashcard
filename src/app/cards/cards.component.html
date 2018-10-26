@@ -4,7 +4,11 @@
       <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
         <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
-            <div class="right floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
+            <div class="right floated meta">
+              <a (click)="comments(card.getId())">
+                <i title="Exibir comentários" class="comments icon" style="margin-left: 5px"></i>
+              </a>
+            </div>
             <div class="header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="description">
               <p>{{ card.getQuestion() }}</p>
@@ -14,8 +18,8 @@
             ver resposta
           </button>
           <div class="extra content">
-            <div class="left floated author">
-              <img class="ui avatar image" src="{{ card.getImage() }}" (click)="comments(card.getId())">
+            <div class="left floated">
+              <img class="ui avatar image" src="{{ card.getImage() }}">
             </div>
           </div>
         </div>
@@ -23,7 +27,11 @@
       <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
         <div class="ui yellow fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
           <div class="content">
-            <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
+            <div class="left floated meta">
+              <a (click)="comments(card.getId())">
+                <i title="Exibir comentários" class="comments icon" style="margin-right: 5px"></i>
+              </a>
+            </div>
             <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="right aligned description">
               <p>{{ card.getAnswer() }}</p>

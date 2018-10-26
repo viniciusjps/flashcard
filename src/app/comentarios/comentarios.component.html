@@ -3,66 +3,123 @@
     <br>
     <div class="ui large active centered inline text loader">Aguarde...</div>
   </div>
-  <div class="ui two column very relaxed stackable grid" *ngIf="showData">
-    <div class="six wide column">
-      <div class="ui card shape">
-        <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
-          <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
-            <div class="content">
-              <div class="right floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
-              <div class="header">{{ card.getDiscipline() | uppercase }}</div>
-              <div class="description">
-                <p>{{ card.getQuestion() }}</p>
+  <div *ngIf="showData">
+    <div class="ui two column very relaxed stackable grid">
+      <div class="six wide column">
+        <div class="ui breadcrumb">
+          <a title="Voltar" routerLink="/mural" class="section">Mural</a>
+          <i class="right angle icon divider"></i>
+          <div class="active section">Comentários</div>
+        </div>
+        <div class="ui card fluid shape">
+          <div class="ui side {{ getSideType(card.getSeeAnswer()) }}">
+            <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
+              <div class="content">
+                <div class="right floated meta">&nbsp; #{{ card.getId() | number:'3.0' }}</div>
+                <div class="header">{{ card.getDiscipline() | uppercase }}</div>
+                <div class="description">
+                  <p>{{ card.getQuestion() }}</p>
+                </div>
               </div>
-            </div>
-            <button class="ui botton attached teal button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
-              ver resposta
-            </button>
-            <div class="extra content">
-              <div class="left floated author">
-                <img class="ui avatar image" src="{{ card.getImage() }}">
+              <button class="ui botton attached teal button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+                ver resposta
+              </button>
+              <div class="extra content">
+                <div class="left floated author">
+                  <img class="ui avatar image" src="{{ card.getImage() }}">
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
-          <div class="ui yellow fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
-            <div class="content">
-              <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
-              <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
-              <div class="right aligned description">
-                <p>{{ card.getAnswer() }}</p>
+          <div class="ui side {{ getSideType(!card.getSeeAnswer()) }}">
+            <div class="ui yellow fluid card" [@rotate]="getAnimation(!card.getSeeAnswer())">
+              <div class="content">
+                <div class="left floated meta">#{{ card.getId() | number:'3.0' }} &nbsp;</div>
+                <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
+                <div class="right aligned description">
+                  <p>{{ card.getAnswer() }}</p>
+                </div>
               </div>
-            </div>
-            <button class="ui botton attached yellow button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
-              ver pergunta
-            </button>
-            <div class="extra content">
-              <div class="right floated author">
-                <img class="ui avatar image" src="{{ card.getImage() }}">
+              <button class="ui botton attached yellow button" (click)="card.setSeeAnswer(!card.getSeeAnswer())">
+                ver pergunta
+              </button>
+              <div class="extra content">
+                <div class="right floated author">
+                  <img class="ui avatar image" src="{{ card.getImage() }}">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="ten wide column">
-      <div class="ui minimal comments">
-        <h3 class="ui horizontal divider header">
-          <i class="comments outline icon"></i>
-          Comentários
-        </h3>
-        <div class="comment" *ngFor="let com of comments">
-          <a class="avatar">
-            <img src="{{ com.getImage() }}">
-          </a>
-          <div class="content">
-            <i class="author">{{ com.getAuthor() }}</i>
-            <div class="metadata">
-              <span class="date">{{ com.getDate() }}</span>
+      <div class="ten wide column">
+        <div class="ui minimal comments">
+          <h3 class="ui horizontal divider header">
+            <i class="comments outline icon"></i>
+            Comentários
+          </h3>
+          <div *ngIf="!hasComments">
+            <h2 class="ui header">
+              Sem comentários
+              <div class="sub header">Adicione um novo</div>
+            </h2>
+            <div class="ui form">
+              <div class="ui field">
+                <textarea rows="2" placeholder="" #newComment></textarea>
+                <button title="Adicionar comentário" class="ui compact labeled icon green button" (click)="publishComment(newComment.value)"
+                  style="margin-top: 5px;">
+                  <i class="paper plane icon"></i>
+                  enviar
+                </button>
+              </div>
             </div>
-            <div class="text">
-              {{ com.getMessage() }}
+          </div>
+          <div class="comment" *ngFor="let com of comments">
+            <a class="avatar">
+              <img src="{{ com.getImage() }}">
+            </a>
+            <div class="content">
+              <i class="author">{{ getDisplayName(com.getAuthor()) }}</i>
+              <div class="metadata">
+                <span class="date"> {{ getTime(com.getDate()) }}</span>
+              </div>
+              <div class="metadata" *ngIf="com.getEdit()">
+                <p><strong>editado</strong></p>
+              </div>
+              <div class="metadata" *ngIf="edit(com.getEmail())">
+                <a class="ui circular label" (click)="com.setToEdit()">editar</a>
+                <a (click)="deleteComment(com.getId())">
+                  <i title="Apagar comentário" class="trash alternate outline red icon"></i>
+                </a>
+              </div>
+              <div class="text" *ngIf="!com.getToEdit()">
+                {{ com.getMessage() }}
+              </div>
+              <div class="ui form">
+                <div class="ui field" *ngIf="com.getToEdit()">
+                  <textarea rows="2" value="{{ com.getMessage() }}" #update></textarea>
+                  <button title="Editar comentário" class="ui compact labeled icon blue button" (click)="editComment(com, update.value)"
+                    style="margin-top: 5px;">
+                    <i class="save icon"></i>
+                    salvar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="hasComments">
+          <h2 class="ui header">
+            <div class="sub header">Adicione um novo comentário</div>
+          </h2>
+          <div class="ui form">
+            <div class="ui field">
+              <textarea rows="2" placeholder="" #newComment></textarea>
+              <button title="Adicionar comentário" class="ui compact labeled icon green button" (click)="publishComment(newComment.value)"
+                style="margin-top: 5px;">
+                <i class="paper plane icon"></i>
+                adicionar
+              </button>
             </div>
           </div>
         </div>
