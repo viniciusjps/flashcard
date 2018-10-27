@@ -183,7 +183,7 @@ export class CardsPerfilComponent implements OnInit {
     email: string,
     image: string
   ) {
-    return fetch('http://api-flashcard.herokuapp.com/api/card', {
+    return fetch('https://api-flashcard.herokuapp.com/api/card', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

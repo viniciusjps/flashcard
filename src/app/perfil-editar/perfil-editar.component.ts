@@ -74,7 +74,7 @@ export class PerfilEditarComponent implements OnInit {
   }
 
   public deleteUser(email: string): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/user/' + email, {
+    return fetch('https://api-flashcard.herokuapp.com/api/user/' + email, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

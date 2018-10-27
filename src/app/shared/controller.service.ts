@@ -54,7 +54,7 @@ export class ControllerService {
    * @param image Url Image
    */
   public addUser(username, email, image) {
-    return fetch('http://api-flashcard.herokuapp.com/api/user', {
+    return fetch('https://api-flashcard.herokuapp.com/api/user', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -73,14 +73,14 @@ export class ControllerService {
    * @param email Email
    */
   public getUser(email: string) {
-    return fetch('http://api-flashcard.herokuapp.com/api/user/' + email).then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/user/' + email).then(res => res.json());
   }
 
   /**
    * Get all users
    */
   public getUsers() {
-    return fetch('http://api-flashcard.herokuapp.com/api/user/').then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/user/').then(res => res.json());
   }
 
   /**
@@ -103,19 +103,19 @@ export class ControllerService {
   }
 
   public getPublicCards(): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/').then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/card/').then(res => res.json());
   }
 
   public getUserCards(email: String): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/user/' + email).then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/card/user/' + email).then(res => res.json());
   }
 
   public getCardById(id: String): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/' + id).then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/card/' + id).then(res => res.json());
   }
 
   public getComments(id: String): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/msg/card/' + id).then(res => res.json());
+    return fetch('https://api-flashcard.herokuapp.com/api/msg/card/' + id).then(res => res.json());
   }
 
   /**
@@ -173,7 +173,7 @@ export class ControllerService {
   }
 
   public turnOnServer(): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/user');
+    return fetch('https://api-flashcard.herokuapp.com/api/user');
   }
 
   /**
@@ -181,7 +181,7 @@ export class ControllerService {
   * @param id Card id
   */
   public deleteCard(id: number): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/' + id, {
+    return fetch('https://api-flashcard.herokuapp.com/api/card/' + id, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

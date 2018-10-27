@@ -73,7 +73,7 @@ export class EditarCardComponent implements OnInit, OnDestroy {
   }
 
   private getCard(id: String): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card/' + id)
+    return fetch('https://api-flashcard.herokuapp.com/api/card/' + id)
       .then(res => res.json())
       .then(card => {
         this.questionCard = card.question;
@@ -96,7 +96,7 @@ export class EditarCardComponent implements OnInit, OnDestroy {
   }
 
   private editCard(discipline, question, answer, privacy): Promise<any> {
-    return fetch('http://api-flashcard.herokuapp.com/api/card', {
+    return fetch('https://api-flashcard.herokuapp.com/api/card', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

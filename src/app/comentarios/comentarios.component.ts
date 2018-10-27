@@ -172,7 +172,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   public publishComment(value: string): void {
-    fetch('http://api-flashcard.herokuapp.com/api/msg/', {
+    fetch('https://api-flashcard.herokuapp.com/api/msg/', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -192,7 +192,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   public editComment(comment: Comment, value: string): void {
-    fetch('http://api-flashcard.herokuapp.com/api/msg/' + comment.getId(), {
+    fetch('https://api-flashcard.herokuapp.com/api/msg/' + comment.getId(), {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -215,7 +215,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   public deleteComment(id: string): void {
-    fetch('http://api-flashcard.herokuapp.com/api/msg/' + id, {
+    fetch('https://api-flashcard.herokuapp.com/api/msg/' + id, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
