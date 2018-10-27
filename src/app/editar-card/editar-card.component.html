@@ -32,12 +32,10 @@
       <div class="ui field">
         <textarea rows="2" #answer value="{{ answerCard }}" [(ngModel)]="answer.value"></textarea>
       </div>
-      <br>
       <div class="ui toggle checkbox">
         <input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
         <label>Tornar público</label>
       </div>
-      <br>
       <br>
       <br>
       <button class="ui teal fluid button" (click)="update(discipline.value,question.value,answer.value,privacy.checked)"
