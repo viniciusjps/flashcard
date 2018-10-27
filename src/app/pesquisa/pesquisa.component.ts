@@ -1,8 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-
-import { ControllerService } from './../shared/controller.service';
-import { Card } from './../models/card';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -12,6 +8,10 @@ import {
   animate,
   transition
 } from '@angular/animations';
+
+
+import { ControllerService } from './../shared/controller.service';
+import { Card } from './../models/card';
 
 @Component({
   selector: 'app-pesquisa',

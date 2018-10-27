@@ -1,8 +1,6 @@
 import { Card } from './../models/card';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import 'rxjs/add/operator/map';
-
 import {
   trigger,
   state,
@@ -10,6 +8,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
+
+
 import { ControllerService } from '../shared/controller.service';
 
 
@@ -24,7 +24,7 @@ import { ControllerService } from '../shared/controller.service';
         animate('250ms', style({ opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('250ms', style({ opacity: 0, width: '0', height: '0' }))
+        animate('250ms', style({ opacity: 0 }))
       ])
     ]),
     trigger('rotate', [
@@ -40,14 +40,14 @@ import { ControllerService } from '../shared/controller.service';
 })
 export class CardsComponent implements OnInit, OnDestroy {
 
-  private cards: Card[];
+  // tslint:disable-next-line:no-input-rename
+  @Input('cardsList') cards: Card[];
 
   constructor(
     private controller: ControllerService,
   ) { }
 
   ngOnInit() {
-    this.cards = this.controller.getAllPublicCards();
   }
 
   ngOnDestroy() {

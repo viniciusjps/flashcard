@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 
 import { ControllerService } from './../shared/controller.service';
+import { Card } from '../models/card';
 
 @Component({
   selector: 'app-mural',
@@ -28,6 +29,7 @@ import { ControllerService } from './../shared/controller.service';
 export class MuralComponent implements OnInit {
 
   private serverStatus: boolean;
+  private cards: Card[];
 
   constructor(
     private controller: ControllerService
@@ -39,6 +41,7 @@ export class MuralComponent implements OnInit {
     if (!this.serverStatus) {
       this.controller.turnOnServer()
       .then(a => {
+        this.cards = this.controller.getAllPublicCards();
         this.serverStatus = true;
       });
     }

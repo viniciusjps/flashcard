@@ -32,6 +32,5 @@
   <br>
 </div>
 <br>
-<br>
 <div class="ui large active centered inline text loader" *ngIf="!serverStatus" @enterLeave>Carregando dados...</div>
-<app-cards *ngIf="serverStatus" @enterLeave></app-cards>
+<app-cards [cardsList]="cards" *ngIf="serverStatus" @enterLeave></app-cards>

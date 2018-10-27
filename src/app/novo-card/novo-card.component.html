@@ -8,7 +8,7 @@
 	<br>
 	<div class="ui teal segment">
 		<div class="ui form">
-			<h4>Disciplina: </h4>
+			<h4>Disciplina </h4>
 			<select class="ui dropdown" #discipline>
 				<option value="{{ item.valueOf() }}" *ngFor="let item of getDisciplines()"> {{ item }} </option>
 			</select>
@@ -32,16 +32,14 @@
 			<div class="ui field">
 				<textarea rows="2" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
 			</div>
-			<br>
 			<div class="ui toggle checkbox">
 				<input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
 				<label>Tornar público</label>
 			</div>
 			<br>
 			<br>
-			<br>
 			<button class="ui teal fluid button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)"
-			 [disabled]="answer.value == '' || question.value == ''">
+			 [disabled]="(showAlert(answer.value) || showAlert(question.value))">
 				adicionar
 			</button>
 		</div>
