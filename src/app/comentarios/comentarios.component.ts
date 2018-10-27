@@ -99,10 +99,14 @@ export class ComentariosComponent implements OnInit {
 
   private checkCard() {
     const user = this.controller.getUserLogado();
-    if (this.id != null && user != null) {
+    let email = '';
+    if (this.id != null) {
       this.getCard(this.id)
         .then(data => {
-          if (data.privacy || data.author === user.getEmail()) {
+          if (user != null) {
+            email = user.getEmail();
+          }
+          if (data.privacy || data.author === email) {
             const card = new Card(data.id, data.discipline, data.question, data.answer, data.privacy, data.author, data.image);
             this.card = card;
           } else {
