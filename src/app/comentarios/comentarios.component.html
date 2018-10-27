@@ -81,7 +81,10 @@
             <div class="content">
               <i class="author">{{ getDisplayName(com.getAuthor()) }}</i>
               <div class="metadata">
-                <span class="date"> {{ getTime(com.getDate()) }}</span>
+                <span class="date">
+                  <i class="clock outline icon"></i>
+                  {{ getTime(com.getDate()) }}
+                </span>
               </div>
               <div class="metadata" *ngIf="com.getEdit()" @enterLeave>
                 <p><strong>editado</strong></p>
@@ -98,7 +101,7 @@
               <div class="ui form">
                 <div class="ui field" *ngIf="com.getToEdit()" @enterLeave>
                   <textarea rows="2" value="{{ com.getMessage() }}" #update></textarea>
-                  <button title="Editar comentário" class="ui compact labeled icon blue button" (click)="editComment(com, update.value)"
+                  <button title="Atualizar comentário" class="ui compact labeled icon blue button" (click)="editComment(com, update.value)"
                     style="margin-top: 5px;">
                     <i class="save icon"></i>
                     salvar

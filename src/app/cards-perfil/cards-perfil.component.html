@@ -41,9 +41,15 @@
       </div>
     </div>
   </div>
-  <div class="ui message" *ngIf="cards.length == 0">
+  <div class="ui message" *ngIf="loadingData" @enterLeave>
     <div>
       <i class="exclamation icon"></i>
+      Carregando dados...
+    </div>
+  </div>
+  <div class="ui message" *ngIf="!loadingData && !hasCards" @enterLeave>
+    <div>
+      <i class="check icon"></i>
       Bem-vindo! Comece cadastrando novos cards
     </div>
   </div>

@@ -12,25 +12,25 @@
       <select class="ui dropdown" #discipline>
         <option value="{{ item.valueOf() }}" *ngFor="let item of getDisciplines()"> {{ item }} </option>
       </select>
-      <h4>Pergunta: </h4>
+      <h4>
+        Pergunta &nbsp;
+        <span class="ui yellow tiny label" *ngIf="showAlert(question.value)" @enterLeave>
+          <i class="exclamation icon"></i>
+          Esse campo não pode ser vazio
+        </span>
+      </h4>
       <div class="ui field">
         <textarea rows="2" #question value="{{ questionCard }}" [(ngModel)]="question.value"></textarea>
-        <div class="ui info message" *ngIf="question.selectionEnd == 0">
-          <div>
-            <i class="exclamation icon"></i>
-            Esse campo não pode ser vazio
-          </div>
-        </div>
       </div>
-      <h4>Resposta: </h4>
+      <h4>
+        Resposta &nbsp;
+        <span class="ui yellow tiny label" *ngIf="showAlert(answer.value)" @enterLeave>
+          <i class="exclamation icon"></i>
+          Esse campo não pode ser vazio
+        </span>
+      </h4>
       <div class="ui field">
         <textarea rows="2" #answer value="{{ answerCard }}" [(ngModel)]="answer.value"></textarea>
-        <div class="ui info message" *ngIf="answer.selectionEnd == 0">
-          <div>
-            <i class="exclamation icon"></i>
-            Esse campo não pode ser vazio
-          </div> 
-        </div>
       </div>
       <br>
       <div class="ui toggle checkbox">

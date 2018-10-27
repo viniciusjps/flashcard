@@ -18,7 +18,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     private controller: ControllerService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.subscription = this.route.queryParams.subscribe(
@@ -61,7 +61,7 @@ export class PerfilComponent implements OnInit {
    * @param mode New mode value
    */
   public setCommand(mode: String) {
-    this.controller.getRouter().navigate(['/perfil'], { queryParams: {command: mode}});
+    this.controller.getRouter().navigate(['/perfil'], { queryParams: { command: mode } });
   }
 
 }

@@ -5,6 +5,9 @@
         <div class="ui teal fluid card" [@rotate]="getAnimation(card.getSeeAnswer())">
           <div class="content">
             <div class="right floated meta">
+              <i title="Nº do cartão">
+                #{{ card.getId() | number:'3.0' }} &nbsp;
+              </i>
               <a (click)="comments(card.getId())">
                 <i title="Exibir comentários" class="comments icon" style="margin-left: 5px"></i>
               </a>
@@ -31,6 +34,9 @@
               <a (click)="comments(card.getId())">
                 <i title="Exibir comentários" class="comments icon" style="margin-right: 5px"></i>
               </a>
+              <i title="Nº do cartão">
+                #{{ card.getId() | number:'3.0' }} &nbsp;
+              </i>
             </div>
             <div class="right aligned header">{{ card.getDiscipline() | uppercase }}</div>
             <div class="right aligned description">

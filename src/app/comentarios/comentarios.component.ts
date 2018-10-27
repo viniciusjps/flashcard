@@ -141,7 +141,7 @@ export class ComentariosComponent implements OnInit {
     const minutes = parseInt(time[1].split(':')[1], 10);
     const seconds = parseInt(time[1].split(':')[2], 10);
     const commentDate = new Date(year, month, day, hour, minutes, seconds, 0);
-    return 'Publicado em ' + commentDate.toLocaleDateString() + ' às ' + commentDate.toLocaleTimeString();
+    return commentDate.toLocaleDateString() + ' às ' + commentDate.toLocaleTimeString().substr(0, 5);
   }
 
   public getDisplayName(value: string): string {
@@ -188,6 +188,7 @@ export class ComentariosComponent implements OnInit {
         id: comment.getId(),
         cardId: comment.getCardId(),
         message: value,
+        createdAt: comment.getDate(),
         edit: true,
         email: comment.getEmail(),
         author: comment.getAuthor(),
@@ -210,5 +211,4 @@ export class ComentariosComponent implements OnInit {
       this.comments = this.getComments();
     });
   }
-
 }

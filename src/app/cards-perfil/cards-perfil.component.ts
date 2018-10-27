@@ -8,7 +8,7 @@ import {
   style,
   animate,
   transition
- } from '@angular/animations';
+} from '@angular/animations';
 import { ControllerService } from '../shared/controller.service';
 
 @Component({
@@ -17,13 +17,22 @@ import { ControllerService } from '../shared/controller.service';
   styleUrls: ['./cards-perfil.component.css'],
   animations: [
     trigger('rotate', [
-      state('left',   style({
+      state('left', style({
         transform: 'rotateY(180deg)',
       })),
-      state('right',   style({
+      state('right', style({
         transform: 'rotateY(0deg)',
       })),
       transition('* => *', animate('500ms ease'))
+    ]),
+    trigger('enterLeave', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('150ms', style({ opacity: 1, height: '*' })),
+      ]),
+      transition(':leave', [
+        animate('150ms', style({ opacity: 0 }))
+      ])
     ])
   ]
 })
@@ -33,6 +42,8 @@ export class CardsPerfilComponent implements OnInit {
   private cards: Card[];
   private hitCards: Card[];
   private missedCards: Card[];
+  private hasCards: boolean;
+  private loadingData: boolean;
 
   constructor(
     private controller: ControllerService
@@ -41,13 +52,15 @@ export class CardsPerfilComponent implements OnInit {
     this.cards = [];
     this.hitCards = [];
     this.missedCards = [];
+    this.hasCards = false;
+    this.loadingData = true;
   }
 
   ngOnInit() {
     this.controller.turnOnServer()
-    .then(data => {
-      this.getCards();
-    });
+      .then(data => {
+        this.getCards();
+      });
   }
 
   /**
@@ -75,28 +88,34 @@ export class CardsPerfilComponent implements OnInit {
       const cards: Card[] = [];
       let request = [];
       this.controller.getUserCards(user.getEmail())
-      .then(data => {
-        request = data;
-      })
-      .then(a => {
-        request.forEach(e => {
-          const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
-          card.setResult(e.result);
-          cards.push(card);
-        });
-        this.cards = cards.sort((c, b) => b.getId() - c.getId());
-        this.hitCards = [];
-        this.missedCards = [];
-      })
-      .then(a => {
-        this.cards.forEach(card => {
-          if (card.getResult() === 'hit') {
-            this.hitCards.push(card);
-          } else if (card.getResult() === 'missed') {
-            this.missedCards.push(card);
+        .then(data => {
+          request = data;
+        })
+        .then(a => {
+          request.forEach(e => {
+            const card = new Card(e.id, e.discipline, e.question, e.answer, e.privacy, e.author, e.image);
+            card.setResult(e.result);
+            cards.push(card);
+          });
+          this.cards = cards.sort((c, b) => b.getId() - c.getId());
+          this.hitCards = [];
+          this.missedCards = [];
+        })
+        .then(a => {
+          this.cards.forEach(card => {
+            if (card.getResult() === 'hit') {
+              this.hitCards.push(card);
+            } else if (card.getResult() === 'missed') {
+              this.missedCards.push(card);
+            }
+          });
+        })
+        .then(a => {
+          this.loadingData = false;
+          if (this.cards.length > 0) {
+            this.hasCards = true;
           }
         });
-      });
     }
   }
 
@@ -130,9 +149,9 @@ export class CardsPerfilComponent implements OnInit {
         result,
         card.getAuthor(),
         card.getImage())
-      .then(data => {
-        this.getCards();
-      });
+        .then(data => {
+          this.getCards();
+        });
     }
   }
 
@@ -148,9 +167,9 @@ export class CardsPerfilComponent implements OnInit {
         card.getResult(),
         card.getAuthor(),
         card.getImage())
-      .then(data => {
-        this.getCards();
-      });
+        .then(data => {
+          this.getCards();
+        });
     }
   }
 
@@ -189,9 +208,9 @@ export class CardsPerfilComponent implements OnInit {
    */
   public delete(id: number) {
     this.controller.deleteCard(id)
-    .then(a => {
-      this.getCards();
-    });
+      .then(a => {
+        this.getCards();
+      });
   }
 
   /**

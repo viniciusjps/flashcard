@@ -12,25 +12,25 @@
 			<select class="ui dropdown" #discipline>
 				<option value="{{ item.valueOf() }}" *ngFor="let item of getDisciplines()"> {{ item }} </option>
 			</select>
-			<h4>Pergunta: </h4>
+			<h4>
+				Pergunta &nbsp;
+				<span class="ui yellow tiny label" *ngIf="showAlert(question.value)" @enterLeave>
+					<i class="exclamation icon"></i>
+					Esse campo não pode ser vazio
+				</span>
+			</h4>
 			<div class="ui field">
 				<textarea rows="2" placeholder="Digite sua pergunta" #question [(ngModel)]="question.value"></textarea>
-				<div class="ui yellow message" *ngIf="question.selectionEnd == 0">
-					<div>
-						<i class="exclamation icon"></i>
-						Esse campo não pode ser vazio
-					</div>
-				</div>
 			</div>
-			<h4>Resposta: </h4>
+			<h4>
+				Resposta &nbsp;
+				<span class="ui yellow tiny label" *ngIf="showAlert(answer.value)" @enterLeave>
+					<i class="exclamation icon"></i>
+					Esse campo não pode ser vazio
+				</span>
+			</h4>
 			<div class="ui field">
 				<textarea rows="2" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
-				<div class="ui yellow message" *ngIf="answer.selectionEnd == 0">
-					<div>
-						<i class="exclamation icon"></i>
-						Esse campo não pode ser vazio
-					</div>
-				</div>
 			</div>
 			<br>
 			<div class="ui toggle checkbox">
@@ -40,7 +40,8 @@
 			<br>
 			<br>
 			<br>
-			<button class="ui teal fluid button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)" [disabled]="answer.value == '' || question.value == ''">
+			<button class="ui teal fluid button" (click)="addCard(discipline.value,question.value,answer.value,privacy.checked)"
+			 [disabled]="answer.value == '' || question.value == ''">
 				adicionar
 			</button>
 		</div>
