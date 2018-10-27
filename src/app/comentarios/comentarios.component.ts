@@ -6,6 +6,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 
 import { Card } from '../models/card';
@@ -39,14 +41,17 @@ import { ControllerService } from '../shared/controller.service';
 })
 export class ComentariosComponent implements OnInit {
 
+  private id: string;
   private card: Card;
   private comments: Comment[];
   private showData: boolean;
   private hasComments: boolean;
   private isLogged: boolean;
+  private subscription: Subscription;
 
   constructor(
-    private controller: ControllerService
+    private controller: ControllerService,
+    private route: ActivatedRoute
   ) {
     this.card = new Card(0, '', '', '', true, '', '');
     this.comments = [];
@@ -55,6 +60,10 @@ export class ComentariosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.controller.reloadPage();
+    this.subscription = this.route.queryParams.subscribe(
+      queryParams => this.id = queryParams['id']
+    );
     if (localStorage.getItem('isLogged') === 'true') {
       this.isLogged = true;
     } else {
@@ -89,12 +98,17 @@ export class ComentariosComponent implements OnInit {
   }
 
   private checkCard() {
-    const id = localStorage.getItem('card');
-    if (id != null) {
-      this.getCard(id).then(data => {
-        const card = new Card(data.id, data.discipline, data.question, data.answer, data.privacy, data.author, data.image);
-        this.card = card;
-      });
+    const user = this.controller.getUserLogado();
+    if (this.id != null) {
+      this.getCard(this.id)
+        .then(data => {
+          if (data.privacy || data.author === user.getEmail()) {
+            const card = new Card(data.id, data.discipline, data.question, data.answer, data.privacy, data.author, data.image);
+            this.card = card;
+          } else {
+            this.controller.navigate('/mural');
+          }
+        });
     } else {
       this.controller.navigate('/mural');
     }
@@ -103,7 +117,7 @@ export class ComentariosComponent implements OnInit {
   public getComments(): Comment[] {
     const comments: Comment[] = [];
     let request = [];
-    this.controller.getComments(localStorage.getItem('card'))
+    this.controller.getComments(this.id)
       .then(data => {
         request = data;
       })

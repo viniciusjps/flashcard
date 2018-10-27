@@ -79,6 +79,9 @@
               <a (click)="editCard(card.getId())">
                 <i class="pencil alternate icon" title="Editar card"></i>
               </a>
+              <a (click)="comments(card.getId())">
+                <i title="Exibir comentários" class="comments icon" style="margin-right: 5px"></i>
+              </a>
             </div>
             <div class="right floated author">
               <a (click)="delete(card.getId())">

@@ -235,4 +235,8 @@ export class CardsPerfilComponent implements OnInit {
     localStorage.setItem('id', id);
     this.controller.navigate('/perfil/editar-card');
   }
+
+  public comments(value: string) {
+    this.controller.getRouter().navigate(['/mural/comentarios'], { queryParams: { id: value } });
+  }
 }

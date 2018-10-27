@@ -149,7 +149,9 @@ export class ControllerService {
       const username = localStorage.getItem('username');
       const email = localStorage.getItem('email');
       const image = localStorage.getItem('image');
-      this.user_logado = new User(username, email, image);
+      if (username != null && email != null && image != null) {
+        this.user_logado = new User(username, email, image);
+      }
     }
   }
 
