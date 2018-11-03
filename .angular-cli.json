@@ -20,10 +20,14 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/semantic-ui-css/semantic.css"
+        "../node_modules/semantic-ui-css/semantic.css",
+        "../node_modules/prism-themes/themes/prism-ghcolors.css"
       ],
       "scripts": [
-        "../node_modules/semantic-ui-css/semantic.js"
+        "../node_modules/semantic-ui-css/semantic.js",
+        "../node_modules/marked/lib/marked.js",
+        "../node_modules/prismjs/prism.js"
+
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

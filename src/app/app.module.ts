@@ -22,6 +22,7 @@ import { PerfilEditarComponent } from './perfil-editar/perfil-editar.component';
 import { EditarCardComponent } from './editar-card/editar-card.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular-6-social-login';
 import { ComentariosComponent } from './comentarios/comentarios.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -58,7 +59,8 @@ export function getAuthServiceConfigs() {
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MarkdownModule.forRoot()
   ],
   providers: [
     ControllerService,

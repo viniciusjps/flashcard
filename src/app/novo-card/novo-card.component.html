@@ -18,9 +18,13 @@
 					<i class="exclamation icon"></i>
 					Esse campo não pode ser vazio
 				</span>
+				<span class="ui green tiny label">
+					<i class="check icon"></i>
+					Markdown disponível
+				</span>
 			</h4>
 			<div class="ui field">
-				<textarea rows="2" placeholder="Digite sua pergunta" #question [(ngModel)]="question.value"></textarea>
+				<textarea rows="4" placeholder="Digite sua pergunta" #question [(ngModel)]="question.value"></textarea>
 			</div>
 			<h4>
 				Resposta &nbsp;
@@ -30,7 +34,7 @@
 				</span>
 			</h4>
 			<div class="ui field">
-				<textarea rows="2" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
+				<textarea rows="4" placeholder="Digite sua resposta" #answer [(ngModel)]="answer.value"></textarea>
 			</div>
 			<div class="ui toggle checkbox">
 				<input type="checkbox" name="privacidade" checked="checked" value="private" #privacy>
